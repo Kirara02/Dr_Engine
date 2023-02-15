@@ -17,6 +17,8 @@
 	<link href="../assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
 	<link href="../assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 	<link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+	<link href="../assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />	
 	<!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -44,11 +46,24 @@
 		<!-- END #sidebar -->
 	</div>
 
+	<script>
+		$('#data-table-default').DataTable({
+            responsive: true
+        });
+		</script>
     <!-- ================== BEGIN core-js ================== -->
 	<script src="../assets/js/vendor.min.js"></script>
 	<script src="../assets/js/app.min.js"></script>
 	<script src="../assets/js/theme/default.min.js"></script>
 	<!-- ================== END core-js ================== -->
+	
+	<!-- ================== BEGIN datatables-js ================== -->
+	<script src="../assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="../assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="../assets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+	@yield('script')
+	<!-- ================== END datatables-js ================== -->
 	
 	<!-- ================== BEGIN page-js ================== -->
 	<script src="../assets/plugins/flot/source/jquery.canvaswrapper.js"></script>

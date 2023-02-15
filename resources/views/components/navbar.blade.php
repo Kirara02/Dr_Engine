@@ -15,7 +15,7 @@
             <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                 <img src="../assets/img/user/user-13.jpg" alt="" /> 
                 <span>
-                    <span class="d-none d-md-inline">Adam Schwartz</span>
+                    <span class="d-none d-md-inline">Kirara Bernstein</span>
                     <b class="caret"></b>
                 </span>
             </a>

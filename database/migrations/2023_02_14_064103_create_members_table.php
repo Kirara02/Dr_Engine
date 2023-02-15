@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("nama", 45);
             $table->string("nohp", 12);
             $table->string("email", 45);
-            $table->string("nik", 45);
             $table->string("ktp", 45);
             $table->text("foto");
             $table->text("alamat");
