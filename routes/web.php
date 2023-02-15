@@ -13,6 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+});
+Route::get('/member', function () {
+    return view('member.index');
+});
+Route::get('/mekanik', function () {
+    return view('mekanik.index');
+});
+Route::get('/perbaikan', function () {
+    return view('perbaikan.index');
+});
+Route::get('/jeniskerusakan', function () {
+    return view('jenisKerusakan.index');
+});
+Route::get('/pembayaran', function () {
+    return view('pembayaran.index');
+});
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+Route::get('/register', function () {
+    return view('auth.register');
+});
+Route::get('/personal', function () {
+    return view('auth.personal');
 });
