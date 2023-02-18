@@ -8,7 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DiagnosaKerusakan extends Model
 {
     use HasFactory;
-
-    protected $id = ['iddiagnosa'];
     
 }

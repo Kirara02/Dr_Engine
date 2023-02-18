@@ -21,56 +21,61 @@
             <div class="menu-item mt-2 {{ (request()->is('dashboard') ? 'active':'') }}">
                 <a href="{{ url('dashboard') }}" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="ion-md-home"></i>
                     </div>
                     <div class="menu-text">Dashboard</div>
                 </a>
             </div>
             
             <div class="menu-header">Menu</div>
-            <div class="menu-item has-sub {{ request()->is('member') || request()->is('mekanik') || request()->is('jeniskerusakan') ? 'active':'' }}">
+            <div class="menu-item has-sub {{ request()->is('members') || request()->is('mekanik') || request()->is('jenis-kerusakan') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fas fa-cube"></i>
+                        <i class="ion-md-cube"></i>
                     </div>
                     <div class="menu-text">Data Master</div>
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item {{ (request()->is('member') ? 'active':'') }}">
-                        <a href="{{ url('member') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->is('members') ? 'active':'') }}">
+                        <a href="{{ route('members.index') }}" class="menu-link">
                             <div class="menu-text">Data Member</div>
                         </a>
                     </div>
                     <div class="menu-item {{ (request()->is('mekanik') ? 'active':'') }}">
-                        <a href="{{ url('mekanik') }}" class="menu-link">
+                        <a href="{{ route('mekanik.index') }}" class="menu-link">
                             <div class="menu-text">Data Mekanik</div>
                         </a>
                     </div>
-                    <div class="menu-item {{ (request()->is('jeniskerusakan') ? 'active':'') }}">
-                        <a href="{{ url('jeniskerusakan') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->is('jenis-kerusakan') ? 'active':'') }}">
+                        <a href="{{ route('jenis-kerusakan.index') }}" class="menu-link">
                             <div class="menu-text">Data Jenis Kerusakan</div>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="menu-item has-sub  {{ request()->is('perbaikan') || request()->is('pembayaran') ? 'active':'' }}">
+            <div class="menu-item has-sub  {{ request()->is('kerusakan') || request()->is('diagnosa') || request()->is('perbaikan') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="ion-md-construct"></i>
                     </div>
-                    <div class="menu-text">Data Transaksi</div>
+                    <div class="menu-text">Data Repair</div>
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item  {{ (request()->is('perbaikan') ? 'active':'') }}">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-text">Data Perbaikan</div>
+                    <div class="menu-item  {{ (request()->is('kerusakan') ? 'active':'') }}">
+                        <a href="{{ route('kerusakan.index') }}" class="menu-link">
+                            <div class="menu-text">Data Kerusakan</div>
                         </a>
                     </div>
-                    <div class="menu-item  {{ (request()->is('pembayaran') ? 'active':'') }}">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-text">Data Pembayaran</div>
+                    <div class="menu-item  {{ (request()->is('diagnosa') ? 'active':'') }}">
+                        <a href="{{ route('diagnosa.index') }}" class="menu-link">
+                            <div class="menu-text">Data Diagnosa</div>
+                        </a>
+                    </div>
+                    <div class="menu-item  {{ (request()->is('perbaikan') ? 'active':'') }}">
+                        <a href="{{ route('perbaikan.index') }}" class="menu-link">
+                            <div class="menu-text">Data Perbaikan</div>
                         </a>
                     </div>
                 </div>

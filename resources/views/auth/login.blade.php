@@ -40,9 +40,7 @@
 				<div class="login-header mb-30px">
 					<div class="brand">
 						<div class="d-flex align-items-center">
-							<span class="logo"></span>
-							
-							
+							<span class="logo"></span>	
 							<b>DR.</b> Engine
 						</div>
 						<small>Website Sistem Informasi Bengkel</small>
@@ -55,13 +53,13 @@
 				
 				<!-- BEGIN login-content -->
 				<div class="login-content">
-					<form action="index.html" method="GET" class="fs-13px">
+					<form action="javascript:;" method="POST" class="fs-13px">
 						<div class="form-floating mb-15px">
-							<input type="text" class="form-control h-45px fs-13px" placeholder="Usernama" id="usernama" />
+							<input type="text" class="form-control h-45px fs-13px" placeholder="Usernama" id="usernama" autocomplete="off" />
 							<label for="username" class="d-flex align-items-center fs-13px text-gray-600">Username</label>
 						</div>
 						<div class="form-floating mb-15px">
-							<input type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
+							<input type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" autocomplete="off"/>
 							<label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
 						</div>
 						<div class="form-check mb-30px">
@@ -74,7 +72,7 @@
 							<button type="submit" class="btn btn-success d-block h-45px w-100 btn-lg fs-14px">Sign me in</button>
 						</div>
 						<div class="mb-40px pb-40px text-inverse">
-							Not a member yet? Click <a href="register_v3.html" class="text-primary">here</a> to register.
+							Not a member yet? Click <a href="{{ url('register') }}" class="text-primary">here</a> to register.
 						</div>
 						<hr class="bg-gray-600 opacity-2" />
 						<div class="text-gray-600 text-center text-gray-500-darker mb-0">

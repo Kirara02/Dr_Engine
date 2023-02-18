@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Member extends Model
 {
     use HasFactory;
 
-    protected $id = ['idmember'];
+    protected $guarded = [];
 
     public function user(){
-        return $this->belongsTo(Member::class, 'idmember', 'idmember');
+        return $this->belongsTo(User::class, 'iduser', 'id');
     }
 }

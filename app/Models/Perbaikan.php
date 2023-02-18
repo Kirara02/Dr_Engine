@@ -9,6 +9,5 @@ class Perbaikan extends Model
 {
     use HasFactory;
 
-    protected $id = ['idperbaikan'];
     
 }

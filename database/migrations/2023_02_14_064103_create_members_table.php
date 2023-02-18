@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->id("idmember");
+            $table->id();
             $table->string("nama", 45);
             $table->string("nohp", 12);
             $table->string("email", 45);
             $table->string("ktp", 45);
             $table->text("foto");
             $table->text("alamat");
-            $table->foreignId("iduser");
+            $table->foreignId("iduser")->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('diagnosa_kerusakan', function (Blueprint $table) {
-            $table->id('iddiagnosa');
-            $table->foreignId('idjeniskerusakan');
-            $table->foreignId('idkerusakan');
+        Schema::create('diagnosa_kerusakans', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('idjeniskerusakan')->constrained('jenis_kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idkerusakan')->constrained('kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->text("keterangan");
             $table->timestamps();
         });

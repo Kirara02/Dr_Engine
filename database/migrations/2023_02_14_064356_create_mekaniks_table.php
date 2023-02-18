@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mekanik', function (Blueprint $table) {
-            $table->id("idmekanik");
+        Schema::create('mekaniks', function (Blueprint $table) {
+            $table->id();
             $table->string("name", 45);
             $table->text("alamat");
             $table->enum("statusAktivasi", ['1','0']);
-            $table->foreignId("idmember");
+            $table->foreignId("idmember")->constrained('members')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

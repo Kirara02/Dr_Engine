@@ -1,6 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MekanikController;
+use App\Http\Controllers\DiagnosaController;
+use App\Http\Controllers\KerusakanController;
+use App\Http\Controllers\PerbaikanController;
+use App\Http\Controllers\JenisKerusakanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,23 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('/dashboard', function () {
     return view('dashboard.index');
-});
-Route::get('/member', function () {
-    return view('member.index');
-});
-Route::get('/mekanik', function () {
-    return view('mekanik.index');
-});
-Route::get('/perbaikan', function () {
-    return view('perbaikan.index');
-});
-Route::get('/jeniskerusakan', function () {
-    return view('jenisKerusakan.index');
-});
-Route::get('/pembayaran', function () {
-    return view('pembayaran.index');
 });
 
 Route::get('/login', function () {
@@ -41,3 +36,20 @@ Route::get('/register', function () {
 Route::get('/personal', function () {
     return view('auth.personal');
 });
+
+Auth::routes();
+// Data Master
+// Route Member
+Route::resource('members', MemberController::class);
+// Route Mekanik
+Route::resource('mekanik', MekanikController::class);
+// Route Jenis Kerusakan
+Route::resource('jenis-kerusakan', JenisKerusakanController::class);
+
+// Data Repair
+// Route Kerusakan
+Route::resource('kerusakan', KerusakanController::class);
+// Route Kerusakan
+Route::resource('diagnosa', DiagnosaController::class);
+// Route Kerusakan
+Route::resource('perbaikan', PerbaikanController::class);

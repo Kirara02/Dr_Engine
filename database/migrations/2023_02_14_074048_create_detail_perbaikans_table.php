@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detail_perbaikan', function (Blueprint $table) {
-            $table->id('iddetailPerbaikan');
+        Schema::create('detail_perbaikans', function (Blueprint $table) {
+            $table->id();
             $table->string('jenisPerbaikan', 45);
             $table->integer('nominal');
             $table->text('keterangan');
-            $table->foreignId('idperbaikan');
+            $table->foreignId('idperbaikan')->constrained('perbaikans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

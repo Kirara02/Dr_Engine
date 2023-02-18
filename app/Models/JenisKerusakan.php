@@ -9,6 +9,4 @@ class JenisKerusakan extends Model
 {
     use HasFactory;
 
-    protected $id = ['idjeniskerusakan'];
-
 }

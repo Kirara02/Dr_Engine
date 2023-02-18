@@ -9,9 +9,7 @@ class Mekanik extends Model
 {
     use HasFactory;
     
-    protected $id = ['idmekanik'];
-    
     public function member(){
-        return $this->belongsTo(Member::class, 'idmember', 'idmember');
+        return $this->belongsTo(Member::class, 'idmember', 'id');
     }
 }

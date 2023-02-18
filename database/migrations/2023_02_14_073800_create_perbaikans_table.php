@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('perbaikan', function (Blueprint $table) {
-            $table->id('idperbaikan');
+        Schema::create('perbaikans', function (Blueprint $table) {
+            $table->id();
             $table->dateTime('tanggal');
             $table->enum('statusPerbaikan', ['pencarian','proses','selesai']);
             $table->enum('statusPembayaran', ['belum bayar','sudah bayar']);
-            $table->foreignId('idmekanik');
-            $table->foreignId('idkerusakan');
+            $table->foreignId('idmekanik')->constrained('mekaniks')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idkerusakan')->constrained('kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

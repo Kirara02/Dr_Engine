@@ -51,25 +51,19 @@
 							<label class="mb-2">Username <span class="text-danger">*</span></label>
 							<input type="text" class="form-control fs-13px" placeholder="Username" />
 						</div>
-						<div class="mb-4">
+						<div class="mb-3">
 							<label class="mb-2">Password <span class="text-danger">*</span></label>
 							<input type="password" class="form-control fs-13px" placeholder="Password" />
 						</div>
-						<div class="mb-4">
+						<div class="mb-3">
 							<label class="mb-2">Confirm Password <span class="text-danger">*</span></label>
 							<input type="password" class="form-control fs-13px" placeholder="Confirm Password" />
 						</div>
-						<div class="form-check mb-4">
-							<input class="form-check-input" type="checkbox" value="" id="agreementCheckbox" />
-							<label class="form-check-label" for="agreementCheckbox">
-								By clicking Sign Up, you agree to our <a href="javascript:;">Terms</a> and that you have read our <a href="javascript:;">Data Policy</a>, including our <a href="javascript:;">Cookie Use</a>.
-							</label>
-						</div>
-						<div class="mb-4">
+						<div class="mb-3">
 							<button type="submit" class="btn btn-primary d-block w-100 btn-lg h-45px fs-13px">Sign Up</button>
 						</div>
-						<div class="mb-4 pb-5">
-							Already a member? Click <a href="login_v3.html">here</a> to login.
+						<div class="mb-4 pb-5 text-inverse">
+							Already a member? Click <a href="{{ url('login') }}">here</a> to login.
 						</div>
 						<hr class="bg-gray-600 opacity-2" />
 						<p class="text-center text-gray-600">

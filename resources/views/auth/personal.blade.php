@@ -43,23 +43,20 @@
 					<small class="d-block fs-15px lh-16">Please complete your personal data</small>
 				</div>
 				<!-- END register-header -->
-                <div class="mb-3">
-                    <label class="mb-2">Name <span class="text-danger">*</span></label>
-                    <div class="row gx-3">
-                        <div class="col-md-6 mb-2 mb-md-0">
-                            <input type="text" class="form-control fs-13px" placeholder="First name" />
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control fs-13px" placeholder="Last name" />
-                        </div>
-                    </div>
-                </div>
+                
 				<!-- BEGIN register-content -->
 				<div class="register-content">
 					<form action="index.html" method="GET" class="fs-13px">
 						<div class="mb-3">
-							<label class="mb-2">Username <span class="text-danger">*</span></label>
-							<input type="text" class="form-control fs-13px" placeholder="Username" />
+							<label class="mb-2">Name <span class="text-danger">*</span></label>
+							<div class="row gx-3">
+								<div class="col-md-6 mb-2 mb-md-0">
+									<input type="text" class="form-control fs-13px" placeholder="First name" />
+								</div>
+								<div class="col-md-6">
+									<input type="text" class="form-control fs-13px" placeholder="Last name" />
+								</div>
+							</div>
 						</div>
 						<div class="mb-3">
 							<label class="mb-2">No Handphone <span class="text-danger">*</span></label>
@@ -68,10 +65,6 @@
 						<div class="mb-3">
 							<label class="mb-2">Email <span class="text-danger">*</span></label>
 							<input type="text" class="form-control fs-13px" placeholder="Email" />
-						</div>
-						<div class="mb-3">
-							<label class="mb-2">NIK <span class="text-danger">*</span></label>
-							<input type="text" class="form-control fs-13px" placeholder="NIK" />
 						</div>
 						<div class="mb-3">
 							<label class="mb-2">No KTP <span class="text-danger">*</span></label>
