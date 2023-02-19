@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\JenisKerusakan;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\jenisKerusakan\CreateJenisKerusakanRequest;
+use App\Http\Requests\jenisKerusakan\UpdateJenisKerusakanRequest;
 
 class JenisKerusakanController extends Controller
 {
@@ -13,7 +17,8 @@ class JenisKerusakanController extends Controller
      */
     public function index()
     {
-        return view('jenisKerusakan.index');
+        $data['jenisKerusakan'] = JenisKerusakan::all();
+        return view('jenisKerusakan.index')->with($data);
     }
 
     /**
@@ -23,7 +28,12 @@ class JenisKerusakanController extends Controller
      */
     public function create()
     {
-        //
+        $jenisKerusakan = new JenisKerusakan();
+        $action = route('jenis_kerusakan.store');
+        $method= 'POST';
+        $title = 'Tambah Jenis Kerusakan';
+        
+        return view('jenisKerusakan.form', compact('jenisKerusakan','action','method','title'));
     }
 
     /**
@@ -32,9 +42,20 @@ class JenisKerusakanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateJenisKerusakanRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            JenisKerusakan::create($request->all());
+
+            DB::commit();
+
+            return redirect()->route('jenis_kerusakan.index')->with('success', 'Data berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -54,9 +75,12 @@ class JenisKerusakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(JenisKerusakan $jenisKerusakan)
     {
-        //
+        $action = route('jenis_kerusakan.update', $jenisKerusakan->id);
+        $method = 'PUT';
+        $title = 'Update Jenis Kerusakan';
+        return view('jenisKerusakan.form', compact('jenisKerusakan', 'action', 'method', 'title'));
     }
 
     /**
@@ -66,9 +90,19 @@ class JenisKerusakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateJenisKerusakanRequest $request, JenisKerusakan $jenis)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $jenis->update($request->all());
+
+            DB::commit();
+
+            return redirect()->route('jenis_kerusakan.index')->with('success', 'Data berhasil diubah');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -77,8 +111,19 @@ class JenisKerusakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(JenisKerusakan $jenisKerusakan)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $jenisKerusakan->delete();
+
+            DB::commit();
+
+            return redirect()->route('jenis_kerusakan.index')->with('success', 'Data berhasil dihapus');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 }

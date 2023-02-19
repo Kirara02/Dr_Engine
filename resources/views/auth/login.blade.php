@@ -53,13 +53,14 @@
 				
 				<!-- BEGIN login-content -->
 				<div class="login-content">
-					<form action="javascript:;" method="POST" class="fs-13px">
+					<form action="{{ route('auth') }}" method="POST" class="fs-13px">
+						@csrf
 						<div class="form-floating mb-15px">
-							<input type="text" class="form-control h-45px fs-13px" placeholder="Usernama" id="usernama" autocomplete="off" />
+							<input type="text" class="form-control h-45px fs-13px" placeholder="Username" name="username" id="username" autocomplete="off" />
 							<label for="username" class="d-flex align-items-center fs-13px text-gray-600">Username</label>
 						</div>
 						<div class="form-floating mb-15px">
-							<input type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" autocomplete="off"/>
+							<input type="password" class="form-control h-45px fs-13px" placeholder="Password" name="password" id="password" autocomplete="off"/>
 							<label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
 						</div>
 						<div class="form-check mb-30px">

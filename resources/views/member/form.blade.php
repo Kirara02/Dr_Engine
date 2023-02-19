@@ -2,7 +2,7 @@
 @section('content')
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="javascript:;">Member</a></li>
-        <li class="breadcrumb-item active"><a href="javascript:;">Create</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:;">Form</a></li>
     </ol>
     <h1 class="page-header">{{ $title }}</h1>
     <div class="panel panel-inverse">

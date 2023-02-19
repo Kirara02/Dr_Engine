@@ -8,7 +8,6 @@
 			<!-- BEGIN page-header -->
 			<h1 class="page-header">Dashboard</h1>
 			<!-- END page-header -->
-			
 			<!-- BEGIN row -->
 			<div class="row">
 				<div class="col-xl-3 col-md-6">
@@ -16,7 +15,7 @@
 						<div class="stats-icon"><i class="fas fa-users"></i></div>
 						<div class="stats-info">
 							<h4>Member</h4>
-							<p>20</p>	
+							<p>{{ App\Models\Member::count() ?? 0 }}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
@@ -28,7 +27,7 @@
 						<div class="stats-icon"><i class="fas fa-cog"></i></div>
 						<div class="stats-info">
 							<h4>Mekanik</h4>
-							<p>20</p>	
+							<p>{{ App\Models\Mekanik::count() ?? 0 }}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
@@ -40,7 +39,7 @@
 						<div class="stats-icon"><i class="fas fa-recycle"></i></div>
 						<div class="stats-info">
 							<h4>Perbaikan</h4>
-							<p>20</p>	
+							<p>{{ App\Models\Perbaikan::count() ?? 0 }}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
@@ -52,7 +51,7 @@
 						<div class="stats-icon"><i class="fas fa-bug"></i></div>
 						<div class="stats-info">
 							<h4>Jenis Kerusakan</h4>
-							<p>5</p>	
+							<p>{{ App\Models\JenisKerusakan::count() ?? 0 }}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>

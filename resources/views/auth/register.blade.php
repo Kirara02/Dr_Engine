@@ -46,18 +46,71 @@
 				
 				<!-- BEGIN register-content -->
 				<div class="register-content">
-					<form action="index.html" method="GET" class="fs-13px">
-						<div class="mb-3">
+					<form action="{{ route('register.store') }}" method="POST" class="fs-13px" enctype="multipart/form-data">
+						@method('POST')
+						@csrf
+						<div class="form-group mb-3">
+							<label class="mb-2">Nama Lengkap <span class="text-danger">*</span></label>
+							<input type="text" class="form-control fs-13px" name="nama" id="nama" placeholder="Nama Lengkap" value="{{ old('nama') }}" />
+							@error('nama')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
+						</div>
+						<div class="form-group mb-3">
+							<label class="mb-2">No handphone <span class="text-danger">*</span></label>
+							<input type="text" class="form-control fs-13px" name="nohp" id="nohp" placeholder="No Handphone" value="{{ old('nohp') }}"/>
+							@error('nohp')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
+						</div>
+						<div class="form-group mb-3">
+							<label class="mb-2">Email <span class="text-danger">*</span></label>
+							<input type="text" class="form-control fs-13px" name="email" id="email" placeholder="Email" value="{{ old('email') }}"/>
+							@error('email')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror	
+						</div>
+						<div class="form-group mb-3">
+							<label class="mb-2">KTP <span class="text-danger">*</span></label>
+							<input type="text" class="form-control fs-13px" name="ktp" id="ktp" placeholder="KTP" value="{{ old('ktp') }}"/>
+							@error('ktp')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
+						</div>
+						<div class="form-group mb-3">
+							<label class="mb-2">Foto <span class="text-danger">*</span></label>
+							<input type="file" class="form-control fs-13px" name="foto" id="foto" placeholder="Foto" value="{{ old('foto') }}"/>
+							@error('foto')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
+						</div>
+						<div class="form-group mb-3">
+							<label class="mb-2">Alamat <span class="text-danger">*</span></label>
+							<textarea class="form-control" name="alamat" rows="3" id="alamat" >{{ old('alamat') }}</textarea>	
+							@error('alamat')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
+						</div>
+						<div class="form-group mb-3">
 							<label class="mb-2">Username <span class="text-danger">*</span></label>
-							<input type="text" class="form-control fs-13px" placeholder="Username" />
+							<input type="text" class="form-control fs-13px" name="username" id="username" placeholder="username" {{ old('username') }}/>
+							@error('username')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
 						</div>
-						<div class="mb-3">
+						<div class="form-group mb-3">
 							<label class="mb-2">Password <span class="text-danger">*</span></label>
-							<input type="password" class="form-control fs-13px" placeholder="Password" />
+							<input type="password" class="form-control fs-13px" name="password" id="password" placeholder="Password" {{ old('password') }}/>
+							@error('password')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
 						</div>
-						<div class="mb-3">
+						<div class="form-group mb-3">
 							<label class="mb-2">Confirm Password <span class="text-danger">*</span></label>
-							<input type="password" class="form-control fs-13px" placeholder="Confirm Password" />
+							<input type="password" class="form-control fs-13px" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" />
+							@error('password_confirmation')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
 						</div>
 						<div class="mb-3">
 							<button type="submit" class="btn btn-primary d-block w-100 btn-lg h-45px fs-13px">Sign Up</button>

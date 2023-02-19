@@ -12,7 +12,7 @@
                     <div class="menu-profile-info">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                Kirara Bernstein
+                                {{ auth()->user()->username }}
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
             </div>
             
             <div class="menu-header">Menu</div>
-            <div class="menu-item has-sub {{ request()->is('members') || request()->is('mekanik') || request()->is('jenis-kerusakan') ? 'active':'' }}">
+            <div class="menu-item has-sub {{ request()->is('members') || request()->is('mekanik') || request()->is('jenis_kerusakan') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="ion-md-cube"></i>
@@ -47,8 +47,8 @@
                             <div class="menu-text">Data Mekanik</div>
                         </a>
                     </div>
-                    <div class="menu-item {{ (request()->is('jenis-kerusakan') ? 'active':'') }}">
-                        <a href="{{ route('jenis-kerusakan.index') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->is('jenis_kerusakan') ? 'active':'') }}">
+                        <a href="{{ route('jenis_kerusakan.index') }}" class="menu-link">
                             <div class="menu-text">Data Jenis Kerusakan</div>
                         </a>
                     </div>
