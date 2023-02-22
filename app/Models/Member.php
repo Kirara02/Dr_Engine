@@ -15,4 +15,8 @@ class Member extends Model
     public function user(){
         return $this->belongsTo(User::class, 'iduser', 'id');
     }
+
+    public function mekanik(){
+        return $this->belongsTo(Mekanik::class, 'id', 'idmember');
+    }
 }

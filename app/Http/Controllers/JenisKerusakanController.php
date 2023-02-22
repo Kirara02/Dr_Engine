@@ -15,6 +15,11 @@ class JenisKerusakanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index()
     {
         $data['jenisKerusakan'] = JenisKerusakan::all();

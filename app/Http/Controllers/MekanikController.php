@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\mekanik\createMekanikRequest;
+use App\Http\Requests\mekanik\UpdateMekanikRequest;
+use App\Models\Mekanik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MekanikController extends Controller
 {
@@ -11,9 +15,16 @@ class MekanikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->middleware('isAdmin')->except(['create','store']);
+     }
+
     public function index()
     {
-        return view('mekanik.index');
+        $data['mekanik'] = Mekanik::all();
+        return view('mekanik.index')->with($data);
     }
 
     /**
@@ -23,7 +34,12 @@ class MekanikController extends Controller
      */
     public function create()
     {
-        //
+        $mekanik = new Mekanik();
+        $action = route('mekanik.store');
+        $method = 'POST';
+        $title = 'Tambah Mekanik';
+
+        return view('mekanik.form', compact('mekanik', 'action', 'method', 'title'));
     }
 
     /**
@@ -32,9 +48,26 @@ class MekanikController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createMekanikRequest $request)
     {
-        //
+        try {
+            $request->validated();
+            DB::beginTransaction();
+
+            Mekanik::create([
+                'name' => $request->name,
+                'alamat' => $request->alamat,
+                'statusAktivasi' => '0',
+                'idmember' => auth()->user()->member->id
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('dashboard')->with('success', 'Data berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -54,9 +87,13 @@ class MekanikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Mekanik $mekanik)
+    {       
+        $action = route('mekanik.update', $mekanik->id);
+        $method = 'PUT';
+        $title = 'Update Mekanik';
+
+        return view('mekanik.form', compact('mekanik', 'action', 'method', 'title'));
     }
 
     /**
@@ -66,9 +103,19 @@ class MekanikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMekanikRequest $request, Mekanik $mekanik)
     {
-        //
+        try {
+            // DB::beginTransaction();
+            $mekanik->update($request->all());
+
+            // DB::commit();
+
+            return redirect()->route('mekanik.index')->with('success', 'Data berhasil diedit');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -77,8 +124,19 @@ class MekanikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Mekanik $mekanik)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            Mekanik::find($mekanik->id)->delete();
+
+            DB::commit();
+
+            return redirect()->route('mekanik.index')->with('success', 'Data berhasil didelete');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 }

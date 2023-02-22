@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['title' => 'Jenis Kerusakan'])
 @section('content')
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="{{ route('members.index') }}">Master</a></li>
@@ -37,8 +37,8 @@
                                 <form id="form-delete" action="{{ route('jenis_kerusakan.destroy', $item->id) }}" method="post" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
-                            </form>
+                                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

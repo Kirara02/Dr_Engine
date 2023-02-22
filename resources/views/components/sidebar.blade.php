@@ -7,12 +7,21 @@
                 <div class="menu-profile-link" data-toggle="app-sidebar-profile" data-target="javascript:;appSidebarProfileMenu">
                     <div class="menu-profile-cover with-shadow"></div>
                     <div class="menu-profile-image">
-                        <img src="../assets/img/user/user-13.jpg" alt="" />
+                        <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" />
                     </div>
                     <div class="menu-profile-info">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                {{ auth()->user()->username }}
+                                <p>
+                                    {{ auth()->user()->member->nama }}
+                                    @if (auth()->user()->member->mekanik != null && auth()->user()->member->mekanik->statusAktivasi == '1')
+                                        <span class="badge bg-indigo rounded-pill">Mekanik</span>
+                                    @elseif(auth()->user()->level == 'admin')
+                                        <span class="badge bg-indigo rounded-pill">Admin</span>
+                                    @else
+                                        <span class="badge bg-indigo rounded-pill">Member</span>
+                                    @endif
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -29,6 +38,7 @@
             
             <div class="menu-header">Menu</div>
             <div class="menu-item has-sub {{ request()->is('members') || request()->is('mekanik') || request()->is('jenis_kerusakan') ? 'active':'' }}">
+                @can('isAdmin') 
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="ion-md-cube"></i>
@@ -53,6 +63,7 @@
                         </a>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="menu-item has-sub  {{ request()->is('kerusakan') || request()->is('diagnosa') || request()->is('perbaikan') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">

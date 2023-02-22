@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['title' => 'Dashboard'])
 @section('content')
     <!-- BEGIN breadcrumb -->
 			<ol class="breadcrumb float-xl-end">
@@ -9,6 +9,13 @@
 			<h1 class="page-header">Dashboard</h1>
 			<!-- END page-header -->
 			<!-- BEGIN row -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="alert alert-lime">
+						Selamat datang {{ auth()->user()->member->nama }}, Have a nice day :)
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-xl-3 col-md-6">
 					<div class="widget widget-stats bg-blue">
@@ -24,10 +31,10 @@
 				</div>
 				<div class="col-xl-3 col-md-6">
 					<div class="widget widget-stats bg-red">
-						<div class="stats-icon"><i class="fas fa-cog"></i></div>
+						<div class="stats-icon"><i class="fas fa-cogs"></i></div>
 						<div class="stats-info">
 							<h4>Mekanik</h4>
-							<p>{{ App\Models\Mekanik::count() ?? 0 }}</p>	
+							<p>{{ App\Models\Mekanik::where('statusAktivasi',1)->count() ?? 0 }}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
@@ -61,4 +68,4 @@
 			</div>
 			<!-- END row -->
 
-@endsection
+@stop

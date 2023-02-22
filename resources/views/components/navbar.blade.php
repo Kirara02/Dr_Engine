@@ -12,17 +12,25 @@
     <!-- BEGIN header-nav -->
     <div class="navbar-nav">				
         <div class="navbar-item navbar-user dropdown">
-            <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                <img src="../assets/img/user/user-13.jpg" alt="" /> 
+            <a href="" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" /> 
                 <span>
                     <span class="d-none d-md-inline">{{ auth()->user()->member->nama }}</span>
                     <b class="caret"></b>
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end me-1">
-                <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                <a href="{{ route('profile') }}" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
                 <div class="dropdown-divider"></div>
-                <a href="javascript:;" class="dropdown-item">Log Out</a>
+                @if(auth()->user()->member->mekanik == null && auth()->user()->level != 'admin')
+                    <a href="{{ route('mekanik.create') }}" class="dropdown-item"><i class="fas fa-cog"></i> Daftar Mekanik</a>
+                    <div class="dropdown-divider"></div>
+                @endif
+                
+                <a href="javascript:;" class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>

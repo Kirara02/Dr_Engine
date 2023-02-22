@@ -18,6 +18,11 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index()
     {
         $data['member'] = Member::with(['user'])->get();
@@ -36,7 +41,7 @@ class MemberController extends Controller
         $method= 'POST';
         $title = 'Tambah Member';
 
-        return view('member.form',compact('member','action','method','title'));
+        return view('member.form', compact('member','action','method','title'));
     }
 
     /**
@@ -113,12 +118,10 @@ class MemberController extends Controller
     public function update(UpdateMemberRequest $request, Member $member)
     {
         try{
+            $request->validated();
+
             DB::beginTransaction();
             
-            $request->validated();
-            $data = $member->with(['user'])->get();
-            
-            // return $data;
             $pass = $request->password ? bcrypt($request->password) : $member->user->password;
             User::find($member->user->id)->update([
                 'username' => $request->username,

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("name", 45);
             $table->text("alamat");
-            $table->enum("statusAktivasi", ['1','0']);
+            $table->enum("statusAktivasi", ['1','0'])->default('0');
             $table->foreignId("idmember")->constrained('members')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

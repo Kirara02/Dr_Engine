@@ -31,25 +31,30 @@ Route::get('/', function () {
 Route::resource('register', RegisterController::class);
 Route::get('login', [LoginController::class,'index'])->name('login');
 Route::post('login', [LoginController::class,'auth'])->name('auth');
-Route::resource('logout', LogoutController::class);
+Route::post('logout', [LogoutController::class,'logout'])->name('logout');
 
-// Route Dashboard
-Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
-Route::get('/profile', [DashboardController::class,'profile'])->name('profile');
-Route::post('/profile', [DashboardController::class,'update'])->name('profile.update');
+Route::middleware('auth')->group(function (){
 
-// Data Master
-// Route Member
-Route::resource('members', MemberController::class);
-// Route Mekanik
-Route::resource('mekanik', MekanikController::class);
-// Route Jenis Kerusakan
-Route::resource('jenis_kerusakan', JenisKerusakanController::class);
-
-// Data Repair
-// Route Kerusakan
-Route::resource('kerusakan', KerusakanController::class);
-// Route Kerusakan
-Route::resource('diagnosa', DiagnosaController::class);
-// Route Kerusakan
-Route::resource('perbaikan', PerbaikanController::class);
+    // Route Dashboard
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/profile', [DashboardController::class,'profile'])->name('profile');
+    Route::get('/profile/edit', [DashboardController::class,'edit'])->name('profile.edit');
+    Route::post('/profile', [DashboardController::class,'update'])->name('profile.update');
+    
+    // Data Master
+    // Route Member
+    Route::resource('members', MemberController::class);
+    // Route Mekanik
+    Route::resource('mekanik', MekanikController::class);
+    // Route Jenis Kerusakan
+    Route::resource('jenis_kerusakan', JenisKerusakanController::class);
+    
+    // Data Repair
+    // Route Kerusakan
+    Route::resource('kerusakan', KerusakanController::class);
+    // Route Kerusakan
+    Route::resource('diagnosa', DiagnosaController::class);
+    // Route Kerusakan
+    Route::resource('perbaikan', PerbaikanController::class);
+    
+});
