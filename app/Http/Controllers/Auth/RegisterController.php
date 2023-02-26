@@ -48,7 +48,7 @@ class RegisterController extends Controller
 
             DB::commit();
 
-            return redirect()->route('login.index')->with('success','Anda berhasil register');
+            return redirect()->route('login')->with('success','Anda berhasil register');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());

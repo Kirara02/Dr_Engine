@@ -16,44 +16,38 @@
             </div>
         </div>
         <div class="panel-body">
-            {{-- <a href="{{ route('mekanik.create') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus-circle"></i> Tambah Mekanik</a> --}}
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
-                <thead>
-                    <tr>
-                        <th width="1%">No</th>
-                        <th class="text-nowrap">Nama</th>
-                        <th class="text-nowrap">Alamat</th>
-                        <th class="text-nowrap">Status Aktivasi</th>
-                        <th class="text-nowrap">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($mekanik as $item)
+            <div class="table-responsive">
+
+                <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->alamat }}</td>
-                            <td>{{ $item->statusAktivasi == '1' ? 'Terdaftar' : 'Belum Diaktivasi' }}</td>
-                            <td class="text-center justify-content-center d-flex">
-                                <a href="{{ route('mekanik.edit', $item->id) }}" class="btn btn-success text-light"><i class="fas fa-edit align-middle"></i></a>
-                                <form id="form-delete" action="{{ route('mekanik.destroy', $item->id) }}" method="post" class="ms-1 d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
-                                </form>
-                            </td>
+                            <th width="1%">No</th>
+                            <th class="text-nowrap">Nama</th>
+                            <th class="text-nowrap">Alamat</th>
+                            <th class="text-nowrap">Status Aktivasi</th>
+                            <th class="text-nowrap">Action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($mekanik as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->alamat }}</td>
+                                <td>{{ $item->statusAktivasi == '1' ? 'Terdaftar' : 'Belum Diaktivasi' }}</td>
+                                <td class="text-center justify-content-center d-flex">
+                                    <a href="{{ route('mekanik.edit', $item->id) }}" class="btn btn-success text-light"><i class="fas fa-edit align-middle"></i></a>
+                                    <form id="form-delete" action="{{ route('mekanik.destroy', $item->id) }}" method="post" class="ms-1 d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script type="text/javascript">
-        $('#data-table-default').DataTable({
-            responsive: true
-        });
-    </script>
 @endsection

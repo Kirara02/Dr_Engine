@@ -17,33 +17,35 @@
         </div>
         <div class="panel-body">
             <a href="{{ route('jenis_kerusakan.create') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus-circle"></i> Tambah Jenis Kerusakan</a>
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
-                <thead>
-                    <tr>
-                        <th width="1%">No</th>
-                        <th class="text-nowrap">Jenis Kerusakan</th>
-                        <th class="text-nowrap">Deskripsi</th>
-                        <th class="text-nowrap">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($jenisKerusakan as $item)
+            <div class="table-responsive">
+                <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->jenisKerusakan }}</td>
-                            <td>{{ $item->deskripsi }}</td>
-                            <td class="text-center ">
-                                <a href="{{ route('jenis_kerusakan.edit', $item->id) }}" class="btn btn-success text-light"><i class="fas fa-edit align-middle"></i></a>
-                                <form id="form-delete" action="{{ route('jenis_kerusakan.destroy', $item->id) }}" method="post" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
-                                </form>
-                            </td>
+                            <th width="1%">No</th>
+                            <th class="text-nowrap">Jenis Kerusakan</th>
+                            <th class="text-nowrap">Deskripsi</th>
+                            <th class="text-nowrap">Action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($jenisKerusakan as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->jenisKerusakan }}</td>
+                                <td>{{ $item->deskripsi }}</td>
+                                <td class="text-center ">
+                                    <a href="{{ route('jenis_kerusakan.edit', $item->id) }}" class="btn btn-success text-light"><i class="fas fa-edit align-middle"></i></a>
+                                    <form id="form-delete" action="{{ route('jenis_kerusakan.destroy', $item->id) }}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

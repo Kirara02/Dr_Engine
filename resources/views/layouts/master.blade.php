@@ -46,16 +46,10 @@
 			<div class="app-content-padding flex-grow-1">
 				@yield('content')
 			</div>
-			@include('components.footer')
 		</div>
 		<!-- END #sidebar -->
 	</div>
 
-	<script>
-		$('#data-table-default').DataTable({
-            responsive: true
-        });
-		</script>
     <!-- ================== BEGIN core-js ================== -->
 	<script src="{{ asset('/') }}assets/js/vendor.min.js"></script>
 	<script src="{{ asset('/') }}assets/js/app.min.js"></script>

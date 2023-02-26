@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mekanik;
 use Illuminate\Http\Request;
+use App\Models\JenisKerusakan;
 
 class PerbaikanController extends Controller
 {
@@ -13,72 +15,68 @@ class PerbaikanController extends Controller
      */
     public function index()
     {
-        return view('perbaikan.index');
+        return view('repair.index');
+    }
+    
+    public function kerusakan()
+    {
+        $status = ['active','disable','disable'];
+        return view('repair.form', compact('status'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function diagnosa()
+    {  
+        $jenis = JenisKerusakan::get();
+        $status = ['completed','active','disable'];
+        return view('repair.form', compact('status','jenis'));      
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function mekanik(Request $request)
     {
-        //
+        $status = ['completed','completed','active'];
+        $mekanik = Mekanik::with(['member'])->get();
+        
+        $cari = $request->input('cari');
+
+        if($cari){
+            $mekanik = Mekanik::with(['member'])
+                ->where('name','LIKE', '%'.$cari.'%')
+                ->orWhere('alamat','LIKE', '%'.$cari.'%')
+                ->get();
+        }
+        
+        return view('repair.form', compact('status','mekanik'));    
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function storeKerusakan(Request $request)
     {
-        //
+        $request->validate([
+            
+        ]);
+
+        $status = ['completed','active','disable'];
+        return redirect()->route('repair.diagnosa')->with('status');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function storeDiagnosa(Request $request)
     {
-        //
+        $request->validate([
+        
+        ]);
+
+        $status = ['completed','completed','active'];
+        return redirect()->route('repair.mekanik')->with('status');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function storeMekanik(Request $request)
     {
-        //
+        $request->validate([
+        
+        ]);
+
+        return redirect()->route('repair.index')->with('status');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
+
 }

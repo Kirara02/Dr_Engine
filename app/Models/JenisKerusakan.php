@@ -10,4 +10,6 @@ class JenisKerusakan extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    
 }   

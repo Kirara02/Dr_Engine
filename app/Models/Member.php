@@ -19,4 +19,8 @@ class Member extends Model
     public function mekanik(){
         return $this->belongsTo(Mekanik::class, 'id', 'idmember');
     }
+
+    public function kerusakan(){
+        return $this->hasMany(Kerusakan::class, 'id', 'idmember');
+    }
 }

@@ -55,6 +55,16 @@ Route::middleware('auth')->group(function (){
     // Route Kerusakan
     Route::resource('diagnosa', DiagnosaController::class);
     // Route Kerusakan
-    Route::resource('perbaikan', PerbaikanController::class);
     
+    // Route Input Repair  
+    Route::controller(PerbaikanController::class)->group(function (){
+        Route::get('repair', 'index')->name('repair.index');
+        Route::get('repair/kerusakan', 'kerusakan')->name('repair.kerusakan');
+        Route::post('repair/kerusakan/store', 'storeKerusakan')->name('repair.kerusakan.store');
+        Route::get('repair/diagnosa', 'diagnosa')->name('repair.diagnosa');
+        Route::post('repair/diagnosa/store', 'storeDiagnosa')->name('repair.diagnosa.store');
+        Route::get('repair/mekanik', 'mekanik')->name('repair.mekanik');
+        Route::post('repair/mekanik/store', 'storeMekanik')->name('repair.mekanik.store');
+    });
+
 });
