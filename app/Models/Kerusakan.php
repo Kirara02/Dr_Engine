@@ -18,7 +18,7 @@ class Kerusakan extends Model
      */
     public function member()
     {
-        return $this->belongsTo(User::class, 'id', 'idmember');
+        return $this->belongsTo(Member::class, 'idmember', 'id');
     }
 
     /**
@@ -41,4 +41,10 @@ class Kerusakan extends Model
         return $this->belongsTo(Perbaikan::class, 'id', 'idkerusakan');
     }
     
+    /**
+     * Get all of the jenisKerusakan for the Kerusakan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+   
 }

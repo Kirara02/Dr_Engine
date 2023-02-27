@@ -130,7 +130,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @dd($diagnosa)
+                    {{-- @dd($diagnosa) --}}
                     @foreach ($diagnosa as $item)
                       <tr>
                         <td>{{ $loop->iteration }}</td>

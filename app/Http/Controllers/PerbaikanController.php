@@ -22,7 +22,8 @@ class PerbaikanController extends Controller
      */
     public function index()
     {
-        return view('repair.index');
+        $data['kerusakan'] = Kerusakan::where('idmember', '=',auth()->user()->member->id)->get();
+        return view('repair.index')->with($data);
     }
     
     public function kerusakan()
@@ -33,8 +34,8 @@ class PerbaikanController extends Controller
 
     public function diagnosa()
     {  
-        $data = Perbaikan::select('idKerusakan')->latest()->first();
-        $diagnosa = DiagnosaKerusakan::with(['jenisKerusakan'])->where('idkerusakan','=',$data->idKerusakan)->get();
+        $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
+        $diagnosa = DiagnosaKerusakan::with(['jenisKerusakan'])->where('idkerusakan','=',$data->id)->get();
 
         $jenis = JenisKerusakan::get();
         $status = ['completed','active','disable'];
@@ -99,7 +100,7 @@ class PerbaikanController extends Controller
                 'idmember' => auth()->user()->member->id
             ]);
 
-            $data = Kerusakan::select('id')->latest()->first();
+            $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
 
             Perbaikan::create([
                 'tanggal' => Carbon::now()->format('Y-m-d'),
@@ -130,7 +131,7 @@ class PerbaikanController extends Controller
 
             Db::beginTransaction();
 
-            $data = Kerusakan::select('id')->latest()->first();
+            $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
 
             DiagnosaKerusakan::create([
                 'idJenisKerusakan' => $request->jenisKerusakan,
@@ -139,7 +140,6 @@ class PerbaikanController extends Controller
             ]);
 
             DB::commit();
-
 
             $status = ['completed','completed','active'];
             return redirect()->back();
@@ -152,11 +152,21 @@ class PerbaikanController extends Controller
     public function storeMekanik(Request $request)
     {
         $request->validate([
-        
+            'idmekanik' => 'required'
         ]);
 
         try {
-            
+         
+            Db::beginTransaction();
+
+            $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
+
+            Perbaikan::where('idkerusakan','=',$data->id)->update([
+                'idmekanik' => $request->idmekanik,
+                'statusPerbaikan' => 'proses',
+            ]);
+
+            DB::commit();      
 
             return redirect()->route('repair.index')->with('status');
         } catch (\Throwable $th) {

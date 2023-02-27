@@ -28,6 +28,6 @@ class DiagnosaKerusakan extends Model
      */
     public function jenisKerusakan()
     {
-        return $this->belongsTo(JenisKerusakan::class, 'id', 'id');
+        return $this->belongsTo(JenisKerusakan::class, 'idjeniskerusakan', 'id');
     }
 }
