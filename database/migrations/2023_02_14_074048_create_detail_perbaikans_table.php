@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('jenisPerbaikan', 45);
             $table->integer('nominal');
             $table->text('keterangan');
-            $table->foreignId('idperbaikan')->constrained('perbaikans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idperbaikan')->nullable()->constrained('perbaikans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

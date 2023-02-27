@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function (){
         Route::post('repair/kerusakan/store', 'storeKerusakan')->name('repair.kerusakan.store');
         Route::get('repair/diagnosa', 'diagnosa')->name('repair.diagnosa');
         Route::post('repair/diagnosa/store', 'storeDiagnosa')->name('repair.diagnosa.store');
+        Route::delete('repair/diagnosa/destroy/{id}', 'destroy')->name('repair.diagnosa.destroy');
         Route::get('repair/mekanik', 'mekanik')->name('repair.mekanik');
         Route::post('repair/mekanik/store', 'storeMekanik')->name('repair.mekanik.store');
     });

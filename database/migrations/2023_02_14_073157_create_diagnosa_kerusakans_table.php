@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('diagnosa_kerusakans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idjeniskerusakan')->constrained('jenis_kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('idkerusakan')->constrained('kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idjeniskerusakan')->nullable()->constrained('jenis_kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idkerusakan')->nullable()->constrained('kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->text("keterangan");
             $table->timestamps();
         });

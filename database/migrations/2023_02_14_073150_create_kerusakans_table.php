@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tipeKendaraan', 45);
             $table->string('tahunKendaraan', 45);
             $table->string('fotoKendaraan', 45);
-            $table->foreignId('idmember')->constrained('members')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idmember')->nullable()->constrained('members')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

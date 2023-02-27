@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('perbaikans', function (Blueprint $table) {
             $table->id();
             $table->dateTime('tanggal');
-            $table->enum('statusPerbaikan', ['pencarian','proses','selesai']);
-            $table->enum('statusPembayaran', ['belum bayar','sudah bayar']);
-            $table->foreignId('idmekanik')->constrained('mekaniks')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('idkerusakan')->constrained('kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->enum('statusPerbaikan', ['pencarian','proses','selesai'])->default('pencarian');
+            $table->enum('statusPembayaran', ['belum bayar','sudah bayar'])->default('belum bayar');
+            $table->foreignId('idmekanik')->nullable()->constrained('mekaniks')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('idkerusakan')->nullable()->constrained('kerusakans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -1,4 +1,4 @@
-@extends('layouts.master', , ['title' => $title])
+@extends('layouts.master', ['title' => $title])
 @section('content')
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="{{ route('members.index') }}">Master</a></li>

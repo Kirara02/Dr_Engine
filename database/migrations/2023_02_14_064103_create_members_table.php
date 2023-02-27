@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("ktp", 45);
             $table->text("foto");
             $table->text("alamat");
-            $table->foreignId("iduser")->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId("iduser")->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
