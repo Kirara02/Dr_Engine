@@ -17,7 +17,7 @@
     <div class="panel-body">
         <a href="{{ route('repair.kerusakan') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus"></i> Repair</a>
         <div class="table-responsive">
-            <table id="table" class="table table-striped table-bordered align-middle fs-16px">
+            <table id="table" class="table table-striped table-bordered align-middle fs-14px">
                 <thead>
                     <tr>
                         <th class="text-nowrap" width="1%">No</th>

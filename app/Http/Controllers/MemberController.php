@@ -66,7 +66,7 @@ class MemberController extends Controller
             $id = User::select('id')->latest()->first();
 
             $foto = $request->file('foto');
-            $fotoUrl = $foto->storeAs('members', Str::slug($request->name) . '-' . Str::random(6) . '.' . $foto->extension());
+            $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
 
 
             Member::create([
@@ -132,7 +132,7 @@ class MemberController extends Controller
             if ($request->file('foto')) {
                 $member->foto != NULL ? Storage::delete($member->foto) : '';
                 $foto = $request->file('foto');
-                $fotoUrl = $foto->storeAs('members', Str::slug($request->name) . '-' . Str::random(6) . '.' . $foto->extension());
+                $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
             } else {
                 $fotoUrl = $member->foto;
             }

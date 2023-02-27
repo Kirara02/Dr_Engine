@@ -64,7 +64,42 @@
                     </div>
                 </div>
             </div>
+            <div class="menu-item has-sub {{ (request()->is('laporan') ? 'active':'') }}">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="ion-md-build"></i>
+                    </div>
+                    <div class="menu-text">Perbaikan</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->is('perbaikan') ? 'active':'') }}">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Data Perbaikan</div>
+                        </a>
+                    </div>
+                </div>
+            </div> 
             @endcan
+            @can('isMekanik')
+                <div class="menu-item has-sub {{ (request()->is('laporan') ? 'active':'') }}">
+                    <a href="javascript:;" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="ion-md-build"></i>
+                        </div>
+                        <div class="menu-text">Data Transaksi</div>
+                        <div class="menu-caret"></div>
+                    </a>
+                <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->is('perbaikan') ? 'active':'') }}">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Data Perbaikan</div>
+                        </a>
+                    </div>
+                </div>
+            </div> 
+            @endcan
+            @cannot('isAdmin')
             <div class="menu-item has-sub  {{ request()->is('kerusakan') || request()->is('diagnosa') || request()->is('perbaikan') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -81,10 +116,12 @@
                     </div>
                 </div>
             </div>
+            @endcannot
+            @can('isAdmin')
             <div class="menu-item has-sub {{ (request()->is('laporan') ? 'active':'') }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fas fa-archive"></i>
+                        <i class="ion-md-archive"></i>
                     </div>
                     <div class="menu-text">Laporan</div> 
                     <div class="menu-caret"></div>
@@ -96,7 +133,8 @@
                         </a>
                     </div>
                 </div>
-            </div>					
+            </div> 
+            @endcan
             <!-- BEGIN minify-button -->
             <div class="menu-item d-flex">
                 <a href="javascript:;" class="app-sidebar-minify-btn ms-auto" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>

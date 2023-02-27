@@ -46,7 +46,7 @@
 						<div class="stats-icon"><i class="fas fa-recycle"></i></div>
 						<div class="stats-info">
 							<h4>Perbaikan</h4>
-							<p>{{ App\Models\Perbaikan::count() ?? 0 }}</p>	
+							<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>

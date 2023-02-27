@@ -35,16 +35,16 @@ class DashboardController extends Controller
             'email' => 'required|string',
             'password' => 'nullable|min:6|',
             'confirm' => 'required_with:password|same:password',
-            'foto' => 'mimes:jpg, jpeg, png',
+            'foto' => 'mimes:jpg,jpeg,png',
             'alamat' => 'required|string',
             'nohp' => 'required|string',
             'ktp' => 'required|string',
-            'nama_bengkel' => 'required|string',
-            'alamat_bengkel' => 'required|string',
+            'nama_bengkel' => 'string',
+            'alamat_bengkel' => 'string',
         ]);
 
-        try {
-            DB::beginTransaction();
+        // try {
+        //     DB::beginTransaction();
 
             if ($request->password) {
                 $pass = bcrypt($request->password);
@@ -52,19 +52,19 @@ class DashboardController extends Controller
                 $pass = auth()->user()->password;
             }
 
-            if ($request->file('foto')) {
-                auth()->user()->member->foto != NULL ? Storage::delete(auth()->user()->member->foto) : '';
-                $foto = $request->file('foto');
-                $fotoUrl = $foto->storeAs('members', Str::slug($request->name) . '-' . Str::random(6) . '.' . $foto->extension());
-            } else {
-                $fotoUrl = auth()->user()->member->foto;
-            }
-           
+            
             User::find(auth()->user()->id)->update([
                 'username' => $request->username,
                 'password' => $pass,
             ]);
-            
+
+            if ($request->file('foto')) {
+                auth()->user()->member->foto != NULL ? Storage::delete(auth()->user()->member->foto) : '';
+                $foto = $request->file('foto');
+                $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
+            } else {
+                $fotoUrl = auth()->user()->member->foto;
+            }            
 
             Member::find(auth()->user()->member->id)->update([
                 'nama' => $request->nama,
@@ -75,16 +75,19 @@ class DashboardController extends Controller
                 'alamat' => $request->alamat,
             ]);
 
-            Mekanik::find(auth()->user()->member->mekanik->id)->update([
-                'name' => $request->nama_bengkel,
-                'alamat' => $request->alamat_bengkel,
-            ]);
+            if(auth()->user()->member->mekanik != null){
+                Mekanik::find(auth()->user()->member->mekanik->id)->update([
+                    'name' => $request->nama_bengkel,
+                    'alamat' => $request->alamat_bengkel,
+                ]);
+            }
 
-            DB::commit();
+
+            // DB::commit();
             return redirect()->route('profile')->with('success', 'Update profile berhasil');
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return back()->with('error', $th->getMessage());
-        }
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        //     return back()->with('error', $th->getMessage());
+        // }
     }
 }
