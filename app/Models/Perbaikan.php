@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Mekanik;
+use App\Models\Kerusakan;
+use App\Models\DetailPerbaikan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Perbaikan extends Model
 {
@@ -18,7 +21,7 @@ class Perbaikan extends Model
      */
     public function detail()
     {
-        return $this->belongsTo(DetailPerbaikan::class, 'id', 'idPerbaikan');
+        return $this->belongsTo(DetailPerbaikan::class, 'id', 'idperbaikan');
     }
 
     /**

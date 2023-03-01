@@ -18,7 +18,7 @@
         <div class="panel-body">
             <a href="{{ route('jenis_kerusakan.create') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus-circle"></i> Tambah Jenis Kerusakan</a>
             <div class="table-responsive">
-                <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                <table id="data-table-default" class="table table-striped table-bordered text-center align-middle">
                     <thead>
                         <tr>
                             <th width="1%">No</th>

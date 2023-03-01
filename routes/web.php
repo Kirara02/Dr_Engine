@@ -7,9 +7,8 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MekanikController;
-use App\Http\Controllers\DiagnosaController;
-use App\Http\Controllers\KerusakanController;
 use App\Http\Controllers\PerbaikanController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\JenisKerusakanController;
 
 /*
@@ -49,23 +48,21 @@ Route::middleware('auth')->group(function (){
     // Route Jenis Kerusakan
     Route::resource('jenis_kerusakan', JenisKerusakanController::class);
     
-    // Data Repair
-    // Route Kerusakan
-    Route::resource('kerusakan', KerusakanController::class);
-    // Route Kerusakan
-    Route::resource('diagnosa', DiagnosaController::class);
-    // Route Kerusakan
+    // Route Perbaikan
+    Route::resource('perbaikan', PerbaikanController::class);
+
     
-    // Route Input Repair  
-    Route::controller(PerbaikanController::class)->group(function (){
-        Route::get('repair', 'index')->name('repair.index');
-        Route::get('repair/kerusakan', 'kerusakan')->name('repair.kerusakan');
-        Route::post('repair/kerusakan/store', 'storeKerusakan')->name('repair.kerusakan.store');
-        Route::get('repair/diagnosa', 'diagnosa')->name('repair.diagnosa');
-        Route::post('repair/diagnosa/store', 'storeDiagnosa')->name('repair.diagnosa.store');
-        Route::delete('repair/diagnosa/destroy/{id}', 'destroy')->name('repair.diagnosa.destroy');
-        Route::get('repair/mekanik', 'mekanik')->name('repair.mekanik');
-        Route::post('repair/mekanik/store', 'storeMekanik')->name('repair.mekanik.store');
+    // Route Input Service  
+    Route::controller(ServiceController::class)->group(function (){
+        Route::get('service', 'index')->name('service.index');
+        Route::get('service/kerusakan', 'kerusakan')->name('service.kerusakan');
+        Route::post('service/kerusakan/store', 'storeKerusakan')->name('service.kerusakan.store');
+        Route::get('service/diagnosa', 'diagnosa')->name('service.diagnosa');
+        Route::post('service/diagnosa/store', 'storeDiagnosa')->name('service.diagnosa.store');
+        Route::delete('service/diagnosa/destroy/{id}', 'destroy')->name('service.diagnosa.destroy');
+        Route::get('service/mekanik', 'mekanik')->name('service.mekanik');
+        Route::post('service/mekanik/store', 'storeMekanik')->name('service.mekanik.store');
+        Route::post('service/status/{id}', 'upStatus')->name('service.status');
     });
 
 });

@@ -32,7 +32,7 @@
       @if ($status[0] == 'active')
         <div class="card mt-5">
           <div class="card-body">
-            <form action="{{ route('repair.kerusakan.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('service.kerusakan.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="row mb-3">
                 <label class="form-label col-form-label col-md-3">Jenis Kendaraan *</label>
@@ -85,7 +85,7 @@
        @elseIf($status[1] == 'active')
        <div class="card mt-5">
          <div class="card-body">
-            <form action="{{ route('repair.diagnosa.store') }}" method="post">
+            <form action="{{ route('service.diagnosa.store') }}" method="post">
               @csrf
               <div class="row mb-3">
                 <label class="form-label col-form-label col-md-3">Jenis Kerusakan *</label>
@@ -113,7 +113,7 @@
               <div class="row">
                 <div class="col-md-7 offset-md-3">
                   <button type="submit" class="btn btn-info w-100px me-5px">Tambah</button>
-                  <a href="{{ route('repair.mekanik') }}" class="btn btn-info">Next</a>
+                  <a href="{{ route('service.mekanik') }}" class="btn btn-info">Next</a>
                 </div>
               </div>
             </form>
@@ -156,7 +156,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-3">
-                <form action="{{ route('repair.mekanik') }}" method="GET" class="d-flex">
+                <form action="{{ route('service.mekanik') }}" method="GET" class="d-flex">
                   <input type="text" name="cari" id="cari" class="form-control me-1" placeholder="Cari Mekanik">
                   <button class="btn btn-info">CARI</button>
                 </form>
@@ -164,7 +164,7 @@
             </div>
             <div class="row row-cols-4 mt-3">
               @foreach ($mekanik as $item)
-              <form action="{{ route('repair.mekanik.store') }}" method="post">
+              <form action="{{ route('service.mekanik.store') }}" method="post">
                 @csrf
                 <input type="hidden" name="idmekanik" value="{{ $item->id }}">        
                 <div class="col mb-4">

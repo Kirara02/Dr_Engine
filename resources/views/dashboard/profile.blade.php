@@ -47,8 +47,8 @@
                         </thead>
                         <tbody>
                             <tr class="highlight">
-                                <td class="field">No KTP</td>
-                                <td><i class="fa fa-address-card fa-lg me-5px"></i> {{ auth()->user()->member->ktp }}</td>
+                                <td class="field">No NIK</td>
+                                <td><i class="fa fa-address-card fa-lg me-5px"></i> {{ auth()->user()->member->nik }}</td>
                             </tr>
                             <tr class="highlight">
                                 <td class="field">No Handphone</td>

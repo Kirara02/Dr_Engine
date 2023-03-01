@@ -41,20 +41,20 @@
                     @enderror
                 </div>
                 <div class="row mb-3">
-                    <label class="form-label col-form-label col-md-3">No KTP *</label>
+                    <label class="form-label col-form-label col-md-3">NIK *</label>
                     <div class="col-md-4">
-                      <input type="text" class="form-control" name="ktp" id="ktp" placeholder="No KTP" value="{{ $member->ktp ?? old('ktp') }}" autocomplete="off"/>
+                      <input type="text" class="form-control" name="nik" id="nik" placeholder="NIK" value="{{ $member->nik ?? old('nik') }}" autocomplete="off"/>
                     </div>
-                    @error('ktp')
+                    @error('nik')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="row mb-3">
-                    <label class="form-label col-form-label col-md-3">Alamat</label>
-                    <div class="col-md-7">
-                        <textarea cols="30" rows="3" name="alamat" id="alamat" placeholder="Alamat" class="form-control" autocomplete="off">{{ $member->alamat ?? old('alamat') }}</textarea>
+                    <label class="form-label col-form-label col-md-3">KTP *</label>
+                    <div class="col-md-4">
+                      <input type="file" class="form-control" name="ktp" value="{{ old('ktp') }}" id="ktp" autocomplete="off"/>
                     </div>
-                    @error('alamat')
+                    @error('ktp')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
@@ -64,6 +64,15 @@
                       <input type="file" class="form-control" name="foto" value="{{ old('foto') }}" id="foto" autocomplete="off"/>
                     </div>
                     @error('foto')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="row mb-3">
+                    <label class="form-label col-form-label col-md-3">Alamat</label>
+                    <div class="col-md-7">
+                        <textarea cols="30" rows="3" name="alamat" id="alamat" placeholder="Alamat" class="form-control" autocomplete="off">{{ $member->alamat ?? old('alamat') }}</textarea>
+                    </div>
+                    @error('alamat')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>

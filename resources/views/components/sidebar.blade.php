@@ -64,17 +64,17 @@
                     </div>
                 </div>
             </div>
-            <div class="menu-item has-sub {{ (request()->is('laporan') ? 'active':'') }}">
+            <div class="menu-item has-sub {{ (request()->is('perbaikan') ? 'active':'') }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="ion-md-build"></i>
                     </div>
-                    <div class="menu-text">Perbaikan</div>
+                    <div class="menu-text">Repair</div>
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->is('perbaikan') ? 'active':'') }}">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="{{ route('perbaikan.index') }}" class="menu-link">
                             <div class="menu-text">Data Perbaikan</div>
                         </a>
                     </div>
@@ -82,17 +82,17 @@
             </div> 
             @endcan
             @can('isMekanik')
-                <div class="menu-item has-sub {{ (request()->is('laporan') ? 'active':'') }}">
+                <div class="menu-item has-sub {{ (request()->is('perbaikan') ? 'active':'') }}">
                     <a href="javascript:;" class="menu-link">
                         <div class="menu-icon">
                             <i class="ion-md-build"></i>
                         </div>
-                        <div class="menu-text">Data Transaksi</div>
+                        <div class="menu-text">Repair</div>
                         <div class="menu-caret"></div>
                     </a>
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->is('perbaikan') ? 'active':'') }}">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="{{ route('perbaikan.index') }}" class="menu-link">
                             <div class="menu-text">Data Perbaikan</div>
                         </a>
                     </div>
@@ -100,18 +100,18 @@
             </div> 
             @endcan
             @cannot('isAdmin')
-            <div class="menu-item has-sub  {{ request()->is('kerusakan') || request()->is('diagnosa') || request()->is('perbaikan') ? 'active':'' }}">
+            <div class="menu-item has-sub  {{ request()->is('service') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="ion-md-construct"></i>
                     </div>
-                    <div class="menu-text"> Repair</div>
+                    <div class="menu-text"> Service</div>
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item  {{ (request()->is('repair') ? 'active':'') }}">
-                        <a href="{{ route('repair.index') }}" class="menu-link">
-                            <div class="menu-text">Perbaikan</div>
+                    <div class="menu-item  {{ (request()->is('service') ? 'active':'') }}">
+                        <a href="{{ route('service.index') }}" class="menu-link">
+                            <div class="menu-text">Service</div>
                         </a>
                     </div>
                 </div>
@@ -145,5 +145,6 @@
     </div>
     <!-- END scrollbar -->
 </aside>
+
 <div class="app-sidebar-bg"></div>
 <div class="app-sidebar-mobile-backdrop"><a href="javascript:;" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>

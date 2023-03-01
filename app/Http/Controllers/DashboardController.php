@@ -36,9 +36,10 @@ class DashboardController extends Controller
             'password' => 'nullable|min:6|',
             'confirm' => 'required_with:password|same:password',
             'foto' => 'mimes:jpg,jpeg,png',
+            'ktp' => 'mimes:jpg,jpeg,png',
             'alamat' => 'required|string',
             'nohp' => 'required|string',
-            'ktp' => 'required|string',
+            'nik' => 'required|string',
             'nama_bengkel' => 'string',
             'alamat_bengkel' => 'string',
         ]);
@@ -64,13 +65,22 @@ class DashboardController extends Controller
                 $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
             } else {
                 $fotoUrl = auth()->user()->member->foto;
-            }            
+            }    
+            
+            if ($request->file('ktp')) {
+                auth()->user()->member->ktp != NULL ? Storage::delete( auth()->user()->member->ktp) : '';
+                $ktp = $request->file('ktp');
+                $fotoKtp = $ktp->storeAs('ktp', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $ktp->extension());
+            } else {
+                $fotoKtp =  auth()->user()->member->ktp;
+            }
 
             Member::find(auth()->user()->member->id)->update([
                 'nama' => $request->nama,
                 'nohp' => $request->nohp,
                 'email' => $request->email,
-                'ktp' => $request->ktp,
+                'nik' => $request->nik,
+                'ktp' => $fotoKtp,
                 'foto' => $fotoUrl,
                 'alamat' => $request->alamat,
             ]);

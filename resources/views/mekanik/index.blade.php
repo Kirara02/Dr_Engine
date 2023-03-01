@@ -18,7 +18,7 @@
         <div class="panel-body">
             <div class="table-responsive">
 
-                <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                <table id="data-table-default" class="table table-striped table-bordered text-center align-middle">
                     <thead>
                         <tr>
                             <th width="1%">No</th>
