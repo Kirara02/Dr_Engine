@@ -71,8 +71,15 @@
 							@enderror	
 						</div>
 						<div class="form-group mb-3">
+							<label class="mb-2">NIK <span class="text-danger">*</span></label>
+							<input type="text" class="form-control fs-13px" name="nik" id="nik" placeholder="NIK" value="{{ old('nik') }}"/>
+							@error('nik')
+								<small class="text-danger">{{ $message }}</small>
+							@enderror
+						</div>
+						<div class="form-group mb-3">
 							<label class="mb-2">KTP <span class="text-danger">*</span></label>
-							<input type="text" class="form-control fs-13px" name="ktp" id="ktp" placeholder="KTP" value="{{ old('ktp') }}"/>
+							<input type="file" class="form-control fs-13px" name="ktp" id="ktp" placeholder="KTP" value="{{ old('ktp') }}"/>
 							@error('ktp')
 								<small class="text-danger">{{ $message }}</small>
 							@enderror

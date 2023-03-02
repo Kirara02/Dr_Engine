@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPerbaikan;
 use App\Models\Perbaikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PerbaikanController extends Controller
 {
@@ -78,7 +80,29 @@ class PerbaikanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+           'nominal' => 'required|integer',
+           'keterangan' => 'required|string',
+        ]);
+        try {
+            DB::beginTransaction();
+
+            DetailPerbaikan::where('idperbaikan',$id)->update([
+                'nominal' => intval($request->nominal),
+                'keterangan' => $request->keterangan,
+            ]);
+
+            Perbaikan::find($id)->update([
+                'statusPembayaran' => 'sudah bayar'
+            ]);
+
+            Db::commit();
+
+            return redirect()->route('perbaikan.index')->with('success','Data berhasil diedit');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**

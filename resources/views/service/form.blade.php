@@ -1,4 +1,4 @@
-@extends('layouts.master', ['title' => 'Input Repair'])
+@extends('layouts.master', ['title' => 'Input Service'])
 @section('content')
 <div class="panel">
   <div class="panel-heading bg-teal-600 text-white"></div>

@@ -21,12 +21,12 @@
                     <tr>
                         <th class="text-nowrap" width="1%">No</th>
                         <th class="text-nowrap" width="10%">Tanggal</th>
+                        <th class="text-nowrap" width="40%">Bengkel</th>
                         <th class="text-nowrap" width="10%">Jenis</th>
                         <th class="text-nowrap" width="20%">Tipe</th>
                         <th class="text-nowrap" width="10%">Foto</th>
                         <th class="text-nowrap" width="10%">Status Perbaikan</th>
                         <th class="text-nowrap" width="10%">Status Pembayaran</th>
-                        <th class="text-nowrap" width="40%">Bengkel</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                 </thead>
@@ -36,6 +36,7 @@
                     <tr>
                         <td class="text-nowrap">{{ $loop->iteration }}</td>
                         <td class="text-nowrap">{{ $item->tanggal }}</td>
+                        <td class="class-nowrap">{{ $item->mekanik->name }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->jenisKendaraan }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->tipeKendaraan }}</td>
                         <td class="text-nowrap">
@@ -43,24 +44,53 @@
                         </td>
                         <td class="class-nowrap">{{ $item->statusPerbaikan }}</td>
                         <td class="class-nowrap">{{ $item->statusPembayaran }}</td>
-                        <td class="class-nowrap">{{ $item->mekanik->name }}</td>
                         <td class="text-nowrap align-middle text-center dropdown">
-                            <a href="" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                            <a href="" class="btn btn-inverse dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="ion-md-more fs-18px"></i>
                             </a>
-                            <div class="dropdown-menu fs-13px">
-                                <a href="{{ route('perbaikan.show',$item->id) }}" class="btn btn-success text-light"><i class="fas fa-eye align-middle"></i></a>
+                            <div class="dropdown-menu w-50 fs-13px">
+                                @if($item->statusPembayaran == 'belum bayar' && auth()->user()->level != 'admin')
+                                <a href="#modal-pembayaran" class="dropdown-item" data-bs-toggle="modal"><i class="fas fa-money-bill-alt align-middle me-2"></i>Pembayaran</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="" class="btn btn-orange text-light"><i class="fas fa-edit align-middle"></i></a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" class="dropdown-item"><i class="ion-md-eye me-2"></i>  Detail</a>
-                                @if($item->perbaikan->statusPerbaikan != 'selesai')
-                                <div class="dropdown-divider"></div>
-                                    <form action="{{ route('service.status', $item->id) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item"><i class="ion-md-checkmark me-2"></i> Selesaikan Perbaikan</button>
-                                    </form>
                                 @endif
+                                <a href="{{ route('perbaikan.show',$item->id) }}" class="dropdown-item"><i class="fas fa-eye align-middle me-2"></i>Detail</a>
+                            </div>
+
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="modal-pembayaran">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Pembayaran</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                    </div>
+                                    <form action="{{ route('perbaikan.update', $item->id) }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <div class="modal-body p-2 justify-content-center">
+                                            <div class="row mb-3">
+                                                <label class="form-label col-form-label col-md-4">Nominal Rp. *</label>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control" name="nominal" id="nominal" autocomplete="off" placeholder="Nominal">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="form-label col-form-label col-md-4">Keterangan *</label>
+                                                <div class="col-md-7">
+                                                    <textarea cols="20" rows="3" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" autocomplete="off"></textarea>
+                                                </div>
+                                                @error('keterangan')
+                                                  <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success">Done</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
                             </div>
                         </td>
                     </tr>

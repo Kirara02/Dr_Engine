@@ -118,6 +118,24 @@
                 }
             })
         });
+		
+		$(".table").on('click', '.btn-status', function(e) {
+            e.preventDefault();
+
+			Swal.fire({
+                title: 'Selesaikan perbaikan?',
+                text: "Akan mengupdate dan menyelesaikan status perbaikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Update!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit()
+                }
+            })
+        });
 
 		$(".logout").on('click', function() {
             Swal.fire({

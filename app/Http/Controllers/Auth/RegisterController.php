@@ -33,14 +33,18 @@ class RegisterController extends Controller
             $id = User::select('id')->latest()->first();
 
             $foto = $request->file('foto');
-            $fotoUrl = $foto->storeAs('members', Str::slug($request->name) . '-' . Str::random(6) . '.' . $foto->extension());
+            $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
+
+            $ktp = $request->file('ktp');
+            $fotoKtp = $ktp->storeAs('ktp', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $ktp->extension());
 
 
             Member::create([
                 'nama' => $request->nama,
                 'nohp' => $request->nohp,
                 'email' => $request->email,
-                'ktp' => $request->ktp,
+                'nik' => $request->nik,
+                'ktp' => $fotoKtp,
                 'foto' => $fotoUrl,
                 'alamat' => $request->alamat,
                 'iduser' => $id->id,

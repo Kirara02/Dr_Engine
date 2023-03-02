@@ -1,4 +1,4 @@
-@extends('layouts.master', ['title' => 'Repair'])
+@extends('layouts.master', ['title' => 'Service'])
 @section('content')
 <ol class="breadcrumb float-xl-end">
     <li class="breadcrumb-item active"><a href="{{ route('service.index') }}">Repair</a></li>
@@ -40,16 +40,15 @@
                         <td class="text-nowrap">{{ $item->tipeKendaraan }}</td>
                         <td class="text-nowrap">{{ $item->tahunKendaraan }}</td>
                         <td class="text-nowrap">
-                            <img src="{{ asset('./storage/'.$item->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="80">
+                            <img src="{{ asset('./storage/'.$item->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="60">
                         </td>
                         <td class="text-nowrap">{{ $item->perbaikan->statusPerbaikan }}</td>
-                        <td class="text-nowrap align-middle text-center ">
-                            <a href="javascript:;" class="dropdown-item"><i class="ion-md-eye me-2"></i>  Detail</a>
+                        <td class="text-nowrap d-flex justify-content-around align-middle">
+                            <a href="javascript:;" class="btn btn-lime"><i class="ion-md-eye text-center"></i></a>
                             @if($item->perbaikan->statusPerbaikan != 'selesai')
-                            <div class="dropdown-divider"></div>
-                                <form action="{{ route('service.status', $item->id) }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item"><i class="ion-md-checkmark me-2"></i> Selesaikan Perbaikan</button>
+                            <form action="{{ route('service.status', $item->id) }}" method="post">
+                                @csrf
+                                <button type="button" class="btn btn-secondary btn-status"><i class="ion-md-checkmark align-middle"></i></button>
                                 </form>
                             @endif
                         </td>
