@@ -175,6 +175,7 @@
                     <div class="card-body">
                       <h4 class="card-title">{{ $item->name }}</h4>
                       <p class="card-text">Alamat : {{ $item->alamat }}</p>
+                      <p class="card-text">No Hp : {{ $item->member->nohp }}</p>
                       <button type="button" class="btn btn-sm btn-lime me-1"><i class="fab fa-whatsapp"></i> Hubungi</button>
                       <button type="submit" class="btn btn-sm btn-primary">Pilih</button>
                     </div>

@@ -104,7 +104,7 @@ class ServiceController extends Controller
             $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
 
             Perbaikan::create([
-                'tanggal' => Carbon::now()->format('Y-m-d'),
+                'tanggal' => Carbon::now()->format('Y-m-d h:i:s'),
                 'statusPerbaikan' => 'pencarian',
                 'statusPembayaran' => 'belum bayar',
                 'idmekanik' => null,

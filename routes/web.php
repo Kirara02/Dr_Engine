@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function (){
     // Route untuk laporan
     Route::controller(LaporanController::class)->group(function(){
         Route::get('laporan', 'index')->name('laporan.index');
+        Route::get('laporan/export', 'export')->name('laporan.export');
     });
 
 });

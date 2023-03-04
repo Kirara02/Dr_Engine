@@ -12,6 +12,9 @@
 	<link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/css/default/app.min.css') }}" rel="stylesheet" />
 	<!-- ================== END core-css ================== -->
+
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 	
 	<!-- ================== BEGIN page-css ================== -->
 	<link href="{{ asset('/') }}assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
@@ -89,8 +92,20 @@
 	<script src="{{ asset('/') }}assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 	<script src="{{ asset('/') }}assets/js/demo/dashboard.js"></script>
 	<script src="{{ asset('/') }}assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
 	<!-- ================== END page-js ================== -->
+	<script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-56159088-1');
+    </script>
 	<script>
 		$('.table-striped').DataTable({
             autoWidth: true,
@@ -98,7 +113,7 @@
             "lengthMenu": [
                 [10, 20, 50, -1],
                 [10, 20, 50, "All"]
-            ]
+            ],
         });
 
 		$(".table").on('click', '.btn-delete', function(e) {
@@ -184,7 +199,14 @@
 				console.log(data['data'])
 			})
 		});
+
+		$('.datetimes').daterangepicker({
+            locale: {
+                format: 'M/DD/YYYY'
+            }
+        });
 	</script>
+
 	@stack('script')
 </body>
 </html>
