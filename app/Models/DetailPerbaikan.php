@@ -16,8 +16,8 @@ class DetailPerbaikan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function detail()
+    public function perbaikan()
     {
-        return $this->belongsTo(Perbaikan::class, 'idPerbaikan', 'id');
+        return $this->belongsTo(Perbaikan::class, 'idperbaikan', 'id');
     }
 }

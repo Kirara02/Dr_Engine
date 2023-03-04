@@ -177,7 +177,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function upStatus($id)
+    public function upStatusPerbaikan($id)
     {
         try {
 
@@ -189,7 +189,34 @@ class ServiceController extends Controller
 
             DB::commit();
 
-            return redirect()->route('service.index')->with('success','Member berhasil ditambahkan');
+            return redirect()->route('service.index')->with('success','Data berhasil ditambahkan');
+            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function detail($id)
+    {
+        $title = 'Detail Service';
+        $perbaikan = Perbaikan::where('id',$id)->with(['detail','Kerusakan','mekanik'])->first();
+        return view('service.detail', compact('perbaikan','title'));
+
+    }
+
+    public function upStatusPembayaran($id)
+    {
+        try {
+            Db::beginTransaction();
+
+            Perbaikan::where('id','=',$id)->update([
+                'statusPembayaran' => 'sudah bayar'
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('perbaikan.index')->with('success','Data berhasil diedit');
             
         } catch (\Throwable $th) {
             DB::rollBack();

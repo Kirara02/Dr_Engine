@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xl-3 col-md-6">
+				<div class="col-xl-3 col-md-4">
 					<div class="widget widget-stats bg-blue">
 						<div class="stats-icon"><i class="fas fa-users"></i></div>
 						<div class="stats-info">
@@ -29,7 +29,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-3 col-md-6">
+				<div class="col-xl-3 col-md-4">
 					<div class="widget widget-stats bg-red">
 						<div class="stats-icon"><i class="fas fa-cogs"></i></div>
 						<div class="stats-info">
@@ -41,19 +41,25 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-3 col-md-6">
+				<div class="col-xl-3 col-md-4">
 					<div class="widget widget-stats bg-info">
 						<div class="stats-icon"><i class="fas fa-recycle"></i></div>
 						<div class="stats-info">
 							<h4>Perbaikan</h4>
-							<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>	
+							@if (auth()->user()->level == 'admin')
+								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>	
+							@elseif(auth()->user()->member->mekanik != null)
+								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->where('idmekanik',auth()->user()->member->mekanik->id)->count() ?? 0 }}</p>		
+							@else
+								<p>{{ App\Models\Kerusakan::where('idmember',auth()->user()->member->id)->count() ?? 0 }}</p>		
+							@endif
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-3 col-md-6">
+				<div class="col-xl-3 col-md-4">
 					<div class="widget widget-stats bg-orange">
 						<div class="stats-icon"><i class="fas fa-bug"></i></div>
 						<div class="stats-info">

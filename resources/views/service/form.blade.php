@@ -113,7 +113,10 @@
               <div class="row">
                 <div class="col-md-7 offset-md-3">
                   <button type="submit" class="btn btn-info w-100px me-5px">Tambah</button>
-                  <a href="{{ route('service.mekanik') }}" class="btn btn-info">Next</a>
+                  {{-- @dd($diagnosa) --}}
+                  @if(!$diagnosa->isEmpty())
+                    <a href="{{ route('service.mekanik') }}" class="btn btn-info">Next</a>
+                  @endif
                 </div>
               </div>
             </form>

@@ -128,7 +128,7 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->is('laporan') ? 'active':'') }}">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="{{ route('laporan.index') }}" class="menu-link">
                             <div class="menu-text">Rekap Perbaikan</div>
                         </a>
                     </div>

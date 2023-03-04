@@ -26,9 +26,14 @@ class Kerusakan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    /**
+     * Get all of the diagnosa\kerusakan for the Kerusakan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function diagnosaKerusakan()
     {
-        return $this->belongsTo(DiagnosaKerusakan::class, 'id', 'idkerusakan');
+        return $this->hasMany(DiagnosaKerusakan::class, 'idkerusakan');
     }
 
     /**

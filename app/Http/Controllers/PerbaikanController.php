@@ -56,7 +56,8 @@ class PerbaikanController extends Controller
     public function show($id)
     {   
         $title = 'Detail Perbaikan';
-        $perbaikan = Perbaikan::find($id)->with(['detail','Kerusakan','mekanik'])->get();
+        $perbaikan = Perbaikan::where('id',$id)->with(['detail','Kerusakan','mekanik'])->first();
+        
         return view('perbaikan.detail', compact('perbaikan','title'));
     }
 
@@ -68,7 +69,11 @@ class PerbaikanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DetailPerbaikan::with(['perbaikan'])->where('idperbaikan', $id)->get();
+        $json = [
+            'data' => $data
+        ];
+        return $json;
     }
 
     /**
@@ -81,19 +86,18 @@ class PerbaikanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-           'nominal' => 'required|integer',
-           'keterangan' => 'required|string',
+            'jenisPerbaikan' => 'required|string',
+            'nominal' => 'required|integer',
+            'keterangan' => 'required|string',
         ]);
+        
         try {
             DB::beginTransaction();
 
-            DetailPerbaikan::where('idperbaikan',$id)->update([
+            DetailPerbaikan::where('idperbaikan','=',$id)->update([
+                'jenisPerbaikan' => $request->jenisPerbaikan,
                 'nominal' => intval($request->nominal),
                 'keterangan' => $request->keterangan,
-            ]);
-
-            Perbaikan::find($id)->update([
-                'statusPembayaran' => 'sudah bayar'
             ]);
 
             Db::commit();
@@ -111,8 +115,10 @@ class PerbaikanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function upStatus($id)
     {
         //
     }
+
+    
 }

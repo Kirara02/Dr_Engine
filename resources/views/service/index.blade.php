@@ -17,17 +17,18 @@
     <div class="panel-body">
         <a href="{{ route('service.kerusakan') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus"></i> Service</a>
         <div class="table-responsive">
-            <table id="table" class="table table-striped table-bordered text-center align-middle fs-14px">
+            <table id="table" class="table table-striped table-bordered text-center align-middle fs-13px">
                 <thead>
                     <tr>
                         <th class="text-nowrap" width="1%">No</th>
-                        <th class="text-nowrap" width="1%">Tanggal</th>
-                        <th class="text-nowrap" width="10%">Jenis Kendaraan</th>
-                        <th class="text-nowrap" width="30%">Tipe Kendaraan</th>
-                        <th class="text-nowrap" width="10%">Tahun Kendaraan</th>
-                        <th class="text-nowrap" width="20%">Foto Kendaraan</th>
+                        <th class="text-nowrap" width="10%">Tanggal</th>
+                        <th class="text-nowrap" width="40%">Bengkel</th>
+                        <th class="text-nowrap" width="10%">Jenis</th>
+                        <th class="text-nowrap" width="20%">Tipe</th>
+                        <th class="text-nowrap" width="10%">Foto</th>
                         <th class="text-nowrap" width="10%">Status Perbaikan</th>
-                        <th class="text-nowrap" width="30%">Action</th>
+                        <th class="text-nowrap" width="10%">Status Pembayaran</th>
+                        <th class="text-nowrap">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,20 +37,21 @@
                     <tr>
                         <td class="text-nowrap">{{ $loop->iteration }}</td>
                         <td class="text-nowrap">{{ $item->perbaikan->tanggal }}</td>
+                        <td class="class-nowrap">{{ $item->perbaikan->mekanik->name }}</td>
                         <td class="text-nowrap">{{ $item->jenisKendaraan }}</td>
                         <td class="text-nowrap">{{ $item->tipeKendaraan }}</td>
-                        <td class="text-nowrap">{{ $item->tahunKendaraan }}</td>
                         <td class="text-nowrap">
                             <img src="{{ asset('./storage/'.$item->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="60">
                         </td>
-                        <td class="text-nowrap">{{ $item->perbaikan->statusPerbaikan }}</td>
+                        <td class="class-nowrap">{{ $item->perbaikan->statusPerbaikan }}</td>
+                        <td class="class-nowrap" width="10%">{{ $item->perbaikan->statusPembayaran }}</td>
                         <td class="text-nowrap d-flex justify-content-around align-middle">
-                            <a href="javascript:;" class="btn btn-lime"><i class="ion-md-eye text-center"></i></a>
+                            <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info"><i class="ion-md-eye"></i></a>
                             @if($item->perbaikan->statusPerbaikan != 'selesai')
-                            <form action="{{ route('service.status', $item->id) }}" method="post">
+                            <form action="{{ route('service.statusPerbaikan', $item->id) }}" method="post">
                                 @csrf
                                 <button type="button" class="btn btn-secondary btn-status"><i class="ion-md-checkmark align-middle"></i></button>
-                                </form>
+                            </form>
                             @endif
                         </td>
                     </tr>

@@ -92,7 +92,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- ================== END page-js ================== -->
 	<script>
-		$('.table').DataTable({
+		$('.table-striped').DataTable({
             autoWidth: true,
 			responsive: true,
             "lengthMenu": [
@@ -129,7 +129,25 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Update!'
+                confirmButtonText: 'Ya, Selesaikan!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit()
+                }
+            })
+        });
+
+		$(".table").on('click', '.btn-pembayaran', function(e) {
+            e.preventDefault();
+
+			Swal.fire({
+                title: 'Selesaikan Pembayaran?',
+                text: "Akan mengupdate dan menyelesaikan status pembayaran!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Selesaikan!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(this).parent().submit()
@@ -151,7 +169,21 @@
                     $("#logout-form").submit()
                 }
             })
-        })
+        });
+
+		$('.form-pembayaran').on('click',function(){
+			const id = $(this).data('id');		
+			$('.modal-content form').attr('action', `http://127.0.0.1:8000/perbaikan/${id}`)
+
+			$.getJSON(`http://127.0.0.1:8000/perbaikan/${id}/edit`, function(data){
+				$.each(data.data, function(){
+					$('#jenisPerbaikan').val(this['jenisPerbaikan']);
+					$('#nominal').val(this['nominal']);
+					$('#keterangan').val(this['keterangan']);
+				});
+				console.log(data['data'])
+			})
+		});
 	</script>
 	@stack('script')
 </body>

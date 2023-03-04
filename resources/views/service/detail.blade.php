@@ -25,7 +25,7 @@
                 </address>
             </div>
             <div class="invoice-to">
-                <small>company</small>
+                <small>bengkel</small>
                 <address class="mt-5px mb-5px">
                     <strong class="text-inverse">{{ $perbaikan->mekanik->name }}</strong><br />
                     {{ $perbaikan->mekanik->alamat }}<br/>

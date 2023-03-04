@@ -1,14 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\MekanikController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\MekanikController;
-use App\Http\Controllers\PerbaikanController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\JenisKerusakanController;
 
 /*
@@ -55,6 +57,7 @@ Route::middleware('auth')->group(function (){
     // Route Input Service  
     Route::controller(ServiceController::class)->group(function (){
         Route::get('service', 'index')->name('service.index');
+        Route::get('service/detail/{id}', 'detail')->name('service.detail');
         Route::get('service/kerusakan', 'kerusakan')->name('service.kerusakan');
         Route::post('service/kerusakan/store', 'storeKerusakan')->name('service.kerusakan.store');
         Route::get('service/diagnosa', 'diagnosa')->name('service.diagnosa');
@@ -62,7 +65,18 @@ Route::middleware('auth')->group(function (){
         Route::delete('service/diagnosa/destroy/{id}', 'destroy')->name('service.diagnosa.destroy');
         Route::get('service/mekanik', 'mekanik')->name('service.mekanik');
         Route::post('service/mekanik/store', 'storeMekanik')->name('service.mekanik.store');
-        Route::post('service/status/{id}', 'upStatus')->name('service.status');
+        Route::post('service/statusPerbaikan/{id}', 'upStatusPerbaikan')->name('service.statusPerbaikan');
+        Route::post('perbaikan/statusPembayaran/{id}', 'upStatusPembayaran')->name('perbaikan.statusPembayaran');
     });
 
+    // Route untuk laporan
+    Route::controller(LaporanController::class)->group(function(){
+        Route::get('laporan', 'index')->name('laporan.index');
+    });
+
+});
+
+Route::get('/exec', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
 });
