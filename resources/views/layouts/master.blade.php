@@ -205,6 +205,8 @@
                 format: 'M/DD/YYYY'
             }
         });
+
+		
 	</script>
 
 	@stack('script')

@@ -120,38 +120,7 @@
                 </div>
               </div>
             </form>
-            <hr class="mt-4 mb-4">
-            <div class="row">
-              <div class="table-responsive ">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th width="1%">No</th>
-                      <th>Jenis Kerusakan</th>
-                      <th>Keterangan</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{-- @dd($diagnosa) --}}
-                    @foreach ($diagnosa as $item)
-                      <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->jenisKerusakan->jenisKerusakan }}</td>
-                        <td>{{ $item->keterangan }}</td>
-                        <td class="text-center">
-                          <form id="form-delete" action="{{ url('repair/diagnosa/destroy/'. $item->id) }}" method="post" class="ms-1 d-inline">
-                            @method('delete')
-                            @csrf
-                            <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
-                        </form>
-                        </td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            
           </div>
         </div>
         @else
@@ -176,7 +145,7 @@
                       <h4 class="card-title">{{ $item->name }}</h4>
                       <p class="card-text">Alamat : {{ $item->alamat }}</p>
                       <p class="card-text">No Hp : {{ $item->member->nohp }}</p>
-                      <button type="button" class="btn btn-sm btn-lime me-1"><i class="fab fa-whatsapp"></i> Hubungi</button>
+                      <a href="https://api.whatsapp.com/send?phone={{ $item->member->nohp }}&text=Assalamualaikum" class="btn btn-sm btn-lime me-1"><i class="fab fa-whatsapp"></i> Hubungi</a>
                       <button type="submit" class="btn btn-sm btn-primary">Pilih</button>
                     </div>
                   </div>

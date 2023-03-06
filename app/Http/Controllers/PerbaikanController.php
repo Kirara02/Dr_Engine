@@ -26,39 +26,63 @@ class PerbaikanController extends Controller
         return view('perbaikan.index', compact('perbaikan'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function detail($id)
     {
-        //
+        $detail = DetailPerbaikan::where('idperbaikan', $id)->get();
+        return view('perbaikan.detail', compact('id','detail'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function createDetails(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {   
-        $title = 'Detail Perbaikan';
-        $perbaikan = Perbaikan::where('id',$id)->with(['detail','Kerusakan','mekanik'])->first();
+        $request->validate([
+            'jenisPerbaikan' => 'required|string',
+            'nominal' => 'required|integer',
+            'keterangan' => 'required|string',
+        ]);
         
-        return view('perbaikan.detail', compact('perbaikan','title'));
+        try {
+            DB::beginTransaction();
+
+            DetailPerbaikan::create([
+                'jenisPerbaikan' => $request->jenisPerbaikan,
+                'nominal' => intval($request->nominal),
+                'keterangan' => $request->keterangan,
+                'idperbaikan' => $id
+            ]);
+
+            Db::commit();
+
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function deleteDetails( $id)
+    {        
+        try {
+            DB::beginTransaction();
+
+            DetailPerbaikan::find($id)->delete();
+
+            Db::commit();
+
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function invoice($id)
+    {   
+        $title = 'Invoice Perbaikan';
+        $perbaikan = Perbaikan::where('id',$id)->with(['detail','mekanik'])->first();
+        $detail = Perbaikan::where('id',$id)->with(['detail'])->get();
+        $nominal = DetailPerbaikan::where('idperbaikan',$id)->select('nominal')->sum('nominal');
+        
+        return view('perbaikan.invoice', compact('perbaikan','title','nominal','detail'));
     }
 
     /**
@@ -85,40 +109,26 @@ class PerbaikanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'jenisPerbaikan' => 'required|string',
-            'nominal' => 'required|integer',
-            'keterangan' => 'required|string',
-        ]);
         
+    }
+    
+    public function upStatus($id)
+    {
         try {
-            DB::beginTransaction();
+            Db::beginTransaction();
 
-            DetailPerbaikan::where('idperbaikan','=',$id)->update([
-                'jenisPerbaikan' => $request->jenisPerbaikan,
-                'nominal' => intval($request->nominal),
-                'keterangan' => $request->keterangan,
+            Perbaikan::where('id','=',$id)->update([
+                'statusPembayaran' => 'sudah bayar'
             ]);
 
-            Db::commit();
+            DB::commit();
 
             return redirect()->route('perbaikan.index')->with('success','Data berhasil diedit');
+            
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function upStatus($id)
-    {
-        //
-    }
-
     
 }

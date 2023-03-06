@@ -51,7 +51,14 @@ Route::middleware('auth')->group(function (){
     Route::resource('jenis_kerusakan', JenisKerusakanController::class);
     
     // Route Perbaikan
-    Route::resource('perbaikan', PerbaikanController::class);
+    Route::controller(PerbaikanController::class)->group(function(){
+        Route::get('perbaikan','index')->name('perbaikan.index');
+        Route::get('perbaikan/invoice/{id}','invoice')->name('perbaikan.invoice');
+        Route::get('perbaikan/detail/{id}','detail')->name('perbaikan.detail');
+        Route::post('perbaikan/detail/{id}/create','createDetails');
+        Route::post('perbaikan/detail/{id}/delete','deleteDetails');
+        Route::post('perbaikan/statusPembayaran/{id}', 'upStatusPembayaran')->name('perbaikan.statusPembayaran');
+    });
 
     
     // Route Input Service  
@@ -66,7 +73,6 @@ Route::middleware('auth')->group(function (){
         Route::get('service/mekanik', 'mekanik')->name('service.mekanik');
         Route::post('service/mekanik/store', 'storeMekanik')->name('service.mekanik.store');
         Route::post('service/statusPerbaikan/{id}', 'upStatusPerbaikan')->name('service.statusPerbaikan');
-        Route::post('perbaikan/statusPembayaran/{id}', 'upStatusPembayaran')->name('perbaikan.statusPembayaran');
     });
 
     // Route untuk laporan

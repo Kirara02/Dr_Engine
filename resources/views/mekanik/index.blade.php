@@ -16,8 +16,13 @@
             </div>
         </div>
         <div class="panel-body">
+            @if(Session::has('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{Session::get('success')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+                </div>
+            @endif
             <div class="table-responsive">
-
                 <table id="data-table-default" class="table table-striped table-bordered text-center align-middle">
                     <thead>
                         <tr>

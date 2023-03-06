@@ -84,7 +84,7 @@ class MemberController extends Controller
 
             DB::commit();
 
-            return redirect()->route('members.index')->with('success','Member berhasil ditambahkan');
+            return redirect()->route('members.index')->with('success','Data berhasil ditambahkan');
          }catch (\Throwable $th) {
              DB::rollBack();
              return back()->with('error', $th->getMessage());
@@ -145,7 +145,7 @@ class MemberController extends Controller
                 $ktp = $request->file('ktp');
                 $fotoKtp = $ktp->storeAs('ktp', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $ktp->extension());
             } else {
-                $fotoKtp = $member->foto;
+                $fotoKtp = $member->ktp;
             }
 
             Member::find($member->id)->update([
@@ -161,7 +161,7 @@ class MemberController extends Controller
 
             DB::commit();
 
-            return redirect()->route('members.index')->with('success','Member berhasil diedit');
+            return redirect()->route('members.index')->with('success','Data berhasil diedit');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
@@ -185,7 +185,7 @@ class MemberController extends Controller
 
             DB::commit();
 
-            return redirect()->route('members.index')->with('success', 'Member berhasil didelete');
+            return redirect()->route('members.index')->with('success', 'Data berhasil didelete');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());

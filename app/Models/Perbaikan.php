@@ -21,7 +21,7 @@ class Perbaikan extends Model
      */
     public function detail()
     {
-        return $this->belongsTo(DetailPerbaikan::class, 'id', 'idperbaikan');
+        return $this->hasMany(DetailPerbaikan::class, 'id', 'idperbaikan');
     }
 
     /**

@@ -1,5 +1,6 @@
 @extends('layouts.master', ['title' => 'Member'])
 @section('content')
+    
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="{{ route('members.index') }}">Master</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('members.index') }}">Member</a></li>
@@ -16,6 +17,12 @@
             </div>
         </div>
         <div class="panel-body">
+            @if(Session::has('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+        {{Session::get('success')}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+    </div>
+    @endif
             <a href="{{ route('members.create') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus"></i> Tambah Member</a>
             <div class="table-responsive">
                 <table id="table" class="table table-striped table-bordered text-center align-middle">

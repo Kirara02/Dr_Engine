@@ -16,6 +16,12 @@
             </div>
         </div>
         <div class="panel-body">
+            @if(Session::has('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{Session::get('success')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+                </div>
+            @endif
             <a href="{{ route('jenis_kerusakan.create') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus-circle"></i> Tambah Jenis Kerusakan</a>
             <div class="table-responsive">
                 <table id="data-table-default" class="table table-striped table-bordered text-center align-middle">

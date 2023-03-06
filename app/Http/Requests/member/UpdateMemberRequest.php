@@ -28,7 +28,7 @@ class UpdateMemberRequest extends FormRequest
             'nohp' => 'required|string',
             'email' => 'required|string|min:3|unique:members,email,'.$this->member->id,
             'nik' => 'required|string',
-            'ktp' => 'required|mimes:jpg,jpeg,png',
+            'ktp' => 'mimes:jpg,jpeg,png',
             'foto' => 'mimes:jpg,jpeg,png',
             'alamat' => 'required|string',
             'username' => 'required|string|min:3|unique:users,username,'. $this->member->user->id,

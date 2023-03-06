@@ -1,76 +1,84 @@
-@extends('layouts.master', ['title' => $title])
+@extends('layouts.master', ['title' => 'Detail Perbaikan'])
 @section('content')
-    <ol class="breadcrumb float-xl-end">
-        <li class="breadcrumb-item"><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
-        <li class="breadcrumb-item active">Detail</li>
-    </ol>
-    <h1 class="page-header">{{ $title }}</h1>
-    <div class="invoice">
-        <!-- BEGIN invoice-company -->
-        <div class="invoice-company">
-            <span class="float-end hidden-print">
-                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
-            </span>
-            dr. Engine
-        </div>
-        <!-- END invoice-company -->
-        <!-- BEGIN invoice-header -->
-        <div class="invoice-header">
-            <div class="invoice-from">
-                <small>costumer</small>
-                <address class="mt-5px mb-5px">
-                    <strong class="text-inverse">{{ $perbaikan->kerusakan->member->nama }}</strong><br />
-                    {{ $perbaikan->kerusakan->member->alamat }}<br/>
-                    Phone: {{ $perbaikan->kerusakan->member->nohp }}<br/>
-                </address>
-            </div>
-            <div class="invoice-to">
-                <small>company</small>
-                <address class="mt-5px mb-5px">
-                    <strong class="text-inverse">{{ $perbaikan->mekanik->name }}</strong><br />
-                    {{ $perbaikan->mekanik->alamat }}<br/>
-                    Phone: {{ $perbaikan->mekanik->member->nohp }}<br/>
-                </address>
-            </div>
-            <div class="invoice-date">
-                <div class="date text-inverse mt-5px">{{ \Carbon\Carbon::parse($perbaikan->tanggal)->format('F d,Y') }}</div>     
-            </div>
-        </div>
-        <!-- END invoice-header -->
-        <!-- BEGIN invoice-content -->
-        <div class="invoice-content">
-            <!-- BEGIN table-responsive -->
-            <div class="table-responsive">
-                <table class=" table-invoice table ">
-                    <thead>
-                        <tr>
-                            <th width="1%">No</th>
-                            <th>Jenis Kerusakan</th>
-                            <th>Keterangan</th>
-                        </tr>
-                    </thead>
-                    {{-- @dd($perbaikan->kerusakan->diagnosaKerusakan) --}}
-                    <tbody>
-                        @foreach ($perbaikan->kerusakan->diagnosaKerusakan as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->jenisKerusakan->jenisKerusakan }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <!-- END table-responsive -->
-            <!-- BEGIN invoice-price -->
-            <div class="invoice-price">
-                <div class="invoice-price-right">
-                    <small>Nominal</small> <span class="fw-bold">Rp.{{ $perbaikan->detail->nominal }}</span>
-                </div>
-            </div>
-            <!-- END invoice-price -->
-        </div>
-        <!-- END invoice-content -->
+<ol class="breadcrumb float-xl-end">
+    <li class="breadcrumb-item "><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route('perbaikan.detail', $id) }}">Detail</a></li>
+</ol>
+<h1 class="page-header">Detail Perbaikan</h1>
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Data Detail Perbaikan</h4>
     </div>
+    <div class="panel-body">
+        <form action="{{ url('perbaikan/detail/'.$id.'/create') }}" method="post">
+            @csrf
+            <div class="row mb-3">
+                <label class="form-label col-form-label col-md-2">Jenis Perbaikan *</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" name="jenisPerbaikan" id="jenisPerbaikan" autocomplete="off" placeholder="Jenis Perbaikan">
+                </div>
+                @error('jenisPerbaikan')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="row mb-3">
+                <label class="form-label col-form-label col-md-2">Nominal Rp. *</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" name="nominal" id="nominal" autocomplete="off" placeholder="Nominal">
+                </div>
+                @error('nominal')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="row mb-3">
+                <label class="form-label col-form-label col-md-2">Keterangan *</label>
+                <div class="col-md-7">
+                    <textarea cols="20" rows="3" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" autocomplete="off"></textarea>
+                </div>
+                @error('keterangan')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-7 offset-md-2">
+                    <button type="submit" class="btn btn-info w-100px me-5px">Tambah</button>
+                </div>
+            </div>    
+        </form>
+        <hr class="mt-4 mb-4">
+            <div class="row">
+              <div class="table-responsive ">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th width="1%">No</th>
+                      <th>Jenis Perbaikan</th>
+                      <th>Keterangan</th>
+                      <th>Nominal</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{-- @dd($detail) --}}
+                    @foreach ($detail as $item)
+                    <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->jenisPerbaikan }}</td>
+                    <td>{{ $item->keterangan }}</td>
+                    <td>{{ $item->nominal }}</td>
+                    <td class="text-center">
+                        <form id="form-delete" action="{{ url('perbaikan/detail/'.$item->id.'/delete') }}" method="post" class="ms-1 d-inline">
+                        @csrf
+                        <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                    </form>
+                    </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

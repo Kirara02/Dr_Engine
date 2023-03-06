@@ -36,24 +36,30 @@
                     <tr>
                         <td class="text-nowrap">{{ $item->id }}</td>
                         <td class="text-nowrap">{{ $item->tanggal }}</td>
-                        <td class="class-nowrap">{{ $item->mekanik->name }}</td>
+                        <td class="class-nowrap">{{ $item->mekanik->name ?? 'belum ada' }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->jenisKendaraan }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->tipeKendaraan }}</td>
                         <td class="text-nowrap">
                             <img src="{{ asset('./storage/'.$item->kerusakan->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="80">
                         </td>
                         <td class="class-nowrap">{{ $item->statusPerbaikan }}</td>
-                        <td class="class-nowrap">{{ $item->statusPembayaran }}</td>
+                        <td class="class-nowrap">
+                            @if ($item->statusPembayaran == 'belum bayar')
+                                <span class="bagde bg-danger rounded-pill p-1">{{ $item->statusPembayaran }}</span>
+                                @else
+                                <span class="bagde bg-success rounded-pill p-1">{{ $item->statusPembayaran }}</span>
+                            @endif
+                        </td>
                         <td class="text-nowrap align-middle text-center dropdown">
                             <a href="" class="btn btn-inverse dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="ion-md-more fs-18px"></i>
                             </a>
                             <div class="dropdown-menu w-50 fs-13px">
                                 @if(auth()->user()->level != 'admin')
-                                <button type="button" class="dropdown-item form-pembayaran" data-id="{{ $item->id }}" data-bs-target="#modal-pembayaran" data-bs-toggle="modal" data-bs-toggle="modal"><i class="fas fa-money-bill-alt align-middle me-2"></i>Pembayaran</button>
+                                <a href="{{ route('perbaikan.detail',$item->id) }}" class="dropdown-item"><i class="fas fa-eye align-middle me-2"></i> Detail</a>
                                 <div class="dropdown-divider"></div>
                                 @endif
-                                <a href="{{ route('perbaikan.show',$item->id) }}" class="dropdown-item"><i class="fas fa-eye align-middle me-2"></i>Detail</a>
+                                <a href="{{ route('perbaikan.invoice',$item->id) }}" class="dropdown-item"><i class="fas fa-newspaper align-middle me-2"></i> Invoice</a>
                                 @if ($item->statusPembayaran != 'sudah bayar')
                                     <div class="dropdown-divider"></div>
                                     <form action="{{ route('perbaikan.statusPembayaran', $item->id) }}" method="post">
@@ -68,55 +74,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
-
- <!-- Modal Edit -->
- <div class="modal fade" id="modal-pembayaran">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Pembayaran</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-        </div>
-        <form action="{{ route('perbaikan.update', $item->id) }}" method="post">
-            @method('PUT')
-            @csrf
-            <div class="modal-body p-2 justify-content-center">
-                <div class="row mb-3">
-                    <label class="form-label col-form-label col-md-4">Jenis Perbaikan *</label>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" name="jenisPerbaikan" id="jenisPerbaikan" autocomplete="off" placeholder="Jenis Perbaikan">
-                    </div>
-                    @error('jenisPerbaikan')
-                      <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label col-form-label col-md-4">Nominal Rp. *</label>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" name="nominal" id="nominal" autocomplete="off" placeholder="Nominal">
-                    </div>
-                    @error('nominal')
-                      <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label col-form-label col-md-4">Keterangan *</label>
-                    <div class="col-md-7">
-                        <textarea cols="20" rows="3" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" autocomplete="off"></textarea>
-                    </div>
-                    @error('keterangan')
-                      <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Done</button>
-            </div>
-        </form>
-    </div>
     </div>
 </div>
 @endsection
