@@ -11,6 +11,12 @@
     <!-- END navbar-header -->
     <!-- BEGIN header-nav -->
     <div class="navbar-nav">
+        @if (auth()->user()->member->nama == '' OR auth()->user()->member->nohp == '' OR auth()->user()->member->nik == '' OR auth()->user()->member->email == '' OR
+        auth()->user()->member->alamat == '')
+            <div class="navbar-item">
+                <div class="bg-default text-danger p-2 rounded">Silahkan lengkapi identitas di menu profil</div>
+            </div>
+        @endif
         <div class="navbar-item dropdown">
             <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
                 <i class="fa fa-bell"></i>

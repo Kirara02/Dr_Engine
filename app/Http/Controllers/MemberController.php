@@ -57,13 +57,12 @@ class MemberController extends Controller
 
             $request->validated();
 
-            User::create([
+            $user = User::create([
                 'username' => $request->username,
                 'password' => bcrypt($request->password),
                 'level' => $request->level,
             ]);
 
-            $id = User::select('id')->latest()->first();
 
             $foto = $request->file('foto');
             $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
@@ -71,15 +70,14 @@ class MemberController extends Controller
             $ktp = $request->file('ktp');
             $fotoKtp = $ktp->storeAs('ktp', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $ktp->extension());
 
-            Member::create([
+            Member::where('iduser','=',$user->id)->update([
                 'nama' => $request->nama,
                 'nohp' => $request->nohp,
                 'email' => $request->email,
-                'nik' => $request->ktp,
+                'nik' => $request->nik,
                 'ktp' => $fotoKtp,
                 'foto' => $fotoUrl,
                 'alamat' => $request->alamat,
-                'iduser' => $id->id,
             ]);
 
             DB::commit();

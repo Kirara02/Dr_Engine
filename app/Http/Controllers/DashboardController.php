@@ -30,7 +30,7 @@ class DashboardController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|min:5|unique:users,username,' . auth()->user()->id,
+            'username' => 'required|string|min:3|unique:users,username,' . auth()->user()->id,
             'nama' => 'required|string',
             'email' => 'required|string',
             'password' => 'nullable|min:6|',

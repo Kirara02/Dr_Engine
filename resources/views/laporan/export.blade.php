@@ -21,7 +21,7 @@
                 <td>{{ $item->mekanik->name }}</td>
                 <td>{{ $item->kerusakan->jenisKendaraan }}</td>
                 <td>{{ $item->kerusakan->tipeKendaraan }}</td>
-                <td>{{ $item->detail->nominal }}</td>
+                <td>Rp.{{ number_format($item->detail()->sum('nominal'), 0,'','.') }}</td>
             </tr>
             @endforeach
         </tbody>

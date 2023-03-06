@@ -24,13 +24,6 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama' => 'required|string',
-            'nohp' => 'required|string',
-            'email' => 'required|string|unique:members|min:3',
-            'nik' => 'required|string',
-            'ktp' => 'required|mimes:jpg,jpeg,png',
-            'foto' => 'required|mimes:jpg,jpeg,png',
-            'alamat' => 'required|string',
             'username' => 'required|string|unique:users|min:3',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6'

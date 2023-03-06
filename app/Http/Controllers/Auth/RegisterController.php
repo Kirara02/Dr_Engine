@@ -30,26 +30,6 @@ class RegisterController extends Controller
                 'level' => 'member'
             ]);
 
-            $id = User::select('id')->latest()->first();
-
-            $foto = $request->file('foto');
-            $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
-
-            $ktp = $request->file('ktp');
-            $fotoKtp = $ktp->storeAs('ktp', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $ktp->extension());
-
-
-            Member::create([
-                'nama' => $request->nama,
-                'nohp' => $request->nohp,
-                'email' => $request->email,
-                'nik' => $request->nik,
-                'ktp' => $fotoKtp,
-                'foto' => $fotoUrl,
-                'alamat' => $request->alamat,
-                'iduser' => $id->id,
-            ]);
-
             DB::commit();
 
             return redirect()->route('login')->with('success','Anda berhasil register');

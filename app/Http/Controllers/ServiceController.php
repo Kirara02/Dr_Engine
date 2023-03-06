@@ -201,9 +201,7 @@ class ServiceController extends Controller
     {
         $title = 'Detail Service';
         $perbaikan = Perbaikan::where('id',$id)->with(['detail','mekanik'])->first();
-        $detail = DetailPerbaikan::where('idperbaikan',$id)->get();
-        $nominal = DetailPerbaikan::where('idperbaikan',$id)->select('nominal')->sum('nominal');
         
-        return view('service.detail', compact('perbaikan','title','nominal','detail'));
+        return view('service.detail', compact('perbaikan','title'));
     }
 }

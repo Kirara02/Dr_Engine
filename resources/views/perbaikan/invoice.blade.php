@@ -52,7 +52,7 @@
                     </thead>
                     {{-- @dd($perbaikan) --}}
                     <tbody>
-                        @foreach ($detail as $item)
+                        @foreach ($perbaikan->detail as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->jenisPerbaikan }}</td>
@@ -67,7 +67,7 @@
             <!-- BEGIN invoice-price -->
             <div class="invoice-price">
                 <div class="invoice-price-right">
-                    <small>Total</small> <span class="fw-bold">Rp.{{ $nominal }}</span>
+                    <small>Total</small> <span class="fw-bold">Rp.{{ $perbaikan->detail()->sum('nominal') }}</span>
                 </div>
             </div>
             <!-- END invoice-price -->

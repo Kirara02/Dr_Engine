@@ -79,37 +79,8 @@ class PerbaikanController extends Controller
     {   
         $title = 'Invoice Perbaikan';
         $perbaikan = Perbaikan::where('id',$id)->with(['detail','mekanik'])->first();
-        $detail = DetailPerbaikan::where('idperbaikan',$id)->get();
-        $nominal = DetailPerbaikan::where('idperbaikan',$id)->select('nominal')->sum('nominal');
         
-        return view('perbaikan.invoice', compact('perbaikan','title','nominal','detail'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $data = DetailPerbaikan::with(['perbaikan'])->where('idperbaikan', $id)->get();
-        $json = [
-            'data' => $data
-        ];
-        return $json;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        
+        return view('perbaikan.invoice', compact('perbaikan','title'));
     }
     
     public function upStatus($id)
