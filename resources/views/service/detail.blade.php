@@ -41,31 +41,34 @@
         <div class="invoice-content">
             <!-- BEGIN table-responsive -->
             <div class="table-responsive">
-                <table class=" table-invoice table ">
-                    <thead>
-                        <tr>
-                            <th width="1%">No</th>
-                            <th>Jenis Kerusakan</th>
-                            <th>Keterangan</th>
-                        </tr>
-                    </thead>
-                    {{-- @dd($perbaikan->kerusakan->diagnosaKerusakan) --}}
-                    <tbody>
-                        @foreach ($perbaikan->kerusakan->diagnosaKerusakan as $item)
+                <div class="table-responsive">
+                    <table class=" table-invoice table ">
+                        <thead>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->jenisKerusakan->jenisKerusakan }}</td>
-                                <td>{{ $item->keterangan }}</td>
+                                <th width="1%">No</th>
+                                <th>Jenis Perbaikan</th>
+                                <th>Keterangan</th>
+                                <th>Nominal</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        {{-- @dd($perbaikan) --}}
+                        <tbody>
+                            @foreach ($detail as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->jenisPerbaikan }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                    <td>{{ $item->nominal }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             <!-- END table-responsive -->
             <!-- BEGIN invoice-price -->
             <div class="invoice-price">
                 <div class="invoice-price-right">
-                    <small>Nominal</small> <span class="fw-bold">Rp.{{ $perbaikan->detail->nominal }}</span>
+                    <small>Nominal</small> <span class="fw-bold">Rp.{{ $nominal }}</span>
                 </div>
             </div>
             <!-- END invoice-price -->
