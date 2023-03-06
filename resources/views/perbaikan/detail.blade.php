@@ -2,7 +2,7 @@
 @section('content')
 <ol class="breadcrumb float-xl-end">
     <li class="breadcrumb-item "><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
-    <li class="breadcrumb-item active"><a href="{{ route('perbaikan.detail', $id) }}">Detail</a></li>
+    <li class="breadcrumb-item active">Detail</li>
 </ol>
 <h1 class="page-header">Detail Perbaikan</h1>
 <div class="panel panel-inverse">
@@ -62,16 +62,16 @@
                     {{-- @dd($detail) --}}
                     @foreach ($detail as $item)
                     <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->jenisPerbaikan }}</td>
-                    <td>{{ $item->keterangan }}</td>
-                    <td>{{ $item->nominal }}</td>
-                    <td class="text-center">
-                        <form id="form-delete" action="{{ url('perbaikan/detail/'.$item->id.'/delete') }}" method="post" class="ms-1 d-inline">
-                        @csrf
-                        <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
-                    </form>
-                    </td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->jenisPerbaikan }}</td>
+                        <td>{{ $item->keterangan }}</td>
+                        <td>{{ $item->nominal }}</td>
+                        <td class="text-center">
+                            <form id="form-delete" action="{{ url('perbaikan/detail/'.$item->id.'/delete') }}" method="post" class="ms-1 d-inline">
+                            @csrf
+                            <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

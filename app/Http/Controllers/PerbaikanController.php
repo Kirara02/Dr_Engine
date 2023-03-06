@@ -79,7 +79,7 @@ class PerbaikanController extends Controller
     {   
         $title = 'Invoice Perbaikan';
         $perbaikan = Perbaikan::where('id',$id)->with(['detail','mekanik'])->first();
-        $detail = Perbaikan::where('id',$id)->with(['detail'])->get();
+        $detail = DetailPerbaikan::where('idperbaikan',$id)->get();
         $nominal = DetailPerbaikan::where('idperbaikan',$id)->select('nominal')->sum('nominal');
         
         return view('perbaikan.invoice', compact('perbaikan','title','nominal','detail'));

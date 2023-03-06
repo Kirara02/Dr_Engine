@@ -2,7 +2,7 @@
 @section('content')
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
-        <li class="breadcrumb-item active">Detail</li>
+        <li class="breadcrumb-item active">Invoice</li>
     </ol>
     <h1 class="page-header">{{ $title }}</h1>
     <div class="invoice">
@@ -45,8 +45,9 @@
                     <thead>
                         <tr>
                             <th width="1%">No</th>
-                            <th>Jenis Kerusakan</th>
+                            <th>Jenis Perbaikan</th>
                             <th>Keterangan</th>
+                            <th>Nominal</th>
                         </tr>
                     </thead>
                     {{-- @dd($perbaikan) --}}
@@ -66,7 +67,7 @@
             <!-- BEGIN invoice-price -->
             <div class="invoice-price">
                 <div class="invoice-price-right">
-                    <small>Nominal</small> <span class="fw-bold">Rp.{{ $nominal }}</span>
+                    <small>Total</small> <span class="fw-bold">Rp.{{ $nominal }}</span>
                 </div>
             </div>
             <!-- END invoice-price -->
