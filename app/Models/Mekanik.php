@@ -16,6 +16,6 @@ class Mekanik extends Model
     }
 
     public function perbaikan(){
-        return $this->hasMany(Perbaikan::class, 'id', 'idmekanik');
+        return $this->hasMany(Perbaikan::class, 'idmekanik', 'id');
     }
 }

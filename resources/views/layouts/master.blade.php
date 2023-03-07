@@ -186,19 +186,37 @@
             })
         });
 
-		$('.form-pembayaran').on('click',function(){
-			const id = $(this).data('id');		
-			$('.modal-content form').attr('action', `http://127.0.0.1:8000/perbaikan/${id}`)
+		$(".btn-acc").on('click', function() {
+            Swal.fire({
+                title: 'Accept?',
+                text: "Anda akan mengaktipkan mekanik ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Aktipkan!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+					$(this).parent().submit()
+                }
+            })
+        });
 
-			$.getJSON(`http://127.0.0.1:8000/perbaikan/${id}/edit`, function(data){
-				$.each(data.data, function(){
-					$('#jenisPerbaikan').val(this['jenisPerbaikan']);
-					$('#nominal').val(this['nominal']);
-					$('#keterangan').val(this['keterangan']);
-				});
-				console.log(data['data'])
-			})
-		});
+		$(".btn-eject").on('click', function() {
+            Swal.fire({
+                title: 'Eject?',
+                text: "Anda akan menolak mekanik ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Eject!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit()
+                }
+            })
+        });
 
 		$('.datetimes').daterangepicker({
             locale: {

@@ -44,8 +44,8 @@ class DashboardController extends Controller
             'alamat_bengkel' => 'string',
         ]);
 
-        // try {
-        //     DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
             if ($request->password) {
                 $pass = bcrypt($request->password);
@@ -93,11 +93,45 @@ class DashboardController extends Controller
             }
 
 
-            // DB::commit();
+            DB::commit();
             return redirect()->route('profile')->with('success', 'Update profile berhasil');
-        // } catch (\Throwable $th) {
-        //     DB::rollBack();
-        //     return back()->with('error', $th->getMessage());
-        // }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function accMekanik(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            Mekanik::find($request->id)->update([
+                'statusAktivasi' => '1'
+            ]);
+
+            DB::commit();
+
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function ejectMekanik(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            Mekanik::find($request->id)->delete();
+
+            DB::commit();
+
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
     }
 }

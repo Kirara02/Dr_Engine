@@ -27,8 +27,8 @@
                     <thead>
                         <tr>
                             <th width="1%">No</th>
-                            <th class="text-nowrap">Nama</th>
-                            <th class="text-nowrap">Alamat</th>
+                            <th class="text-nowrap" width="15%">Nama</th>
+                            <th class="text-nowrap" width="40%">Alamat</th>
                             <th class="text-nowrap">Status Aktivasi</th>
                             <th class="text-nowrap">Action</th>
                         </tr>
@@ -41,6 +41,7 @@
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->statusAktivasi == '1' ? 'Terdaftar' : 'Belum Diaktivasi' }}</td>
                                 <td class="text-center justify-content-center d-flex">
+                                    <form action="" method="post"></form>
                                     <a href="{{ route('mekanik.edit', $item->id) }}" class="btn btn-success text-light"><i class="fas fa-edit align-middle"></i></a>
                                     <form id="form-delete" action="{{ route('mekanik.destroy', $item->id) }}" method="post" class="ms-1 d-inline">
                                         @method('delete')

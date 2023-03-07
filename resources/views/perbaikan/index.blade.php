@@ -20,10 +20,11 @@
                 <thead>
                     <tr>
                         <th class="text-nowrap" width="1%">No</th>
+                        <th class="text-nowrap" width="10%">Costumer</th>
                         <th class="text-nowrap" width="10%">Tanggal</th>
-                        <th class="text-nowrap" width="40%">Bengkel</th>
+                        <th class="text-nowrap" width="30%">Bengkel</th>
                         <th class="text-nowrap" width="10%">Jenis</th>
-                        <th class="text-nowrap" width="20%">Tipe</th>
+                        <th class="text-nowrap" width="15%">Tipe</th>
                         <th class="text-nowrap" width="10%">Foto</th>
                         <th class="text-nowrap" width="10%">Status Perbaikan</th>
                         <th class="text-nowrap" width="10%">Status Pembayaran</th>
@@ -35,6 +36,7 @@
                     @foreach($perbaikan as $item)
                     <tr>
                         <td class="text-nowrap">{{ $item->id }}</td>
+                        <td class="text-nowrap">{{ $item->kerusakan->member->nama }}</td>
                         <td class="text-nowrap">{{ $item->tanggal }}</td>
                         <td class="class-nowrap">{{ $item->mekanik->name ?? 'belum ada' }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->jenisKendaraan }}</td>

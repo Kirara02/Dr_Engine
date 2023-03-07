@@ -23,7 +23,8 @@ class MekanikController extends Controller
 
     public function index()
     {
-        $data['mekanik'] = Mekanik::all();
+        $data['mekanik'] = Mekanik::where('statusAktivasi','=','1')->get();
+    
         return view('mekanik.index')->with($data);
     }
 

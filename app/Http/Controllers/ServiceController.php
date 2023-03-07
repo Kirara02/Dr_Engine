@@ -23,7 +23,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $data['kerusakan'] = Kerusakan::with(['perbaikan'])->where('idmember', '=',auth()->user()->member->id)->get();
+        $data['kerusakan'] = Kerusakan::with(['perbaikan','member'])->where('idmember', '=',auth()->user()->member->id)->get();
         return view('service.index')->with($data);
     }
     
@@ -47,7 +47,7 @@ class ServiceController extends Controller
     {   
        
         $status = ['completed','completed','active'];
-        $mekanik = Mekanik::with(['member'])->get();
+        $mekanik = Mekanik::with(['member','perbaikan'])->whereRelation('perbaikan','statusPerbaikan','=','selesai')->get();
         
         $cari = $request->input('cari');
 

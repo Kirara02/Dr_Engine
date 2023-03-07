@@ -17,24 +17,43 @@
                 <div class="bg-default text-danger p-2 rounded">Silahkan lengkapi identitas di menu profil</div>
             </div>
         @endif
-        <div class="navbar-item dropdown">
-            <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
-                <i class="fa fa-bell"></i>
-                <span class="badge">5</span>
-            </a>
-            <div class="dropdown-menu media-list dropdown-menu-end">
-                <div class="dropdown-header">NOTIFICATIONS (5)</div>
-                <a href="javascript:;" class="dropdown-item media">
-                    <div class="media-left">
-                        <i class="fa fa-bug media-object bg-gray-500"></i>
-                    </div>
-                    <div class="media-body">
-                        <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
-                        <div class="text-muted fs-10px">3 minutes ago</div>
-                    </div>
+        @can('isAdmin')
+            <div class="navbar-item dropdown">
+                <?php $data = \App\Models\Mekanik::where('statusAktivasi','=','0') ?>
+                <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
+                    <i class="fa fa-bell"></i>
+                    @if(!$data->first() == null)
+                        <span class="badge">{{ $data->count() }}</span>
+                    @endif
                 </a>
-            </div>
-        </div>				
+                <div class="dropdown-menu media-list dropdown-menu-end">
+                    <div class="dropdown-header">NOTIFICATIONS ({{ $data->count() }})</div>
+                    @foreach (\App\Models\Mekanik::where('statusAktivasi','=','0')->get() as $item)
+                        <a href="javascript:;" class="dropdown-item media">
+                            <div class="media-left">
+                                <i class="fa fa-cogs media-object bg-gray-500"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading"><strong>{{ $item->name }}</strong> mendaftar mekanik</i></h6>
+                                <div class="text-muted fs-10px">{{ $item->created_at->diffForHumans() }}</div>
+                                <div class="row mt-2 d-flex justify-content-between">
+                                    <form action="{{ route('mekanik.acc') }}" method="post" class="w-50">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <button type="button" class="btn btn-sm btn-success w-100 btn-acc">Accept</button>
+                                    </form>
+                                    <form action="{{ route('mekanik.eject') }}" method="post" class="w-50">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <button type="button" class="btn btn-sm btn-danger w-100 btn-eject">Eject</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>				
+        @endcan
         <div class="navbar-item navbar-user dropdown">
             <a href="" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                 <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" /> 

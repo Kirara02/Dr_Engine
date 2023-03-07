@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/profile', [DashboardController::class,'profile'])->name('profile');
     Route::get('/profile/edit', [DashboardController::class,'edit'])->name('profile.edit');
     Route::post('/profile', [DashboardController::class,'update'])->name('profile.update');
+    Route::post('/mekanik/acc', [DashboardController::class,'accMekanik'])->name('mekanik.acc');
+    Route::post('/mekanik/eject', [DashboardController::class,'ejectMekanik'])->name('mekanik.eject');
     
     // Data Master
     // Route Member

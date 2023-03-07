@@ -32,21 +32,6 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
-            @if (request()->is('mekanik/'.$mekanik->id.'/edit'))
-            <div class="row mb-3">
-                <label class="form-label col-form-label col-md-3">Status *</label>
-                <div class="col-md-4">
-                    <select class="form-select" name="statusAktivasi" id="level">
-                        <option disabled selected>-- Pilih Status --</option>
-                        <option {{ request()->is('mekanik/'. $mekanik->id.'/edit') && $mekanik->statusAktivasi   == '1' ? 'selected' : ''}} value="1">Aktip</option>
-                        <option {{ request()->is('mekanik/'. $mekanik->id.'/edit') && $mekanik->statusAktivasi   == '0' ? 'selected' : ''}} value="0">Nonaktip</option>
-                    </select>
-                </div>
-                @error('statusAktivasi')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-            @endif
             <div class="row">
                 <div class="col-md-7 offset-md-3">
                     <button type="submit" class="btn btn-primary w-100px me-5px">Submit</button>

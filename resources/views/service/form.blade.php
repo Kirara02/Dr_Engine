@@ -120,7 +120,37 @@
                 </div>
               </div>
             </form>
-            
+            <hr class="mt-4 mb-4">
+            <div class="row">
+              <div class="table-responsive ">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th width="1%">No</th>
+                      <th>Jenis Perbaikan</th>
+                      <th>Keterangan</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($diagnosa as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->jenisKerusakan->jenisKerusakan }}</td>
+                        <td>{{ $item->keterangan }}</td>
+                        <td class="text-center">
+                            <form id="form-delete" action="{{ route('service.diagnosa.destroy',$item->id) }}" method="post" class="ms-1 d-inline">
+                              @method('delete')
+                              @csrf
+                            <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                            </form>
+                        </td>
+                      </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                </div>
+            </div>
           </div>
         </div>
         @else
@@ -134,7 +164,8 @@
                 </form>
               </div>
             </div>
-            <div class="row row-cols-4 mt-3">
+            <div class="row row-cols-3 mt-3">
+              @dd($mekanik)
               @foreach ($mekanik as $item)
               <form action="{{ route('service.mekanik.store') }}" method="post">
                 @csrf

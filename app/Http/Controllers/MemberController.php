@@ -56,7 +56,7 @@ class MemberController extends Controller
             DB::beginTransaction();
 
             $request->validated();
-
+            
             $user = User::create([
                 'username' => $request->username,
                 'password' => bcrypt($request->password),

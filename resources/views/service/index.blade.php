@@ -45,7 +45,7 @@
                         </td>
                         <td class="class-nowrap">{{ $item->perbaikan->statusPerbaikan }}</td>
                         <td class="class-nowrap" width="10%">{{ $item->perbaikan->statusPembayaran }}</td>
-                        <td class="text-nowrap d-flex justify-content-around align-middle">
+                        <td class="text-nowrap d-flex justify-content-around align-middle" >
                             <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info"><i class="ion-md-eye"></i></a>
                             @if($item->perbaikan->statusPerbaikan != 'selesai')
                             <form action="{{ route('service.statusPerbaikan', $item->id) }}" method="post">
