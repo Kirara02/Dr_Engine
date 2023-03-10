@@ -16,7 +16,7 @@
     </div>
     <div class="panel-body">
         <div class="alert alert-info">
-            *Untuk lakukan export perbaikan mohon lakukan filter terlebih dahulu.
+            *Untuk melakukan export perbaikan mohon lakukan filter terlebih dahulu.
         </div>
 
         <form action="" class="row">

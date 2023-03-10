@@ -59,7 +59,8 @@ Route::middleware('auth')->group(function (){
         Route::get('perbaikan/detail/{id}','detail')->name('perbaikan.detail');
         Route::post('perbaikan/detail/{id}/create','createDetails');
         Route::post('perbaikan/detail/{id}/delete','deleteDetails');
-        Route::post('perbaikan/statusPembayaran/{id}', 'upStatus')->name('perbaikan.statusPembayaran');
+        Route::post('perbaikan/statusPembayaran/{id}', 'upStatusPembayaran')->name('perbaikan.statusPembayaran');
+        Route::post('perbaikan/statusPerbaikan/{id}', 'upStatusPerbaikan')->name('perbaikan.statusPerbaikan');
     });
 
     

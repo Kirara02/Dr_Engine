@@ -22,7 +22,9 @@
                         <th class="text-nowrap" width="1%">No</th>
                         <th class="text-nowrap" width="10%">Costumer</th>
                         <th class="text-nowrap" width="10%">Tanggal</th>
-                        <th class="text-nowrap" width="30%">Bengkel</th>
+                        @if(auth()->user()->member->mekanik == null)
+                            <th class="text-nowrap" width="20%">Bengkel</th>
+                        @endif
                         <th class="text-nowrap" width="10%">Jenis</th>
                         <th class="text-nowrap" width="15%">Tipe</th>
                         <th class="text-nowrap" width="10%">Foto</th>
@@ -35,10 +37,12 @@
                     {{-- @dd($perbaikan) --}}
                     @foreach($perbaikan as $item)
                     <tr>
-                        <td class="text-nowrap">{{ $item->id }}</td>
+                        <td class="text-nowrap">{{ $loop->iteration }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->member->nama }}</td>
                         <td class="text-nowrap">{{ $item->tanggal }}</td>
-                        <td class="class-nowrap">{{ $item->mekanik->name ?? 'belum ada' }}</td>
+                        @if(auth()->user()->member->mekanik == null)
+                            <td class="class-nowrap">{{ $item->mekanik->name ?? 'Belum ada' }}</td>
+                        @endif
                         <td class="text-nowrap">{{ $item->kerusakan->jenisKendaraan }}</td>
                         <td class="text-nowrap">{{ $item->kerusakan->tipeKendaraan }}</td>
                         <td class="text-nowrap">
@@ -56,18 +60,25 @@
                             <a href="" class="btn btn-inverse dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="ion-md-more fs-18px"></i>
                             </a>
-                            <div class="dropdown-menu w-50 fs-13px">
+                            <div class="dropdown-menu w-50 fs-12px">
                                 @if(auth()->user()->level != 'admin')
-                                <a href="{{ route('perbaikan.detail',$item->id) }}" class="dropdown-item"><i class="fas fa-eye align-middle me-2"></i> Detail</a>
-                                <div class="dropdown-divider"></div>
-                                @endif
-                                <a href="{{ route('perbaikan.invoice',$item->id) }}" class="dropdown-item"><i class="fas fa-newspaper align-middle me-2"></i> Invoice</a>
-                                @if ($item->statusPembayaran != 'sudah bayar')
+                                    <a href="{{ route('perbaikan.detail',$item->id) }}" class="dropdown-item"><i class="fas fa-eye align-middle me-2"></i> Detail</a>
                                     <div class="dropdown-divider"></div>
-                                    <form action="{{ route('perbaikan.statusPembayaran', $item->id) }}" method="post">
+                                @endif
+                                    <a href="{{ route('perbaikan.invoice',$item->id) }}" class="dropdown-item"><i class="fas fa-newspaper align-middle me-2"></i> Invoice</a>
+                                    @if(auth()->user()->level == 'admin' && $item->statusPerbaikan != 'selesai')
+                                    <div class="dropdown-divider"></div>
+                                    <form action="{{ route('perbaikan.statusPerbaikan', $item->id) }}" method="post">
                                         @csrf
-                                        <button type="button" class="dropdown-item btn-pembayaran"><i class="fas fa-check align-middle me-2"></i>Selesaikan</button>
+                                        <button type="button" class="dropdown-item btn-status"><i class="fas fa-check align-middle me-2"></i>Perbaikan</button>
                                     </form>
+                                @endif
+                                @if ($item->statusPembayaran != 'sudah bayar')
+                                <div class="dropdown-divider"></div>
+                                <form action="{{ route('perbaikan.statusPembayaran', $item->id) }}" method="post">
+                                    @csrf
+                                    <button type="button" class="dropdown-item btn-pembayaran"><i class="fas fa-check align-middle me-2"></i>Pembayaran </button>
+                                </form>
                                 @endif
                             </div>
                         </td>

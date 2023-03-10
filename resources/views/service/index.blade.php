@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @dd($kerusakan) --}}
+                    {{-- @dd($kerusakan) --}}   
                     @foreach($kerusakan as $item)
                     <tr>
                         <td class="text-nowrap">{{ $loop->iteration }}</td>
@@ -47,7 +47,7 @@
                         <td class="class-nowrap" width="10%">{{ $item->perbaikan->statusPembayaran }}</td>
                         <td class="text-nowrap d-flex justify-content-around align-middle" >
                             <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info"><i class="ion-md-eye"></i></a>
-                            @if($item->perbaikan->statusPerbaikan != 'selesai')
+                            @if($item->perbaikan->statusPerbaikan != 'selesai' && $item->perbaikan->detail == null)
                             <form action="{{ route('service.statusPerbaikan', $item->id) }}" method="post">
                                 @csrf
                                 <button type="button" class="btn btn-secondary btn-status"><i class="ion-md-checkmark align-middle"></i></button>

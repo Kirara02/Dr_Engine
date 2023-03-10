@@ -10,6 +10,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index(Request $request)
     {
         $date = Carbon::now('Asia/Jakarta')->format('Y-m-d');

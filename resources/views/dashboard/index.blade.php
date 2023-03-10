@@ -17,60 +17,57 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xl-3 col-md-4">
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-teal">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-users"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">MEMBERS</div>
+							<div class="stats-number">{{ App\Models\Member::count() ?? 0 }}</div>
+						</div>
+					</div>
+				</div>
+				<!-- END col-3 -->
+				<!-- BEGIN col-3 -->
+				<div class="col-xl-3 col-md-6">
 					<div class="widget widget-stats bg-blue">
-						<div class="stats-icon"><i class="fas fa-users"></i></div>
-						<div class="stats-info">
-							<h4>Member</h4>
-							<p>{{ App\Models\Member::count() ?? 0 }}</p>	
-						</div>
-						<div class="stats-link">
-							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-cogs"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">MEKANIKS</div>
+							<div class="stats-number">{{ App\Models\Mekanik::where('statusAktivasi',1)->count() ?? 0 }}</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-3 col-md-4">
-					<div class="widget widget-stats bg-red">
-						<div class="stats-icon"><i class="fas fa-cogs"></i></div>
-						<div class="stats-info">
-							<h4>Mekanik</h4>
-							<p>{{ App\Models\Mekanik::where('statusAktivasi',1)->count() ?? 0 }}</p>	
-						</div>
-						<div class="stats-link">
-							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-3 col-md-4">
-					<div class="widget widget-stats bg-info">
-						<div class="stats-icon"><i class="fas fa-recycle"></i></div>
-						<div class="stats-info">
-							<h4>Perbaikan</h4>
-							@if (auth()->user()->level == 'admin')
+				<!-- END col-3 -->
+				<!-- BEGIN col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-indigo">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-recycle"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">REPAIRSS</div>
+							<div class="stats-number">
+								@if (auth()->user()->level == 'admin')
 								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>	
 							@elseif(auth()->user()->member->mekanik != null)
 								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->where('idmekanik',auth()->user()->member->mekanik->id)->count() ?? 0 }}</p>		
 							@else
 								<p>{{ App\Models\Kerusakan::where('idmember',auth()->user()->member->id)->count() ?? 0 }}</p>		
 							@endif
-						</div>
-						<div class="stats-link">
-							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-3 col-md-4">
-					<div class="widget widget-stats bg-orange">
-						<div class="stats-icon"><i class="fas fa-bug"></i></div>
-						<div class="stats-info">
-							<h4>Jenis Kerusakan</h4>
-							<p>{{ App\Models\JenisKerusakan::count() ?? 0 }}</p>	
-						</div>
-						<div class="stats-link">
-							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+				<!-- END col-3 -->
+				<!-- BEGIN col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-dark">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-bug"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">REPAIR TYPES</div>
+							<div class="stats-number">{{ App\Models\JenisKerusakan::count() ?? 0 }}</div>
 						</div>
 					</div>
 				</div>
+				<!-- END col-3 -->
 			</div>
 			<!-- END row -->
 

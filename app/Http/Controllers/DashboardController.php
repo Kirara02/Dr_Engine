@@ -32,14 +32,14 @@ class DashboardController extends Controller
         $request->validate([
             'username' => 'required|string|min:3|unique:users,username,' . auth()->user()->id,
             'nama' => 'required|string',
-            'email' => 'required|string',
+            'email' => 'required|email',
             'password' => 'nullable|min:6|',
             'confirm' => 'required_with:password|same:password',
             'foto' => 'mimes:jpg,jpeg,png',
             'ktp' => 'mimes:jpg,jpeg,png',
             'alamat' => 'required|string',
-            'nohp' => 'required|string',
-            'nik' => 'required|string',
+            'nohp' => 'required|numeric',
+            'nik' => 'required|numeric',
             'nama_bengkel' => 'string',
             'alamat_bengkel' => 'string',
         ]);

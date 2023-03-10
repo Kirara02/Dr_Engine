@@ -25,9 +25,9 @@ class CreateMemberRequest extends FormRequest
     {
         return [
             'nama' => 'required|string',
-            'nohp' => 'required|string',
-            'email' => 'required|string|unique:members|min:3',
-            'nik' => 'required|string',
+            'nohp' => 'required|numeric',
+            'email' => 'required|email|unique:members|min:3',
+            'nik' => 'required|numeric',
             'ktp' => 'required|mimes:jpg,jpeg,png',
             'foto' => 'required|mimes:jpg,jpeg,png',
             'alamat' => 'required|string',

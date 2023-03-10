@@ -16,11 +16,7 @@ use App\Models\DetailPerbaikan;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data['kerusakan'] = Kerusakan::with(['perbaikan','member'])->where('idmember', '=',auth()->user()->member->id)->get();
@@ -47,14 +43,16 @@ class ServiceController extends Controller
     {   
        
         $status = ['completed','completed','active'];
-        $mekanik = Mekanik::with(['member','perbaikan'])->whereRelation('perbaikan','statusPerbaikan','=','selesai')->get();
-        
+        $mekanik = Mekanik::with(['member'])->where('statusSibuk','0')->get();
+
         $cari = $request->input('cari');
 
         if($cari){
             $mekanik = Mekanik::with(['member'])
-                ->where('name','LIKE', '%'.$cari.'%')
-                ->orWhere('alamat','LIKE', '%'.$cari.'%')
+                ->where(function($q) use ($cari){
+                    $q->where('name','LIKE', '%'.$cari.'%')
+                    ->orWhere('alamat','LIKE', '%'.$cari.'%');
+                })->where('statusSibuk','0')
                 ->get();
         }
         
@@ -167,6 +165,9 @@ class ServiceController extends Controller
                 'statusPerbaikan' => 'proses',
             ]);
 
+            Mekanik::find($request->idmekanik)->update([
+                'statusSibuk' => '1'
+            ]);
 
             DB::commit();      
 
@@ -185,6 +186,12 @@ class ServiceController extends Controller
 
             Perbaikan::where('idkerusakan',$id)->update([
                 'statusPerbaikan' => 'selesai'
+            ]);
+
+            $data = Perbaikan::where('id','=',$id)->first();
+            
+            Mekanik::where('id',$data->idmekanik)->update([
+                'statusSibuk' => '0'
             ]);
 
             DB::commit();

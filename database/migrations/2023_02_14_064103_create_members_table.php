@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string("nama", 45);
-            $table->string("nohp", 12);
+            $table->string("nohp", 13);
             $table->string("email", 45);
             $table->string("nik", 45);
             $table->string("ktp", 45);

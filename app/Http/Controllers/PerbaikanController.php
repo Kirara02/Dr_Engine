@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailPerbaikan;
+use App\Models\Mekanik;
 use App\Models\Perbaikan;
 use Illuminate\Http\Request;
+use App\Models\DetailPerbaikan;
 use Illuminate\Support\Facades\DB;
 
 class PerbaikanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('isMekanik', ['only' => [
+            'detail','createDetails','deleteDetails'
+        ]]);
+    }
+
     public function index()
     {
         if(auth()->user()->member->mekanik != null){       
@@ -83,13 +86,38 @@ class PerbaikanController extends Controller
         return view('perbaikan.invoice', compact('perbaikan','title'));
     }
     
-    public function upStatus($id)
+    public function upStatusPembayaran($id)
     {
         try {
             Db::beginTransaction();
 
             Perbaikan::where('id','=',$id)->update([
                 'statusPembayaran' => 'sudah bayar'
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('perbaikan.index')->with('success','Data berhasil diedit');
+            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function upStatusPerbaikan($id)
+    {
+        try {
+            Db::beginTransaction();
+
+            Perbaikan::where('idkerusakan',$id)->update([
+                'statusPerbaikan' => 'selesai'
+            ]);
+
+            $data = Perbaikan::where('id','=',$id)->first();
+            
+            Mekanik::where('id',$data->idmekanik)->update([
+                'statusSibuk' => '0'
             ]);
 
             DB::commit();

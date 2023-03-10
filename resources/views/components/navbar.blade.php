@@ -65,7 +65,7 @@
             <div class="dropdown-menu dropdown-menu-end me-1">
                 <a href="{{ route('profile') }}" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
                 <div class="dropdown-divider"></div>
-                @if(auth()->user()->member->mekanik == null && auth()->user()->level != 'admin')
+                @if(auth()->user()->member->mekanik == null && auth()->user()->level != 'admin' && auth()->user()->member->nama != '')
                     <a href="{{ route('mekanik.create') }}" class="dropdown-item"><i class="fas fa-cog"></i> Daftar Mekanik</a>
                     <div class="dropdown-divider"></div>
                 @endif

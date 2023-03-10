@@ -14,8 +14,8 @@
 	<!-- ================== END core-css ================== -->
 
     <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-	
+    <link href="{{ asset('/') }}assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    
 	<!-- ================== BEGIN page-css ================== -->
 	<link href="{{ asset('/') }}assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
 	<link href="{{ asset('/') }}assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
@@ -92,8 +92,8 @@
 	<script src="{{ asset('/') }}assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 	<script src="{{ asset('/') }}assets/js/demo/dashboard.js"></script>
 	<script src="{{ asset('/') }}assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{ asset('/') }}assets/plugins/moment/min/moment.min.js"></script>
+    <script src="{{ asset('/') }}assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
 	<!-- ================== END page-js ================== -->
@@ -107,6 +107,7 @@
         gtag('config', 'UA-56159088-1');
     </script>
 	<script>
+		
 		$('.table-striped').DataTable({
             autoWidth: true,
 			responsive: true,

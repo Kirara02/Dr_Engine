@@ -36,7 +36,7 @@
               @csrf
               <div class="row mb-3">
                 <label class="form-label col-form-label col-md-3">Jenis Kendaraan *</label>
-                <div class="col-md-2">
+                <div class="col-md-3">
                   <select name="jenisKendaraan" id="" class="form-control">
                     <option disabled selected value="">-- Pilih Jenis Kendaraan --</option>
                     <option value="mobil">Mobil</option>
@@ -127,7 +127,7 @@
                   <thead>
                     <tr>
                       <th width="1%">No</th>
-                      <th>Jenis Perbaikan</th>
+                      <th>Jenis Kerusakan</th>
                       <th>Keterangan</th>
                       <th>Action</th>
                     </tr>
@@ -165,7 +165,7 @@
               </div>
             </div>
             <div class="row row-cols-3 mt-3">
-              @dd($mekanik)
+              {{-- @dd($mekanik) --}}
               @foreach ($mekanik as $item)
               <form action="{{ route('service.mekanik.store') }}" method="post">
                 @csrf

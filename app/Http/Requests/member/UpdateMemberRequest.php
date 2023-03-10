@@ -25,9 +25,9 @@ class UpdateMemberRequest extends FormRequest
     {
         return [
             'nama' => 'required|string',
-            'nohp' => 'required|string',
-            'email' => 'required|string|min:3|unique:members,email,'.$this->member->id,
-            'nik' => 'required|string',
+            'nohp' => 'required|numeric',
+            'email' => 'required|email|min:3|unique:members,email,'.$this->member->id,
+            'nik' => 'required|numeric',
             'ktp' => 'mimes:jpg,jpeg,png',
             'foto' => 'mimes:jpg,jpeg,png',
             'alamat' => 'required|string',
