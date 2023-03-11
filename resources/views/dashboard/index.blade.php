@@ -43,7 +43,7 @@
 					<div class="widget widget-stats bg-indigo">
 						<div class="stats-icon stats-icon-lg"><i class="fa fa-recycle"></i></div>
 						<div class="stats-content">
-							<div class="stats-title">REPAIRSS</div>
+							<div class="stats-title">REPAIRS</div>
 							<div class="stats-number">
 								@if (auth()->user()->level == 'admin')
 								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>	

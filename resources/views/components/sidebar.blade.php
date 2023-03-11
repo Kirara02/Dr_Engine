@@ -96,6 +96,11 @@
                             <div class="menu-text">Data Perbaikan</div>
                         </a>
                     </div>
+                    <div class="menu-item {{ (request()->is('daftar-perbaikan') ? 'active':'') }}">
+                        <a href="{{ route('list.index') }}" class="menu-link">
+                            <div class="menu-text">Daftar Perbaikan</div>
+                        </a>
+                    </div>
                 </div>
             </div> 
             @endcan

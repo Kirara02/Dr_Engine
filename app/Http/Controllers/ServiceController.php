@@ -211,4 +211,21 @@ class ServiceController extends Controller
         
         return view('service.detail', compact('perbaikan','title'));
     }
+
+    public function delete(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            DiagnosaKerusakan::where('idkerusakan',$id)->delete();
+            Kerusakan::find($id)->delete();
+
+            Db::commit();
+
+            return redirect()->route('service.index')->with('success','Data berhasil dihapus');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+    }
 }

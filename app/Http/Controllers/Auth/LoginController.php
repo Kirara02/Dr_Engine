@@ -14,6 +14,7 @@ class LoginController extends Controller
     }
 
     public function auth(Request $request){
+      try {
         $credentials = $request->only('username', 'password');
   
         if(Auth::attempt($credentials)){
@@ -21,5 +22,8 @@ class LoginController extends Controller
         }
   
         return redirect()->back();
+      } catch (\Throwable $th) {
+        return redirect()->back()->with('error', $th->getMessage());
       }
+    }
 }

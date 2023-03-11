@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\JenisKerusakanController;
+use App\Http\Controllers\ListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,7 @@ Route::middleware('auth')->group(function (){
     Route::controller(ServiceController::class)->group(function (){
         Route::get('service', 'index')->name('service.index');
         Route::get('service/detail/{id}', 'detail')->name('service.detail');
+        Route::post('service/delete/{id}', 'delete')->name('service.delete');
         Route::get('service/kerusakan', 'kerusakan')->name('service.kerusakan');
         Route::post('service/kerusakan/store', 'storeKerusakan')->name('service.kerusakan.store');
         Route::get('service/diagnosa', 'diagnosa')->name('service.diagnosa');
@@ -76,6 +78,12 @@ Route::middleware('auth')->group(function (){
         Route::get('service/mekanik', 'mekanik')->name('service.mekanik');
         Route::post('service/mekanik/store', 'storeMekanik')->name('service.mekanik.store');
         Route::post('service/statusPerbaikan/{id}', 'upStatusPerbaikan')->name('service.statusPerbaikan');
+    });
+
+    //Route untuk list Perbaikan
+    Route::controller(ListController::class)->group(function(){
+        Route::get('daftar-perbaikan','index')->name('list.index');
+        Route::post('daftar-perbaikan/{id}','acc')->name('list.acc');
     });
 
     // Route untuk laporan

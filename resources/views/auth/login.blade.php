@@ -29,7 +29,7 @@
 			<div class="news-feed">
 				<div class="news-image" style="background-image: url(../assets/img/login-bg/login-bg-11.jpg)"></div>
 				<div class="news-caption">
-					<h4 class="caption-title"><b>DR.</b>Engine</h4>
+					<h4 class="caption-title"><b>dr.</b>Engine</h4>
 				</div>
 			</div>
 			<!-- END news-feed -->
@@ -41,7 +41,7 @@
 					<div class="brand">
 						<div class="d-flex align-items-center">
 							<span class="logo"></span>	
-							<b>DR.</b> Engine
+							<b>dr.</b> Engine
 						</div>
 						<small>Website Sistem Informasi Bengkel</small>
 					</div>
@@ -53,22 +53,23 @@
 				
 				<!-- BEGIN login-content -->
 				<div class="login-content">
+					
 					<form action="{{ route('auth') }}" method="POST" class="fs-13px">
 						@csrf
 						<div class="form-floating mb-15px">
 							<input type="text" class="form-control h-45px fs-13px" placeholder="Username" name="username" id="username" autocomplete="off" />
 							<label for="username" class="d-flex align-items-center fs-13px text-gray-600">Username</label>
 						</div>
+						@error('username')
+							<small class="text-danger">{{ $message }}</small>
+						@enderror
 						<div class="form-floating mb-15px">
 							<input type="password" class="form-control h-45px fs-13px" placeholder="Password" name="password" id="password" autocomplete="off"/>
 							<label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
 						</div>
-						<div class="form-check mb-30px">
-							<input class="form-check-input" type="checkbox" value="1" id="rememberMe" />
-							<label class="form-check-label" for="rememberMe">
-								Remember Me
-							</label>
-						</div>
+						@error('password')
+							<small class="text-danger">{{ $message }}</small>
+						@enderror
 						<div class="mb-15px">
 							<button type="submit" class="btn btn-success d-block h-45px w-100 btn-lg fs-14px">Sign me in</button>
 						</div>

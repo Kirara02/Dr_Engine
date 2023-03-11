@@ -65,7 +65,7 @@
                         @enderror
                     </div>
                     <div class="row mb-3">
-                        <label class="form-label col-form-label col-md-3">KTP *</label>
+                        <label class="form-label col-form-label col-md-3">KTP </label>
                         <div class="col-md-4">
                         <input type="file" class="form-control" name="ktp" value={{ auth()->user()->member->ktp }}" id="ktp" autocomplete="off"/>
                         </div>
@@ -74,7 +74,7 @@
                         @enderror
                     </div>
                     <div class="row mb-3">
-                        <label class="form-label col-form-label col-md-3">Foto *</label>
+                        <label class="form-label col-form-label col-md-3">Foto </label>
                         <div class="col-md-4">
                         <input type="file" class="form-control" name="foto" value={{ auth()->user()->member->foto }}" id="foto" autocomplete="off"/>
                         </div>
@@ -83,7 +83,7 @@
                         @enderror
                     </div>
                     <div class="row mb-3">
-                        <label class="form-label col-form-label col-md-3">Alamat</label>
+                        <label class="form-label col-form-label col-md-3">Alamat *</label>
                         <div class="col-md-4">
                             <textarea cols="30" rows="3" name="alamat" id="alamat" placeholder="Alamat" class="form-control" autocomplete="off">{{ auth()->user()->member->alamat }}</textarea>
                         </div>
@@ -121,7 +121,7 @@
                     </div>
                     @endcan
                     <div class="row mb-3">
-                        <label class="form-label col-form-label col-md-3">Password *</label>
+                        <label class="form-label col-form-label col-md-3">Password </label>
                         <div class="col-md-4">
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="" autocomplete="off"/>
                         </div>
@@ -130,7 +130,7 @@
                         @enderror
                     </div>
                     <div class="row mb-3">
-                        <label class="form-label col-form-label col-md-3">Confirm Password *</label>
+                        <label class="form-label col-form-label col-md-3">Confirm Password </label>
                         <div class="col-md-4">
                         <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm Password" value="" autocomplete="off"/>
                         </div>

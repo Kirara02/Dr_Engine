@@ -30,7 +30,7 @@
 			<div class="news-feed">
 				<div class="news-image" style="background-image: url(../assets/img/login-bg/login-bg-15.jpg)"></div>
 				<div class="news-caption">
-					<h4 class="caption-title"><b>DR.</b> Engine</h4>
+					<h4 class="caption-title"><b>dr.</b> Engine</h4>
 				</div>
 			</div>
 			<!-- END news-feed -->
@@ -51,7 +51,7 @@
 						@csrf
 						<div class="form-group mb-3">
 							<label class="mb-2">Username <span class="text-danger">*</span></label>
-							<input type="text" class="form-control fs-13px" name="username" id="username" placeholder="username" {{ old('username') }}/>
+							<input type="text" class="form-control fs-13px" name="username" id="username" placeholder="username" value="{{ old('username') }}" />
 							@error('username')
 								<small class="text-danger">{{ $message }}</small>
 							@enderror

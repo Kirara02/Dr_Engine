@@ -36,35 +36,40 @@
                 <div class="date text-inverse mt-5px">{{ \Carbon\Carbon::parse($perbaikan->tanggal)->format('F d,Y') }}</div>     
             </div>
         </div>
+        {{-- @dd($perbaikan) --}}
         <!-- END invoice-header -->
         <!-- BEGIN invoice-content -->
         <div class="invoice-content">
-            <!-- BEGIN table-responsive -->
-            <div class="table-responsive">
+            @if(count($perbaikan->detail) == 0)
+                <p>dhsjdhsj</p>
+            @else         
+                <!-- BEGIN table-responsive -->
                 <div class="table-responsive">
-                    <table class=" table-invoice table ">
-                        <thead>
-                            <tr>
-                                <th width="1%">No</th>
-                                <th>Jenis Perbaikan</th>
-                                <th>Keterangan</th>
-                                <th>Nominal</th>
-                            </tr>
-                        </thead>
-                        {{-- @dd($perbaikan) --}}
-                        <tbody>
-                            @foreach ($perbaikan->detail as $item)
+                    <div class="table-responsive">
+                        <table class=" table-invoice table ">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->jenisPerbaikan }}</td>
-                                    <td>{{ $item->keterangan }}</td>
-                                    <td>{{ $item->nominal }}</td>
+                                    <th width="1%">No</th>
+                                    <th>Jenis Perbaikan</th>
+                                    <th>Keterangan</th>
+                                    <th>Nominal</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            <!-- END table-responsive -->
+                            </thead>
+                            {{-- @dd($perbaikan) --}}
+                            <tbody>
+                                @foreach ($perbaikan->detail as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->jenisPerbaikan }}</td>
+                                        <td>{{ $item->keterangan }}</td>
+                                        <td>{{ $item->nominal }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- END table-responsive -->
+            @endif
             <!-- BEGIN invoice-price -->
             <div class="invoice-price">
                 <div class="invoice-price-right">

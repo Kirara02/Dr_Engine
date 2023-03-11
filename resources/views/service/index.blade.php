@@ -22,7 +22,7 @@
                     <tr>
                         <th class="text-nowrap" width="1%">No</th>
                         <th class="text-nowrap" width="10%">Tanggal</th>
-                        <th class="text-nowrap" width="40%">Bengkel</th>
+                        <th class="text-nowrap" width="30%">Bengkel</th>
                         <th class="text-nowrap" width="10%">Jenis</th>
                         <th class="text-nowrap" width="20%">Tipe</th>
                         <th class="text-nowrap" width="10%">Foto</th>
@@ -37,22 +37,33 @@
                     <tr>
                         <td class="text-nowrap">{{ $loop->iteration }}</td>
                         <td class="text-nowrap">{{ $item->perbaikan->tanggal }}</td>
-                        <td class="class-nowrap">{{ $item->perbaikan->mekanik->name }}</td>
+                        <td class="class-nowrap">{{ $item->perbaikan->mekanik->name ?? 'belum ada'}}</td>
                         <td class="text-nowrap">{{ $item->jenisKendaraan }}</td>
                         <td class="text-nowrap">{{ $item->tipeKendaraan }}</td>
                         <td class="text-nowrap">
+                            {{-- @dd($item->perbaikan->detail) --}}
                             <img src="{{ asset('./storage/'.$item->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="60">
                         </td>
                         <td class="class-nowrap">{{ $item->perbaikan->statusPerbaikan }}</td>
                         <td class="class-nowrap" width="10%">{{ $item->perbaikan->statusPembayaran }}</td>
-                        <td class="text-nowrap d-flex justify-content-around align-middle" >
-                            <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info"><i class="ion-md-eye"></i></a>
-                            @if($item->perbaikan->statusPerbaikan != 'selesai' && $item->perbaikan->detail == null)
+                        <td class="text-nowrap d-flex justify-content-center align-middle" >
+                            @if($item->perbaikan->statusPerbaikan != 'pencarian')
+                                <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info me-2"><i class="ion-md-eye"></i></a>
+                            @endif
+                            @if($item->perbaikan->statusPerbaikan != 'proses' && $item->perbaikan->detail  )
                             <form action="{{ route('service.statusPerbaikan', $item->id) }}" method="post">
                                 @csrf
-                                <button type="button" class="btn btn-secondary btn-status"><i class="ion-md-checkmark align-middle"></i></button>
+                                <button type="button" class="btn btn-secondary btn-status me-2"><i class="ion-md-checkmark align-middle"></i></button>
                             </form>
                             @endif
+                            @if($item->perbaikan->statusPerbaikan == 'pencarian')
+                                <a href="{{ route('service.mekanik') }}" class="btn btn-orange me-2"><i class="ion-md-search"></i></a>
+                                <form id="form-delete" action="{{ route('service.delete', $item->id) }}" method="post" class="d-inline">
+                                    @csrf
+                                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                                </form>
+                            @endif
+
                         </td>
                     </tr>
                     @endforeach

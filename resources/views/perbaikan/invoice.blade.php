@@ -40,6 +40,7 @@
         <!-- BEGIN invoice-content -->
         <div class="invoice-content">
             <!-- BEGIN table-responsive -->
+            @if()
             <div class="table-responsive">
                 <table class=" table-invoice table ">
                     <thead>

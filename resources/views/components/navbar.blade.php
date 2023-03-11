@@ -56,7 +56,11 @@
         @endcan
         <div class="navbar-item navbar-user dropdown">
             <a href="" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                @if(!auth()->user()->member->foto)
+                <img src={{ asset('assets/img/user/user-1.jpg') }}" alt="" /> 
+                @else
                 <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" /> 
+                @endif
                 <span>
                     <span class="d-none d-md-inline">{{ auth()->user()->member->nama }}</span>
                     <b class="caret"></b>
