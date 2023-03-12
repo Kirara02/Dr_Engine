@@ -28,8 +28,8 @@
                         <th class="text-nowrap" width="10%">Jenis</th>
                         <th class="text-nowrap" width="15%">Tipe</th>
                         <th class="text-nowrap" width="10%">Foto</th>
-                        <th class="text-nowrap" width="10%">Status Perbaikan</th>
-                        <th class="text-nowrap" width="10%">Status Pembayaran</th>
+                        <th class="text-nowrap" width="5%">Status Perbaikan</th>
+                        <th class="text-nowrap" width="5%">Status Pembayaran</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                 </thead>
@@ -48,12 +48,20 @@
                         <td class="text-nowrap">
                             <img src="{{ asset('./storage/'.$item->kerusakan->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="80">
                         </td>
-                        <td class="class-nowrap">{{ $item->statusPerbaikan }}</td>
+                        <td class="class-nowrap text-light">
+                            @if ($item->statusPerbaikan == 'pencarian')
+                                <span class="bagde d-block bg-warning rounded-pill p-1">{{ $item->statusPerbaikan }}</span>
+                            @elseif ($item->statusPerbaikan == 'proses')
+                                <span class="bagde d-block bg-green rounded-pill p-1">{{ $item->statusPerbaikan }}</span>
+                            @else
+                                <span class="bagde d-block bg-indigo rounded-pill p-1">{{ $item->statusPerbaikan }}</span>
+                            @endif
+                        </td>
                         <td class="class-nowrap text-light">
                             @if ($item->statusPembayaran == 'belum bayar')
-                                <span class="bagde bg-danger rounded-pill p-1">{{ $item->statusPembayaran }}</span>
-                                @else
-                                <span class="bagde bg-success rounded-pill p-1">{{ $item->statusPembayaran }}</span>
+                                <span class="bagde d-block bg-danger rounded-pill p-1">{{ $item->statusPembayaran }}</span>
+                            @else
+                                <span class="bagde d-block bg-success rounded-pill p-1">{{ $item->statusPembayaran }}</span>
                             @endif
                         </td>
                         <td class="text-nowrap align-middle text-center dropdown">
@@ -66,19 +74,19 @@
                                     <div class="dropdown-divider"></div>
                                 @endif
                                     <a href="{{ route('perbaikan.invoice',$item->id) }}" class="dropdown-item"><i class="fas fa-newspaper align-middle me-2"></i> Invoice</a>
-                                    @if(auth()->user()->level == 'admin' && $item->statusPerbaikan != 'selesai')
+                                @if(auth()->user()->level == 'admin' && $item->statusPerbaikan != 'selesai' && count($item->detail->all()) > 0)
                                     <div class="dropdown-divider"></div>
                                     <form action="{{ route('perbaikan.statusPerbaikan', $item->id) }}" method="post">
                                         @csrf
                                         <button type="button" class="dropdown-item btn-status"><i class="fas fa-check align-middle me-2"></i>Perbaikan</button>
                                     </form>
                                 @endif
-                                @if ($item->statusPembayaran != 'sudah bayar')
-                                <div class="dropdown-divider"></div>
-                                <form action="{{ route('perbaikan.statusPembayaran', $item->id) }}" method="post">
-                                    @csrf
-                                    <button type="button" class="dropdown-item btn-pembayaran"><i class="fas fa-check align-middle me-2"></i>Pembayaran </button>
-                                </form>
+                                @if ($item->statusPembayaran != 'sudah bayar' && count($item->detail->all()) > 0)
+                                    <div class="dropdown-divider"></div>
+                                    <form action="{{ route('perbaikan.statusPembayaran', $item->id) }}" method="post">
+                                        @csrf
+                                        <button type="button" class="dropdown-item btn-pembayaran"><i class="fas fa-check align-middle me-2"></i>Pembayaran </button>
+                                    </form>
                                 @endif
                             </div>
                         </td>

@@ -1,5 +1,10 @@
 @extends('layouts.master', ['title' => 'Input Service'])
 @section('content')
+<ol class="breadcrumb float-xl-end">
+  <li class="breadcrumb-item"><a href="{{ route('service.index') }}">Service</a></li>
+  <li class="breadcrumb-item active">Input</li>
+</ol>
+<h1 class="page-header">Input Service</h1>
 <div class="panel">
   <div class="panel-heading bg-teal-600 text-white"></div>
     <div class="panel-body">

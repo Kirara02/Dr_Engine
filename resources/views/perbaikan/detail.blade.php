@@ -65,7 +65,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->jenisPerbaikan }}</td>
                         <td>{{ $item->keterangan }}</td>
-                        <td>{{ $item->nominal }}</td>
+                        <td>{{ number_format($item->nominal,0,'','.') }}</td>
                         <td class="text-center">
                             <form id="form-delete" action="{{ url('perbaikan/detail/'.$item->id.'/delete') }}" method="post" class="ms-1 d-inline">
                             @csrf

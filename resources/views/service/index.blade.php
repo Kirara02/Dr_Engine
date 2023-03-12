@@ -1,7 +1,7 @@
 @extends('layouts.master', ['title' => 'Service'])
 @section('content')
 <ol class="breadcrumb float-xl-end">
-    <li class="breadcrumb-item active"><a href="{{ route('service.index') }}">Repair</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route('service.index') }}">Service</a></li>
 </ol>
 <h1 class="page-header">Data Service</h1>
 <div class="panel panel-inverse">
@@ -26,8 +26,8 @@
                         <th class="text-nowrap" width="10%">Jenis</th>
                         <th class="text-nowrap" width="20%">Tipe</th>
                         <th class="text-nowrap" width="10%">Foto</th>
-                        <th class="text-nowrap" width="10%">Status Perbaikan</th>
-                        <th class="text-nowrap" width="10%">Status Pembayaran</th>
+                        <th class="text-nowrap" width="5%">Status Perbaikan</th>
+                        <th class="text-nowrap" width="5%">Status Pembayaran</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                 </thead>
@@ -44,13 +44,30 @@
                             {{-- @dd($item->perbaikan->detail) --}}
                             <img src="{{ asset('./storage/'.$item->fotoKendaraan) }}" alt="" avatar-img rounded-circle" width="60">
                         </td>
-                        <td class="class-nowrap">{{ $item->perbaikan->statusPerbaikan }}</td>
-                        <td class="class-nowrap" width="10%">{{ $item->perbaikan->statusPembayaran }}</td>
+                        <td class="class-nowrap text-light">
+                            @if ($item->perbaikan->statusPerbaikan == 'pencarian')
+                                <span class="bagde d-block bg-warning rounded-pill p-1">{{ $item->perbaikan->statusPerbaikan }}</span>
+                            @elseif ($item->perbaikan->statusPerbaikan == 'proses')
+                                <span class="bagde d-block bg-green rounded-pill p-1">{{ $item->perbaikan->statusPerbaikan }}</span>
+                            @else
+                                <span class="bagde d-block bg-indigo rounded-pill p-1">{{ $item->perbaikan->statusPerbaikan }}</span>
+                            @endif    
+                        </td>
+                        <td class="class-nowrap text-light" width="10%">
+                            @if ($item->perbaikan->statusPembayaran == 'belum bayar')
+                                <span class="bagde d-block bg-danger rounded-pill p-1">{{ $item->perbaikan->statusPembayaran }}</span>
+                            @else
+                                <span class="bagde d-block bg-success rounded-pill p-1">{{ $item->perbaikan->statusPembayaran }}</span>
+                            @endif    
+                        </td>
                         <td class="text-nowrap d-flex justify-content-center align-middle" >
                             @if($item->perbaikan->statusPerbaikan != 'pencarian')
-                                <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info me-2"><i class="ion-md-eye"></i></a>
+                            <a href="{{ route('service.detail', $item->id) }}" class="btn btn-info me-2"><i class="ion-md-eye"></i></a>
                             @endif
-                            @if($item->perbaikan->statusPerbaikan != 'proses' && $item->perbaikan->detail  )
+                            @if($item->perbaikan->statusPembayaran != 'sudah bayar' && $item->perbaikan->statusPerbaikan == 'selesai')
+                            <a href="https://api.whatsapp.com/send?phone={{ $item->perbaikan->mekanik->member->nohp }}&text=Saya membayar sebesar Rp{{ number_format($item->perbaikan->detail()->sum('nominal'), 0,'','.') }}" class="btn btn-success me-2"><i class="ion-md-cash"></i></a>
+                            @endif
+                            @if($item->perbaikan->statusPerbaikan == 'proses' && count($item->perbaikan->detail->all()) > 0)
                             <form action="{{ route('service.statusPerbaikan', $item->id) }}" method="post">
                                 @csrf
                                 <button type="button" class="btn btn-secondary btn-status me-2"><i class="ion-md-checkmark align-middle"></i></button>
@@ -65,7 +82,7 @@
                             @endif
 
                         </td>
-                    </tr>
+                    </tmelr>
                     @endforeach
                 </tbody>
             </table>

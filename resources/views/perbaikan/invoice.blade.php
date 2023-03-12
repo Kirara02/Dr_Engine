@@ -40,7 +40,16 @@
         <!-- BEGIN invoice-content -->
         <div class="invoice-content">
             <!-- BEGIN table-responsive -->
-            @if()
+            @if(count($perbaikan->detail) == 0)
+            <div class="error h-150px">
+                <div class="error-content">
+                    <div class="error-message">Belum ada entri detail perbaikan</div>
+                    <div class="error-desc mb-4">
+                        Silahkan hubungi mekanik untuk menambah detail perbaikan.
+                    </div>
+                </div>
+            </div>
+            @else
             <div class="table-responsive">
                 <table class=" table-invoice table ">
                     <thead>
@@ -58,17 +67,18 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->jenisPerbaikan }}</td>
                                 <td>{{ $item->keterangan }}</td>
-                                <td>{{ $item->nominal }}</td>
+                                <td>{{ number_format($item->nominal, 0,'','.') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <!-- END table-responsive -->
+            @endif
             <!-- BEGIN invoice-price -->
             <div class="invoice-price">
                 <div class="invoice-price-right">
-                    <small>Total</small> <span class="fw-bold">Rp.{{ $perbaikan->detail()->sum('nominal') }}</span>
+                    <small>Total</small> <span class="fw-bold">Rp{{ number_format($perbaikan->detail()->sum('nominal'), 0,'','.') }}</span>
                 </div>
             </div>
             <!-- END invoice-price -->

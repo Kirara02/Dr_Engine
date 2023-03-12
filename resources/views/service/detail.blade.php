@@ -1,7 +1,7 @@
 @extends('layouts.master', ['title' => $title])
 @section('content')
     <ol class="breadcrumb float-xl-end">
-        <li class="breadcrumb-item"><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('service.index') }}">Service</a></li>
         <li class="breadcrumb-item active">Detail</li>
     </ol>
     <h1 class="page-header">{{ $title }}</h1>
@@ -41,7 +41,14 @@
         <!-- BEGIN invoice-content -->
         <div class="invoice-content">
             @if(count($perbaikan->detail) == 0)
-                <p>dhsjdhsj</p>
+            <div class="error h-150px">
+                <div class="error-content">
+                    <div class="error-message">Belum ada entri detail perbaikan</div>
+                    <div class="error-desc mb-4">
+                        Silahkan hubungi mekanik untuk menambah detail perbaikan.
+                    </div>
+                </div>
+            </div>
             @else         
                 <!-- BEGIN table-responsive -->
                 <div class="table-responsive">
@@ -62,7 +69,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->jenisPerbaikan }}</td>
                                         <td>{{ $item->keterangan }}</td>
-                                        <td>{{ $item->nominal }}</td>
+                                        <td>Rp{{ number_format($item->nominal,0,'','.') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -73,7 +80,7 @@
             <!-- BEGIN invoice-price -->
             <div class="invoice-price">
                 <div class="invoice-price-right">
-                    <small>Nominal</small> <span class="fw-bold">Rp.{{ $perbaikan->detail()->sum('nominal') }}</span>
+                    <small>Nominal</small> <span class="fw-bold">Rp{{ number_format($perbaikan->detail()->sum('nominal'), 0,'','.') }}</span>
                 </div>
             </div>
             <!-- END invoice-price -->
