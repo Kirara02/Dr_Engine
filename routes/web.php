@@ -70,12 +70,12 @@ Route::middleware('auth')->group(function (){
         Route::get('service', 'index')->name('service.index');
         Route::get('service/detail/{id}', 'detail')->name('service.detail');
         Route::post('service/delete/{id}', 'delete')->name('service.delete');
-        Route::get('service/kerusakan', 'kerusakan')->name('service.kerusakan');
+        Route::get('service/kerusakan/', 'kerusakan')->name('service.kerusakan');
         Route::post('service/kerusakan/store', 'storeKerusakan')->name('service.kerusakan.store');
-        Route::get('service/diagnosa', 'diagnosa')->name('service.diagnosa');
+        Route::get('service/diagnosa/{id}', 'diagnosa')->name('service.diagnosa');
         Route::post('service/diagnosa/store', 'storeDiagnosa')->name('service.diagnosa.store');
         Route::delete('service/diagnosa/destroy/{id}', 'destroy')->name('service.diagnosa.destroy');
-        Route::get('service/mekanik', 'mekanik')->name('service.mekanik');
+        Route::get('service/mekanik/{id}', 'mekanik')->name('service.mekanik');
         Route::post('service/mekanik/store', 'storeMekanik')->name('service.mekanik.store');
         Route::post('service/statusPerbaikan/{id}', 'upStatusPerbaikan')->name('service.statusPerbaikan');
     });

@@ -1,7 +1,7 @@
 @extends('layouts.master', ['title' => 'Rekap'])
 @section('content')
 <ol class="breadcrumb float-xl-end">
-    <li class="breadcrumb-item active"><a href="{{ route('laporan.index') }}">Perbaikan</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route('laporan.index') }}">Rekap Perbaikan</a></li>
 </ol>
 <h1 class="page-header">Laporan</h1>
 <div class="panel panel-inverse">
@@ -15,8 +15,8 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="alert alert-info">
-            *Untuk melakukan export perbaikan mohon lakukan filter terlebih dahulu.
+        <div class="alert alert-info text-danger">
+            * Untuk melakukan export perbaikan mohon lakukan filter terlebih dahulu.
         </div>
 
         <form action="" class="row">

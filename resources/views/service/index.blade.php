@@ -73,11 +73,16 @@
                                 <button type="button" class="btn btn-secondary btn-status me-2"><i class="ion-md-checkmark align-middle"></i></button>
                             </form>
                             @endif
-                            @if($item->perbaikan->statusPerbaikan == 'pencarian')
-                                <a href="{{ route('service.mekanik') }}" class="btn btn-orange me-2"><i class="ion-md-search"></i></a>
+                            @if($item->perbaikan->statusPerbaikan == 'pencarian' && count($item->diagnosaKerusakan->all()) > 0)
+                                <a href="{{ route('service.mekanik', $item->id) }}" class="btn btn-orange me-2"><i class="ion-md-search"></i></a>
+                            @endif
+                            @if($item->perbaikan->statusPerbaikan == 'pencarian' && count($item->diagnosaKerusakan->all()) < 1)
+                                <a href="{{ route('service.diagnosa', $item->id) }}" class="btn btn-orange me-2"><i class="ion-md-construct"></i></a>
+                            @endif
+                            @if($item->perbaikan->statusPerbaikan == 'pencarian' )
                                 <form id="form-delete" action="{{ route('service.delete', $item->id) }}" method="post" class="d-inline">
                                     @csrf
-                                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                                    <button type="button" class="btn btn-danger me-2 btn-delete"><i class="fas fa-trash align-middle"></i></button>
                                 </form>
                             @endif
 

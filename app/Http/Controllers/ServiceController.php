@@ -29,17 +29,16 @@ class ServiceController extends Controller
         return view('service.form', compact('status'));
     }
 
-    public function diagnosa()
+    public function diagnosa($id)
     {  
-        $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
-        $diagnosa = DiagnosaKerusakan::with(['jenisKerusakan'])->where('idkerusakan','=',$data->id)->get();
+        $diagnosa = DiagnosaKerusakan::with(['jenisKerusakan'])->where('idkerusakan','=',$id)->get();
 
         $jenis = JenisKerusakan::get();
         $status = ['completed','active','disable'];
-        return view('service.form', compact('status','jenis','diagnosa'));      
+        return view('service.form', compact('status','jenis','diagnosa','id'));      
     }
 
-    public function mekanik(Request $request)
+    public function mekanik(Request $request, $id)
     {   
        
         $status = ['completed','completed','active'];
@@ -56,7 +55,7 @@ class ServiceController extends Controller
                 ->get();
         }
         
-        return view('service.form', compact('status','mekanik'));    
+        return view('service.form', compact('status','mekanik','id'));    
     }
 
     public function destroy($id)
@@ -110,9 +109,9 @@ class ServiceController extends Controller
             ]);
             
             Db::commit();
-    
+            $id = $data->id;
             $status = ['completed','active','disable'];
-            return redirect()->route('service.diagnosa')->with('status');
+            return redirect()->route('service.diagnosa', $id)->with('status');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
@@ -158,9 +157,7 @@ class ServiceController extends Controller
          
             Db::beginTransaction();
 
-            $data = Kerusakan::select('id')->where('idmember','=',auth()->user()->member->id)->latest()->first();
-
-            Perbaikan::where('idkerusakan','=',$data->id)->update([
+            Perbaikan::where('idkerusakan','=',$request->id)->update([
                 'idmekanik' => $request->idmekanik,
                 'statusPerbaikan' => 'proses',
             ]);

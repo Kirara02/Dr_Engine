@@ -120,7 +120,7 @@
                   <button type="submit" class="btn btn-info w-100px me-5px">Tambah</button>
                   {{-- @dd($diagnosa) --}}
                   @if(!$diagnosa->isEmpty())
-                    <a href="{{ route('service.mekanik') }}" class="btn btn-info">Next</a>
+                    <a href="{{ route('service.mekanik', $id) }}" class="btn btn-info">Next</a>
                   @endif
                 </div>
               </div>
@@ -163,7 +163,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-3">
-                <form action="{{ route('service.mekanik') }}" method="GET" class="d-flex">
+                <form action="{{ route('service.mekanik', $id) }}" method="GET" class="d-flex">
                   <input type="text" name="cari" id="cari" class="form-control me-1" placeholder="Cari Mekanik">
                   <button class="btn btn-info">CARI</button>
                 </form>
@@ -174,6 +174,7 @@
               @foreach ($mekanik as $item)
               <form action="{{ route('service.mekanik.store') }}" method="post">
                 @csrf
+                <input type="hidden" name="id" value="{{ $id }}">        
                 <input type="hidden" name="idmekanik" value="{{ $item->id }}">        
                 <div class="col mb-4">
                   <div class="card bg-dark border-0 text-white">
