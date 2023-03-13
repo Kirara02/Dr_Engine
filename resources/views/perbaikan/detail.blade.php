@@ -15,7 +15,11 @@
             <div class="row mb-3">
                 <label class="form-label col-form-label col-md-2">Jenis Perbaikan *</label>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="jenisPerbaikan" id="jenisPerbaikan" autocomplete="off" placeholder="Jenis Perbaikan">
+                    <select name="jenisPerbaikan" id="jenisPerbaikan" class="form-select">
+                        @foreach ($perbaikan->kerusakan->diagnosaKerusakan as $jenis)
+                            <option value="{{ $jenis->jenisKerusakan->jenisKerusakan }}">{{ $jenis->jenisKerusakan->jenisKerusakan }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 @error('jenisPerbaikan')
                     <small class="text-danger">{{ $message }}</small>
@@ -59,8 +63,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{-- @dd($detail) --}}
-                    @foreach ($detail as $item)
+                    {{-- @dd($perbaikan) --}}
+                    @foreach ($perbaikan->detail as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->jenisPerbaikan }}</td>

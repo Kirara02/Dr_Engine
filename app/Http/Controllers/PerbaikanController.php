@@ -31,8 +31,8 @@ class PerbaikanController extends Controller
 
     public function detail($id)
     {
-        $detail = DetailPerbaikan::where('idperbaikan', $id)->get();
-        return view('perbaikan.detail', compact('id','detail'));
+        $perbaikan = Perbaikan::with(['detail','kerusakan'])->where('id',$id)->first();
+        return view('perbaikan.detail', compact('id','perbaikan'));
     }
 
     public function createDetails(Request $request, $id)
