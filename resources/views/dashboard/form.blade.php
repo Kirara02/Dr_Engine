@@ -10,7 +10,7 @@
                 </div>
                 <!-- END profile-header-img -->
                 <!-- BEGIN profile-header-info -->
-            
+
                 <div class="profile-header-info">
                     <h4 class="mt-0 mb-1">{{ auth()->user()->member->nama }}</h4>
                     <p>@'{{ auth()->user()->username }}</p>
@@ -100,11 +100,11 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    @can('isMekanik')   
+                    @can('isMekanik')
                     <div class="row mb-3">
                         <label class="form-label col-form-label col-md-3">Nama Bengkel *</label>
                         <div class="col-md-4">
-                        <input type="text" class="form-control" name="nama_bengkel" id="nama_bengkel" placeholder="Username" value="{{ auth()->user()->member->mekanik->name ?? old('nama_bengkel') }}" autocomplete="off"/>
+                        <input type="text" class="form-control" name="nama_bengkel" id="nama_bengkel" placeholder="Username" value="{{ auth()->user()->member->mekanik()->where('statusHapus','0')->first()->name ?? old('nama_bengkel') }}" autocomplete="off"/>
                         </div>
                         @error('nama_bengkel')
                             <small class="text-danger">{{ $message }}</small>
@@ -113,7 +113,7 @@
                     <div class="row mb-3">
                         <label class="form-label col-form-label col-md-3">Alamat Bengkel</label>
                         <div class="col-md-4">
-                            <textarea cols="30" rows="3" name="alamat_bengkel" id="alamat_bengkel" placeholder="Alamat" class="form-control" autocomplete="off">{{ auth()->user()->member->mekanik->alamat }}</textarea>
+                            <textarea cols="30" rows="3" name="alamat_bengkel" id="alamat_bengkel" placeholder="Alamat" class="form-control" autocomplete="off">{{ auth()->user()->member->mekanik()->where('statusHapus','0')->first()->alamat }}</textarea>
                         </div>
                         @error('alamat_bengkel')
                             <small class="text-danger">{{ $message }}</small>

@@ -22,10 +22,10 @@ class ListController extends Controller
             DB::beginTransaction();
 
             Perbaikan::find($id)->update([
-                'idmekanik' => auth()->user()->member->mekanik->id,
+                'idmekanik' => auth()->user()->member->mekanik()->where('statusHapus','0')->first()->id,
                 'statusPerbaikan' => 'proses'
             ]);
-            
+
             DB::commit();
             return redirect()->route('list.index')->with('status','Data berhasil di ACC');
         } catch (\Throwable $th) {

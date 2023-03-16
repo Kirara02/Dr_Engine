@@ -53,7 +53,7 @@ class DashboardController extends Controller
                 $pass = auth()->user()->password;
             }
 
-            
+
             User::find(auth()->user()->id)->update([
                 'username' => $request->username,
                 'password' => $pass,
@@ -65,8 +65,8 @@ class DashboardController extends Controller
                 $fotoUrl = $foto->storeAs('members', Str::slug($request->nama) . '-' . Str::random(6) . '.' . $foto->extension());
             } else {
                 $fotoUrl = auth()->user()->member->foto;
-            }    
-            
+            }
+
             if ($request->file('ktp')) {
                 auth()->user()->member->ktp != NULL ? Storage::delete( auth()->user()->member->ktp) : '';
                 $ktp = $request->file('ktp');
@@ -85,8 +85,8 @@ class DashboardController extends Controller
                 'alamat' => $request->alamat,
             ]);
 
-            if(auth()->user()->member->mekanik != null){
-                Mekanik::find(auth()->user()->member->mekanik->id)->update([
+            if(auth()->user()->member->mekanik()->where('statusHapus','0')->first() != null){
+                Mekanik::find(auth()->user()->member->mekanik()->where('statusHapus','0')->first()->id)->update([
                     'name' => $request->nama_bengkel,
                     'alamat' => $request->alamat_bengkel,
                 ]);

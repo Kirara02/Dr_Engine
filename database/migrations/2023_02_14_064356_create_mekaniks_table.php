@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text("alamat");
             $table->enum("statusAktivasi", ['1','0'])->default('0');
             $table->enum("statusSibuk", ['1','0'])->default('0');
+            $table->enum("statusHapus", ['1','0'])->default('0');
             $table->foreignId("idmember")->nullable()->constrained('members')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
