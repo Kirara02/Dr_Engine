@@ -9,7 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\auth\LogoutController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\JenisKerusakanController;
 use App\Http\Controllers\ListController;
@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/profile', [DashboardController::class,'update'])->name('profile.update');
     Route::post('/mekanik/acc', [DashboardController::class,'accMekanik'])->name('mekanik.acc');
     Route::post('/mekanik/eject', [DashboardController::class,'ejectMekanik'])->name('mekanik.eject');
-    
+
     // Data Master
     // Route Member
     Route::resource('members', MemberController::class);
@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('mekanik', MekanikController::class);
     // Route Jenis Kerusakan
     Route::resource('jenis_kerusakan', JenisKerusakanController::class);
-    
+
     // Route Perbaikan
     Route::controller(PerbaikanController::class)->group(function(){
         Route::get('perbaikan','index')->name('perbaikan.index');
@@ -64,8 +64,8 @@ Route::middleware('auth')->group(function (){
         Route::post('perbaikan/statusPerbaikan/{id}', 'upStatusPerbaikan')->name('perbaikan.statusPerbaikan');
     });
 
-    
-    // Route Input Service  
+
+    // Route Input Service
     Route::controller(ServiceController::class)->group(function (){
         Route::get('service', 'index')->name('service.index');
         Route::get('service/detail/{id}', 'detail')->name('service.detail');

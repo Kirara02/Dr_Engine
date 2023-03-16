@@ -33,7 +33,7 @@
                 </address>
             </div>
             <div class="invoice-date">
-                <div class="date text-inverse mt-5px">{{ \Carbon\Carbon::parse($perbaikan->tanggal)->format('F d,Y') }}</div>     
+                <div class="date text-inverse mt-5px">{{ \Carbon\Carbon::parse($perbaikan->tanggal)->format('F d,Y') }}</div>
             </div>
         </div>
         {{-- @dd($perbaikan) --}}
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            @else         
+            @else
                 <!-- BEGIN table-responsive -->
                 <div class="table-responsive">
                     <div class="table-responsive">
