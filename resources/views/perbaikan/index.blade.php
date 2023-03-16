@@ -1,7 +1,13 @@
 @extends('layouts.master', ['title' => 'Perbaikan']);')
 @section('content')
 <ol class="breadcrumb float-xl-end">
-    <li class="breadcrumb-item active"><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
+    @can('isAdmin')
+    <li class="breadcrumb-item active"><a href="{{ route('perbaikans.index') }}">Perbaikan</a></li>
+    @endcan
+
+    @can('isMekanik')
+    <li class="breadcrumb-item active"><a href="{{ route('perbaikan.show') }}">Perbaikan</a></li>
+    @endcan
 </ol>
 <h1 class="page-header">Data Perbaikan</h1>
 <div class="panel panel-inverse">

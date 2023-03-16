@@ -27,8 +27,9 @@
                     <thead>
                         <tr>
                             <th width="1%">No</th>
-                            <th class="text-nowrap" width="15%">Nama</th>
-                            <th class="text-nowrap" width="40%">Alamat</th>
+                            <th class="text-nowrap" width="15%">Nama Mekanik</th>
+                            <th class="text-nowrap" width="15%">Nama Bengkel</th>
+                            <th class="text-nowrap" width="30%">Alamat</th>
                             <th class="text-nowrap">Status Aktivasi</th>
                             <th class="text-nowrap">Action</th>
                         </tr>
@@ -37,6 +38,7 @@
                         @foreach ($mekanik as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->member->nama }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->statusAktivasi == '1' ? 'Terdaftar' : 'Belum Diaktivasi' }}</td>

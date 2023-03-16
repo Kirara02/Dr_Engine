@@ -55,7 +55,8 @@ Route::middleware('auth')->group(function (){
 
     // Route Perbaikan
     Route::controller(PerbaikanController::class)->group(function(){
-        Route::get('perbaikan','index')->name('perbaikan.index');
+        Route::get('perbaikans','index')->name('perbaikans.index');
+        Route::get('perbaikan','show')->name('perbaikan.show');
         Route::get('perbaikan/invoice/{id}','invoice')->name('perbaikan.invoice');
         Route::get('perbaikan/detail/{id}','detail')->name('perbaikan.detail');
         Route::post('perbaikan/detail/{id}/create','createDetails');

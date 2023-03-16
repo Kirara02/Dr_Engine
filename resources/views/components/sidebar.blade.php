@@ -35,9 +35,9 @@
                     <div class="menu-text">Dashboard</div>
                 </a>
             </div>
-            
+
             <div class="menu-header">Menu</div>
-            @can('isAdmin') 
+            @can('isAdmin')
             <div class="menu-item has-sub {{ request()->is('members') || request()->is('mekanik') || request()->is('jenis_kerusakan') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="menu-item has-sub {{ (request()->is('perbaikan') ? 'active':'') }}">
+            <div class="menu-item has-sub {{ (request()->is('perbaikans') ? 'active':'') }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="ion-md-build"></i>
@@ -73,13 +73,13 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item {{ (request()->is('perbaikan') ? 'active':'') }}">
-                        <a href="{{ route('perbaikan.index') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->is('perbaikans') ? 'active':'') }}">
+                        <a href="{{ route('perbaikans.index') }}" class="menu-link">
                             <div class="menu-text">Data Perbaikan</div>
                         </a>
                     </div>
                 </div>
-            </div> 
+            </div>
             @endcan
             @can('isMekanik')
                 <div class="menu-item has-sub {{ (request()->is('perbaikan') ? 'active':'') }}">
@@ -92,7 +92,7 @@
                     </a>
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->is('perbaikan') ? 'active':'') }}">
-                        <a href="{{ route('perbaikan.index') }}" class="menu-link">
+                        <a href="{{ route('perbaikan.show') }}" class="menu-link">
                             <div class="menu-text">Data Perbaikan</div>
                         </a>
                     </div>
@@ -102,7 +102,7 @@
                         </a>
                     </div>
                 </div>
-            </div> 
+            </div>
             @endcan
             @cannot('isAdmin')
             <div class="menu-item has-sub  {{ request()->is('service') ? 'active':'' }}">
@@ -128,7 +128,7 @@
                     <div class="menu-icon">
                         <i class="ion-md-archive"></i>
                     </div>
-                    <div class="menu-text">Laporan</div> 
+                    <div class="menu-text">Laporan</div>
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
@@ -138,7 +138,7 @@
                         </a>
                     </div>
                 </div>
-            </div> 
+            </div>
             @endcan
             <!-- BEGIN minify-button -->
             <div class="menu-item d-flex">

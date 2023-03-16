@@ -47,7 +47,7 @@
                 <div class="col-md-7 offset-md-2">
                     <button type="submit" class="btn btn-info w-100px me-5px">Tambah</button>
                 </div>
-            </div>    
+            </div>
         </form>
         <hr class="mt-4 mb-4">
             <div class="row">
@@ -73,7 +73,7 @@
                         <td class="text-center">
                             <form id="form-delete" action="{{ url('perbaikan/detail/'.$item->id.'/delete') }}" method="post" class="ms-1 d-inline">
                             @csrf
-                            <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                            <button type="button" {{ $item->perbaikan->statusPembayaran == 'sudah bayar' && $item->perbaikan->statusPerbaikan == 'selesai' ? 'disabled':''}} class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
                             </form>
                         </td>
                     </tr>
