@@ -14,7 +14,7 @@
                             <div class="flex-grow-1">
                                 <p>
                                     {{ auth()->user()->member->nama }}
-                                    @if (auth()->user()->member->mekanik != null && auth()->user()->member->mekanik->statusAktivasi == '1')
+                                    @if (auth()->user()->member->mekanik != null && auth()->user()->member->mekanik()->where('statusHapus','0')->first()->statusAktivasi == '1' )
                                         <span class="badge bg-indigo rounded-pill">Mekanik</span>
                                     @elseif(auth()->user()->level == 'admin')
                                         <span class="badge bg-indigo rounded-pill">Admin</span>

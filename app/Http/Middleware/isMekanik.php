@@ -16,7 +16,7 @@ class isMekanik
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->member->mekanik != null) {
+        if (auth()->user()->member->mekanik != null && auth()->user()->member->mekanik()->where('statusHapus','0')->first()->statusAktivasi == '1') {
             return $next($request);
         }
 

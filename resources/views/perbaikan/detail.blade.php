@@ -1,7 +1,7 @@
 @extends('layouts.master', ['title' => 'Detail Perbaikan'])
 @section('content')
 <ol class="breadcrumb float-xl-end">
-    <li class="breadcrumb-item "><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
+    <li class="breadcrumb-item "><a href="{{ route('perbaikan.show') }}">Perbaikan</a></li>
     <li class="breadcrumb-item active">Detail</li>
 </ol>
 <h1 class="page-header">Detail Perbaikan</h1>
@@ -10,6 +10,7 @@
         <h4 class="panel-title">Data Detail Perbaikan</h4>
     </div>
     <div class="panel-body">
+        @if($perbaikan->statusPerbaikan != 'selesai' && $perbaikan->statusPembayaran != 'sudah bayar')
         <form action="{{ url('perbaikan/detail/'.$id.'/create') }}" method="post">
             @csrf
             <div class="row mb-3">
@@ -50,6 +51,7 @@
             </div>
         </form>
         <hr class="mt-4 mb-4">
+        @endif
             <div class="row">
               <div class="table-responsive ">
                 <table class="table table-bordered table-striped">
@@ -59,7 +61,9 @@
                       <th>Jenis Perbaikan</th>
                       <th>Keterangan</th>
                       <th>Nominal</th>
+                    @if($perbaikan->statusPerbaikan != 'selesai' && $perbaikan->statusPembayaran != 'sudah bayar')
                       <th>Action</th>
+                    @endif
                     </tr>
                   </thead>
                   <tbody>
@@ -70,12 +74,15 @@
                         <td>{{ $item->jenisPerbaikan }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>{{ number_format($item->nominal,0,'','.') }}</td>
+                        @if($item->perbaikan->statusPembayaran != 'sudah bayar' && $item->perbaikan->statusPerbaikan != 'selesai')
                         <td class="text-center">
                             <form id="form-delete" action="{{ url('perbaikan/detail/'.$item->id.'/delete') }}" method="post" class="ms-1 d-inline">
                             @csrf
-                            <button type="button" {{ $item->perbaikan->statusPembayaran == 'sudah bayar' && $item->perbaikan->statusPerbaikan == 'selesai' ? 'disabled':''}} class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
+                            <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash align-middle"></i></button>
                             </form>
                         </td>
+
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

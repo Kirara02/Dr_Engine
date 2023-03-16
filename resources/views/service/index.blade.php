@@ -14,6 +14,7 @@
             <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
         </div>
     </div>
+    {{-- @dd($kerusakan) --}}
     <div class="panel-body">
         <a href="{{ route('service.kerusakan') }}" class="btn btn-inverse mb-3 align-middle"><i class="fas fa-plus"></i> Service</a>
         <div class="table-responsive">
@@ -32,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @dd($kerusakan) --}}   
+                    {{-- @dd($kerusakan) --}}
                     @foreach($kerusakan as $item)
                     <tr>
                         <td class="text-nowrap">{{ $loop->iteration }}</td>
@@ -51,14 +52,14 @@
                                 <span class="bagde d-block bg-green rounded-pill p-1">{{ $item->perbaikan->statusPerbaikan }}</span>
                             @else
                                 <span class="bagde d-block bg-indigo rounded-pill p-1">{{ $item->perbaikan->statusPerbaikan }}</span>
-                            @endif    
+                            @endif
                         </td>
                         <td class="class-nowrap text-light" width="10%">
                             @if ($item->perbaikan->statusPembayaran == 'belum bayar')
                                 <span class="bagde d-block bg-danger rounded-pill p-1">{{ $item->perbaikan->statusPembayaran }}</span>
                             @else
                                 <span class="bagde d-block bg-success rounded-pill p-1">{{ $item->perbaikan->statusPembayaran }}</span>
-                            @endif    
+                            @endif
                         </td>
                         <td class="text-nowrap d-flex justify-content-center align-middle" >
                             @if($item->perbaikan->statusPerbaikan != 'pencarian')

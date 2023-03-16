@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->level == 'admin';
         });
         Gate::define('isMekanik', function ($user) {
-            return $user->member->mekanik != null && $user->member->mekanik->statusAktivasi == '1';
+            return $user->member->mekanik != null && $user->member->mekanik()->where('statusHapus','0')->first()->statusAktivasi == '1';
         });
     }
 }

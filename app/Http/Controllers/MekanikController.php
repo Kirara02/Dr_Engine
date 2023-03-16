@@ -23,8 +23,8 @@ class MekanikController extends Controller
 
     public function index()
     {
-        $data['mekanik'] = Mekanik::where('statusAktivasi','=','1')->get();
-    
+        $data['mekanik'] = Mekanik::where('statusAktivasi','=','1')->where('statusHapus','=','0')->get();
+
         return view('mekanik.index')->with($data);
     }
 
@@ -59,6 +59,7 @@ class MekanikController extends Controller
                 'name' => $request->name,
                 'alamat' => $request->alamat,
                 'statusAktivasi' => '0',
+                'statusHapus' => '0',
                 'idmember' => auth()->user()->member->id
             ]);
 
@@ -89,7 +90,7 @@ class MekanikController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Mekanik $mekanik)
-    {       
+    {
         $action = route('mekanik.update', $mekanik->id);
         $method = 'PUT';
         $title = 'Update Mekanik';
@@ -107,10 +108,10 @@ class MekanikController extends Controller
     public function update(UpdateMekanikRequest $request, Mekanik $mekanik)
     {
         try {
-            // DB::beginTransaction();
+            DB::beginTransaction();
             $mekanik->update($request->all());
 
-            // DB::commit();
+            DB::commit();
 
             return redirect()->route('mekanik.index')->with('success', 'Data berhasil diedit');
         } catch (\Throwable $th) {
@@ -130,7 +131,9 @@ class MekanikController extends Controller
         try {
             DB::beginTransaction();
 
-            Mekanik::find($mekanik->id)->delete();
+            Mekanik::find($mekanik->id)->update([
+                'statusHapus' => '1'
+            ]);
 
             DB::commit();
 

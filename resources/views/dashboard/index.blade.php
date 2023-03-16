@@ -33,7 +33,7 @@
 						<div class="stats-icon stats-icon-lg"><i class="fa fa-cogs"></i></div>
 						<div class="stats-content">
 							<div class="stats-title">MEKANIKS</div>
-							<div class="stats-number">{{ App\Models\Mekanik::where('statusAktivasi',1)->count() ?? 0 }}</div>
+							<div class="stats-number">{{ App\Models\Mekanik::where('statusAktivasi',1)->where('statusHapus','0')->count() ?? 0 }}</div>
 						</div>
 					</div>
 				</div>
@@ -46,11 +46,11 @@
 							<div class="stats-title">REPAIRS</div>
 							<div class="stats-number">
 								@if (auth()->user()->level == 'admin')
-								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>	
+								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->count() ?? 0 }}</p>
 							@elseif(auth()->user()->member->mekanik != null)
-								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->where('idmekanik',auth()->user()->member->mekanik->id)->count() ?? 0 }}</p>		
+								<p>{{ App\Models\Perbaikan::where('statusPerbaikan','=','selesai')->where('idmekanik',auth()->user()->member->mekanik()->where('statusHapus','0')->first()->id)->count() ?? 0 }}</p>
 							@else
-								<p>{{ App\Models\Kerusakan::where('idmember',auth()->user()->member->id)->count() ?? 0 }}</p>		
+								<p>{{ App\Models\Kerusakan::where('idmember',auth()->user()->member->id)->count() ?? 0 }}</p>
 							@endif
 							</div>
 						</div>

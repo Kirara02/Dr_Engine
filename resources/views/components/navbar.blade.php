@@ -52,14 +52,17 @@
                         </a>
                     @endforeach
                 </div>
-            </div>				
+            </div>
         @endcan
+        @if(auth()->user()->member->mekanik()->where('statusHapus','0')->first() != null && auth()->user()->member->mekanik()->where('statusHapus','0')->first()->statusAktivasi == '0' && auth()->user()->member->mekanik()->where('statusHapus','0')->first()->statusHapus == '0')
+            <span class="badge bg-secondary fs-13px">Menunggu persetujuan menjadi mekanik !!</span>
+        @endif
         <div class="navbar-item navbar-user dropdown">
             <a href="" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                 @if(!auth()->user()->member->foto)
-                <img src={{ asset('assets/img/user/user-1.jpg') }}" alt="" /> 
+                <img src={{ asset('assets/img/user/user-1.jpg') }}" alt="" />
                 @else
-                <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" /> 
+                <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" />
                 @endif
                 <span>
                     <span class="d-none d-md-inline">{{ auth()->user()->member->nama }}</span>
@@ -69,11 +72,11 @@
             <div class="dropdown-menu dropdown-menu-end me-1">
                 <a href="{{ route('profile') }}" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
                 <div class="dropdown-divider"></div>
-                @if(auth()->user()->member->mekanik == null && auth()->user()->level != 'admin' && auth()->user()->member->nama != '')
+                @if(auth()->user()->member->mekanik == null && auth()->user()->level != 'admin' && auth()->user()->member->nama != '' || auth()->user()->member->mekanik()->where('statusHapus','1')->first() != null && auth()->user()->member->mekanik()->where('statusHapus','1')->first()->statusHapus == '1' && auth()->user()->member->mekanik()->where('statusHapus','0')->first() == null )
                     <a href="{{ route('mekanik.create') }}" class="dropdown-item"><i class="fas fa-cog"></i> Daftar Mekanik</a>
                     <div class="dropdown-divider"></div>
                 @endif
-                
+
                 <a href="javascript:;" class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf

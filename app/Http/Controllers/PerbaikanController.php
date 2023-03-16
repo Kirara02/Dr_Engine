@@ -29,7 +29,7 @@ class PerbaikanController extends Controller
 
     public function show()
     {
-        $perbaikan = Perbaikan::with(['detail','Kerusakan','mekanik'])->where('idmekanik','=',auth()->user()->member->mekanik->id)->get();
+        $perbaikan = Perbaikan::with(['detail','Kerusakan','mekanik'])->where('idmekanik','=',auth()->user()->member->mekanik()->where('statusHapus','0')->first()->id)->get();
         return view('perbaikan.index', compact('perbaikan'));
     }
     public function detail($id)

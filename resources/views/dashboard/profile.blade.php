@@ -11,7 +11,7 @@
                 </div>
                 <!-- END profile-header-img -->
                 <!-- BEGIN profile-header-info -->
-            
+
                 <div class="profile-header-info">
                     <h4 class="mt-0 mb-1">{{ auth()->user()->member->nama }}
                      @if (auth()->user()->member->mekanik != null && auth()->user()->member->mekanik->statusAktivasi == '1')
@@ -78,15 +78,15 @@
                             </tr>
                             <tr class="highlight">
                                 <td class="field">Nama Bengkel</td>
-                                <td>{{ auth()->user()->member->mekanik->name }}</td>
+                                <td>{{ auth()->user()->member->mekanik()->where('statusHapus','0')->first()->name }}</td>
                             </tr>
                             <tr class="highlight">
                                 <td class="field">Alamat Bengkel</td>
-                                <td>{{ auth()->user()->member->mekanik->alamat }}</td>
+                                <td>{{ auth()->user()->member->mekanik()->where('statusHapus','0')->first()->alamat }}</td>
                             </tr>
                             <tr class="divider">
                                 <td colspan="2"></td>
-                            </tr>     
+                            </tr>
                             @endcan
                         </tbody>
                     </table>

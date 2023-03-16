@@ -1,8 +1,14 @@
 @extends('layouts.master', ['title' => $title])
 @section('content')
+
     <ol class="breadcrumb float-xl-end">
-        <li class="breadcrumb-item"><a href="{{ route('perbaikan.index') }}">Perbaikan</a></li>
-        <li class="breadcrumb-item active">Invoice</li>
+        @can('isAdmin')
+        <li class="breadcrumb-item active"><a href="{{ route('perbaikans.index') }}">Perbaikan</a></li>
+        @endcan
+
+        @can('isMekanik')
+        <li class="breadcrumb-item active"><a href="{{ route('perbaikan.show') }}">Perbaikan</a></li>
+        @endcan
     </ol>
     <h1 class="page-header">{{ $title }}</h1>
     <div class="invoice">
@@ -33,7 +39,7 @@
                 </address>
             </div>
             <div class="invoice-date">
-                <div class="date text-inverse mt-5px">{{ \Carbon\Carbon::parse($perbaikan->tanggal)->format('F d,Y') }}</div>     
+                <div class="date text-inverse mt-5px">{{ \Carbon\Carbon::parse($perbaikan->tanggal)->format('F d,Y') }}</div>
             </div>
         </div>
         <!-- END invoice-header -->
