@@ -16,14 +16,14 @@
               <div class="nav-text">1. Kerusakan</div>
             </a>
           </div>
-      
+
           <!-- active -->
           <div class="nav-item col">
             <a class="nav-link {{ $status[1] }}" href="#">
               <div class="nav-text">2. Diagnosa Kerusakan</div>
             </a>
           </div>
-      
+
           <!-- disabled -->
           <div class="nav-item col">
             <a class="nav-link {{ $status[2] }}" href="#">
@@ -51,7 +51,7 @@
                 @error('jenisKendaraan')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
-              </div>  
+              </div>
               <div class="row mb-3">
                 <label class="form-label col-form-label col-md-3">Tipe Kendaraan *</label>
                 <div class="col-md-4">
@@ -60,7 +60,7 @@
                 @error('tipeKendaraan')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
-              </div>  
+              </div>
               <div class="row mb-3">
                 <label class="form-label col-form-label col-md-3">Tahun Kendaraan *</label>
                 <div class="col-md-2">
@@ -69,7 +69,7 @@
                 @error('tahunKendaraan')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
-              </div>  
+              </div>
               <div class="row mb-3">
                 <label class="form-label col-form-label col-md-3">Foto Kendaraan *</label>
                 <div class="col-md-4">
@@ -78,7 +78,7 @@
                 @error('fotoKendaraan')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
-              </div>  
+              </div>
               <div class="row">
                 <div class="col-md-7 offset-md-3">
                   <button type="submit" class="btn btn-info w-100px me-5px">Next</button>
@@ -100,6 +100,7 @@
                     @foreach ($jenis as $item)
                     <option value="{{ $item->id }}">{{ $item->jenisKerusakan }}</option>
                     @endforeach
+                    <option value="lainnya">Lainnya</option>
                   </select>
                 </div>
                 @error('jenisKerusakan')
@@ -141,7 +142,7 @@
                     @foreach ($diagnosa as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->jenisKerusakan->jenisKerusakan }}</td>
+                        <td>{{ $item->jenisKerusakan->jenisKerusakan  ?? 'tidak ada'}}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td class="text-center">
                             <form id="form-delete" action="{{ route('service.diagnosa.destroy',$item->id) }}" method="post" class="ms-1 d-inline">
@@ -174,8 +175,8 @@
               @foreach ($mekanik as $item)
               <form action="{{ route('service.mekanik.store') }}" method="post">
                 @csrf
-                <input type="hidden" name="id" value="{{ $id }}">        
-                <input type="hidden" name="idmekanik" value="{{ $item->id }}">        
+                <input type="hidden" name="id" value="{{ $id }}">
+                <input type="hidden" name="idmekanik" value="{{ $item->id }}">
                 <div class="col mb-4">
                   <div class="card bg-dark border-0 text-white">
                     <div class="card-body">

@@ -18,8 +18,9 @@
                 <div class="col-md-7">
                     <select name="jenisPerbaikan" id="jenisPerbaikan" class="form-select">
                         @foreach ($perbaikan->kerusakan->diagnosaKerusakan as $jenis)
-                            <option value="{{ $jenis->jenisKerusakan->jenisKerusakan }}">{{ $jenis->jenisKerusakan->jenisKerusakan }}</option>
+                        <option value="{{ $jenis->keterangan }}">{{ $jenis->keterangan }}</option>
                         @endforeach
+                        <option value="lainnya">Lainnya</option>
                     </select>
                 </div>
                 @error('jenisPerbaikan')
