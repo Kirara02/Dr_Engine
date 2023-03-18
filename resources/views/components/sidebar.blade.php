@@ -7,13 +7,17 @@
                 <div class="menu-profile-link" data-toggle="app-sidebar-profile" data-target="javascript:;appSidebarProfileMenu">
                     <div class="menu-profile-cover with-shadow"></div>
                     <div class="menu-profile-image">
-                        <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" />
+                        @if(auth()->user()->member->foto == null)
+                            <img src="{{ asset('assets/img/user/user-guest.png') }}" alt="" />
+                        @else
+                            <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" />
+                        @endif
                     </div>
                     <div class="menu-profile-info">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <p>
-                                    {{ auth()->user()->member->nama }}
+                                    {{ auth()->user()->member->nama ?? 'Guest'}}
                                     @if (auth()->user()->member->mekanik != null && auth()->user()->member->mekanik()->where('statusHapus','0')->first()->statusAktivasi == '1' )
                                         <span class="badge bg-indigo rounded-pill">Mekanik</span>
                                     @elseif(auth()->user()->level == 'admin')
@@ -104,7 +108,7 @@
                 </div>
             </div>
             @endcan
-            @cannot('isAdmin')
+            @if(auth()->user()->level == 'member' && auth()->user()->member->nama != null)
             <div class="menu-item has-sub  {{ request()->is('service') ? 'active':'' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -121,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            @endcannot
+            @endif
             @can('isAdmin')
             <div class="menu-item has-sub {{ (request()->is('laporan') ? 'active':'') }}">
                 <a href="javascript:;" class="menu-link">

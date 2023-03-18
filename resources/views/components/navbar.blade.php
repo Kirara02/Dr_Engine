@@ -14,7 +14,7 @@
         @if (auth()->user()->member->nama == '' OR auth()->user()->member->nohp == '' OR auth()->user()->member->nik == '' OR auth()->user()->member->email == '' OR
         auth()->user()->member->alamat == '')
             <div class="navbar-item">
-                <div class="bg-default text-danger p-2 rounded">Silahkan lengkapi identitas di menu profil</div>
+                <div class="bg-default text-danger p-2 rounded"><i>Silahkan lengkapi dulu identitas di menu profile untuk membuka fitur!</i></div>
             </div>
         @endif
         @can('isAdmin')
@@ -59,10 +59,10 @@
         @endif
         <div class="navbar-item navbar-user dropdown">
             <a href="" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                @if(!auth()->user()->member->foto)
-                <img src={{ asset('assets/img/user/user-1.jpg') }}" alt="" />
+                @if(auth()->user()->member->foto == null)
+                    <img src="{{ asset('assets/img/user/user-guest.png') }}" alt="" />
                 @else
-                <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" />
+                    <img src="{{ asset('/storage/'.auth()->user()->member->foto) }}" alt="" />
                 @endif
                 <span>
                     <span class="d-none d-md-inline">{{ auth()->user()->member->nama }}</span>

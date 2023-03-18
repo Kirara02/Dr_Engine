@@ -15,14 +15,14 @@
 
     <!-- Date Range Picker CSS -->
     <link href="{{ asset('/') }}assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-    
+
 	<!-- ================== BEGIN page-css ================== -->
 	<link href="{{ asset('/') }}assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
 	<link href="{{ asset('/') }}assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
 	<link href="{{ asset('/') }}assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 	<link href="{{ asset('/') }}assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
 	<link href="{{ asset('/') }}assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-	<link href="{{ asset('/') }}assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />	
+	<link href="{{ asset('/') }}assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />
 	<!-- ================== END page-css ================== -->
 	@stack('style')
 </head>
@@ -39,7 +39,7 @@
 		<!-- BEGIN #header -->
 		@include('components.navbar')
 		<!-- END #header -->
-	
+
 		<!-- BEGIN #sidebar -->
 		@include('components.sidebar')
 		<!-- END #sidebar -->
@@ -58,14 +58,14 @@
 	<script src="{{ asset('/') }}assets/js/app.min.js"></script>
 	<script src="{{ asset('/') }}assets/js/theme/default.min.js"></script>
 	<!-- ================== END core-js ================== -->
-	
+
 	<!-- ================== BEGIN datatables-js ================== -->
 	<script src="{{ asset('/') }}assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
 	<script src="{{ asset('/') }}assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 	<script src="{{ asset('/') }}assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 	<script src="{{ asset('/') }}assets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 	<!-- ================== END datatables-js ================== -->
-	
+
 	<!-- ================== BEGIN page-js ================== -->
 	<script src="{{ asset('/') }}assets/plugins/flot/source/jquery.canvaswrapper.js"></script>
 	<script src="{{ asset('/') }}assets/plugins/flot/source/jquery.colorhelpers.js"></script>
@@ -107,7 +107,7 @@
         gtag('config', 'UA-56159088-1');
     </script>
 	<script>
-		
+
 		$('.table-striped').DataTable({
             autoWidth: true,
 			responsive: true,
@@ -134,7 +134,7 @@
                 }
             })
         });
-		
+
 		$(".table").on('click', '.btn-status', function(e) {
             e.preventDefault();
 
@@ -225,7 +225,7 @@
             }
         });
 
-		
+
 	</script>
 
 	@stack('script')

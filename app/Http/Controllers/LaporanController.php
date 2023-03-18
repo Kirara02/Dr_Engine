@@ -14,7 +14,7 @@ class LaporanController extends Controller
     {
         $this->middleware('isAdmin');
     }
-
+    
     public function index(Request $request)
     {
         $date = Carbon::now('Asia/Jakarta')->format('Y-m-d');

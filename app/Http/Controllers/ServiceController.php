@@ -22,7 +22,7 @@ class ServiceController extends Controller
         $data['kerusakan'] = Kerusakan::with(['perbaikan','member'])->where('idmember', '=',auth()->user()->member->id)->get();
         return view('service.index')->with($data);
     }
-    
+
     public function kerusakan()
     {
         $status = ['active','disable','disable'];
@@ -30,19 +30,19 @@ class ServiceController extends Controller
     }
 
     public function diagnosa($id)
-    {  
+    {
         $diagnosa = DiagnosaKerusakan::with(['jenisKerusakan'])->where('idkerusakan','=',$id)->get();
 
         $jenis = JenisKerusakan::get();
         $status = ['completed','active','disable'];
-        return view('service.form', compact('status','jenis','diagnosa','id'));      
+        return view('service.form', compact('status','jenis','diagnosa','id'));
     }
 
     public function mekanik(Request $request, $id)
-    {   
-       
+    {
+
         $status = ['completed','completed','active'];
-        $mekanik = Mekanik::with(['member'])->where('statusSibuk','0')->get();
+        $mekanik = Mekanik::with(['member'])->where('statusSibuk','0')->where('statusHapus','0')->get();
 
         $cari = $request->input('cari');
 
@@ -54,8 +54,8 @@ class ServiceController extends Controller
                 })->where('statusSibuk','0')
                 ->get();
         }
-        
-        return view('service.form', compact('status','mekanik','id'));    
+
+        return view('service.form', compact('status','mekanik','id'));
     }
 
     public function destroy($id)
@@ -63,7 +63,7 @@ class ServiceController extends Controller
         try {
             DB::beginTransaction();
 
-            DiagnosaKerusakan::find($id)->delete();            
+            DiagnosaKerusakan::find($id)->delete();
 
             DB::commit();
 
@@ -82,7 +82,7 @@ class ServiceController extends Controller
             'tahunKendaraan' => 'required|string',
             'fotoKendaraan' => 'required|mimes:jpg,jpeg,png',
         ]);
-        
+
         try {
 
             Db::beginTransaction();
@@ -107,7 +107,7 @@ class ServiceController extends Controller
                 'idmekanik' => null,
                 'idKerusakan' => $data->id
             ]);
-            
+
             Db::commit();
             $id = $data->id;
             $status = ['completed','active','disable'];
@@ -154,7 +154,7 @@ class ServiceController extends Controller
         ]);
 
         try {
-         
+
             Db::beginTransaction();
 
             Perbaikan::where('idkerusakan','=',$request->id)->update([
@@ -166,7 +166,7 @@ class ServiceController extends Controller
                 'statusSibuk' => '1'
             ]);
 
-            DB::commit();      
+            DB::commit();
 
             return redirect()->route('service.index')->with('status');
         } catch (\Throwable $th) {
@@ -186,7 +186,7 @@ class ServiceController extends Controller
             ]);
 
             $data = Perbaikan::where('id','=',$id)->first();
-            
+
             Mekanik::where('id',$data->idmekanik)->update([
                 'statusSibuk' => '0'
             ]);
@@ -194,7 +194,7 @@ class ServiceController extends Controller
             DB::commit();
 
             return redirect()->route('service.index')->with('success','Data berhasil ditambahkan');
-            
+
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
@@ -205,7 +205,7 @@ class ServiceController extends Controller
     {
         $title = 'Detail Service';
         $perbaikan = Perbaikan::where('id',$id)->with(['detail','mekanik'])->first();
-        
+
         return view('service.detail', compact('perbaikan','title'));
     }
 
